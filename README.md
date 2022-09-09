@@ -1,10 +1,10 @@
 # servicenow-tools
 tools for the servicenow platform
 
-🚧 under construction
-🌍 global scope
-🔥 impacts performance
-👑 admin only
+🚧 under construction  
+🌍 global scope  
+🔥 impacts performance  
+👑 admin only  
 
 ## Admin tools
 
