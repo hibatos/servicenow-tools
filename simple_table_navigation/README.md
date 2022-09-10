@@ -57,3 +57,12 @@ Custom and scoped tables might prevent the application to reference them because
 Uninstalling the application is as easy as removing it from the installed applications with one exception.
 If the system property _simple_table_nav.target_menu_ is modified and set to a menu outside the application then the modules are not removed.
 they can also be removed by first clearing the table list, waiting for the reload business rule to run and the removing the application.
+
+
+## Bugs
+
+If the table list property is updated it might not reload the modules, it might require updating it again.
+You can also run the following code as a background script
+```
+new SimpleTableNavigationUtils().reloadTables()
+```
