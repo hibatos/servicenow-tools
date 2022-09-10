@@ -8,6 +8,6 @@ tools for the servicenow platform
 
 ## Admin tools
 
-### Simple Table Navigator 👑🌍
+### Simple Table Navigator 👑🌍🚧
 
 Makes searching for table names in the filter navigator for predefined tables possible and way more convenient
