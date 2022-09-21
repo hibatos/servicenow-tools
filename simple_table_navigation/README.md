@@ -60,7 +60,7 @@ they can also be removed by first clearing the table list, waiting for the reloa
 
 
 ## Bugs
-
+### Only V1
 If the table list property is updated it might not reload the modules, it might require updating it again.
 You can also run the following code as a background script
 ```
