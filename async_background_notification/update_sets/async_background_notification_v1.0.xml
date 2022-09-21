@@ -1,0 +1,1699 @@
+<?xml version="1.0" encoding="UTF-8"?><unload unload_date="2022-09-21 18:11:01">
+<sys_remote_update_set action="INSERT_OR_UPDATE">
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<application_name>Async Background Notification</application_name>
+<application_scope>x_716205_async_b_n</application_scope>
+<application_version>1.0.0</application_version>
+<collisions/>
+<commit_date/>
+<deleted/>
+<description># Async Background Notification
+
+Allows to easily send workspace notifications to users with the workspace permission and itil.
+Super useful in ssynchronous long running business rules or scheduled jobs.
+
+## Example
+
+### 1
+
+A background script to send yourself a remonder to pay a visit to the beloved sys_user table
+
+```
+bmu = new x_716205_async_b_n.AsyncBMUtils()
+
+var msgId = bmu.sendMessage(
+  gs.getUserID(),
+  "hi there",
+  "Click here to go to the &lt;a href=\"sys_user_list.do\"&gt;user table&lt;/a&gt;",
+  gs.getCurrentApplicationId(),
+  gs.getCurrentScopeName(),
+  2,
+  "other"
+)
+```
+
+### 2
+
+Send a message to the user with the sys_id "a4b7a9f7"
+`x_716205_async_b_n.AsyncBMUtils.sendMessage("a4b7a9f7","hi there","hi, this is a Message to &lt;b&gt;you&lt;/b&gt;.")`
+
+## System requirements
+
+SanDiego or newer, older might work but untested.
+
+## Licensing
+
+Since this application uses a custom table, you may need to allocate it to a license.
+
+## Bugs
+
+Messages are retrieved by the client after x seconds, so it might take up to a minute/a page refresh for a user to receive your message.
+
+## Docs
+
+### sendMessage()
+
+Send a message to a user by sys_id.
+
+@returns sys_id of the generated message (for reference in _appendToMessage()_).
+
+It is recommended to provide some more infos, such as
+
+| argument            | type                                    | default  |
+| ------------------- | --------------------------------------- | -------- |
+| calling scope       | string of scope name                    |          |
+| calling application | sys_id of current application           |          |
+| priority            | number between 1 (critical) and 4 (low) | 4        |
+| notification type   | string value                            | "others" |
+
+#### Usage
+```x_716205_async_b_n.AsyncBMUtils.sendMessage(user_sys_id, short_message, message_html, calling_application_sys_id, calling_scope, priority, notification_type)```
+
+### appendToMessage()
+
+Update a previously sent message.
+
+This will change the message field and the short_description field respectively.
+
+@returns result of message.update()
+
+#### Usage
+
+```x_716205_async_b_n.AsyncBMUtils.appendToMessage(message_sys_id, short_message, message_html, priority)```
+</description>
+<inserted/>
+<name>Async Background Notification</name>
+<origin_sys_id/>
+<parent display_value=""/>
+<release_date/>
+<remote_base_update_set display_value=""/>
+<remote_parent_id/>
+<remote_sys_id>bc8e24ff2fb1d110dc91c886f699b631</remote_sys_id>
+<state>loaded</state>
+<summary/>
+<sys_class_name>sys_remote_update_set</sys_class_name>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>4dd71e8e2fc61110dc91c886f699b6b5</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<update_set display_value=""/>
+<update_source display_value=""/>
+<updated/>
+</sys_remote_update_set>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_documentation_x_716205_async_b_n_msg_priority_en</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update><sys_documentation element="priority" label="Priority" language="en" table="x_716205_async_b_n_msg"><sys_documentation action="INSERT_OR_UPDATE"><element>priority</element><help/><hint/><label>Priority</label><language>en</language><name>x_716205_async_b_n_msg</name><plural>Priorities</plural><sys_class_name>sys_documentation</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-14 16:27:57</sys_created_on><sys_id>5b1d3df72ff5d110dc91c886f699b650</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Priority</sys_name><sys_package display_value="Async Background Notification" source="x_716205_async_b_n">708e24ff2fb1d110dc91c886f699b630</sys_package><sys_policy/><sys_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</sys_scope><sys_update_name>sys_documentation_x_716205_async_b_n_msg_priority_en</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-14 16:27:57</sys_updated_on><url/><url_target/></sys_documentation></sys_documentation></record_update>]]></payload>
+<payload_hash>488036065</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>01d79e8e2fc61110dc91c886f699b67b</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1833cd421ea0000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table>x_716205_async_b_n_msg</table>
+<target_name>Background Message.Priority</target_name>
+<type>Field Label</type>
+<update_domain>global</update_domain>
+<update_guid>af1d3df756f5d1105eff379a8a572158</update_guid>
+<update_guid_history>af1d3df756f5d1105eff379a8a572158:488036065</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_ui_form_sections_d2204ebb2ff5d110dc91c886f699b654</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update><sys_ui_form_sections form_id="d2204ebb2ff5d110dc91c886f699b654" sys_domain="global" table="x_716205_async_b_n_msg" version="3"><sys_ui_form_section action="INSERT_OR_UPDATE"><position>0</position><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-14 16:41:19</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>07204ebb2ff5d110dc91c886f699b657</sys_id><sys_mod_count>0</sys_mod_count><sys_overrides/><sys_ui_form display_value="x_716205_async_b_n_msg" name="x_716205_async_b_n_msg" sys_domain="global" view="Default view">d2204ebb2ff5d110dc91c886f699b654</sys_ui_form><sys_ui_section caption="NULL" display_value="" name="x_716205_async_b_n_msg" sys_domain="global" view="Default view">a1e8747b2ff1d110dc91c886f699b646</sys_ui_section><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-14 16:41:19</sys_updated_on></sys_ui_form_section><sys_ui_form_section action="INSERT_OR_UPDATE"><position>1</position><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-14 16:41:19</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>13204ebb2ff5d110dc91c886f699b658</sys_id><sys_mod_count>0</sys_mod_count><sys_overrides/><sys_ui_form display_value="x_716205_async_b_n_msg" name="x_716205_async_b_n_msg" sys_domain="global" view="Default view">d2204ebb2ff5d110dc91c886f699b654</sys_ui_form><sys_ui_section caption="Source" display_value="Source" name="x_716205_async_b_n_msg" sys_domain="global" view="Default view">42200ebb2ff5d110dc91c886f699b6d6</sys_ui_section><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-14 16:41:19</sys_updated_on></sys_ui_form_section><sys_ui_form action="INSERT_OR_UPDATE"><name>x_716205_async_b_n_msg</name><roles/><sys_class_name>sys_ui_form</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-14 16:41:15</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>d2204ebb2ff5d110dc91c886f699b654</sys_id><sys_mod_count>0</sys_mod_count><sys_name>x_716205_async_b_n_msg</sys_name><sys_overrides/><sys_package display_value="Async Background Notification" source="x_716205_async_b_n">708e24ff2fb1d110dc91c886f699b630</sys_package><sys_policy/><sys_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</sys_scope><sys_update_name>sys_ui_form_sections_d2204ebb2ff5d110dc91c886f699b654</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-14 16:41:15</sys_updated_on><sys_user/><view display_value="Default view" name="NULL">Default view</view><view_name/></sys_ui_form></sys_ui_form_sections></record_update>]]></payload>
+<payload_hash>-1786650329</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>01d79e8e2fc61110dc91c886f699b67e</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1833ce05ca40000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table>x_716205_async_b_n_msg</table>
+<target_name>Background Message</target_name>
+<type>Form Sections</type>
+<update_domain>global</update_domain>
+<update_guid>1f204ebb51f5d1103113d4e1339f7b59</update_guid>
+<update_guid_history>1f204ebb51f5d1103113d4e1339f7b59:-1786650329,83204ebb95f5d110315acdfca008b156:-1387603799</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_dictionary_x_716205_async_b_n_msg_message</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update><sys_dictionary action="INSERT_OR_UPDATE" element="message" table="x_716205_async_b_n_msg"><active>true</active><array>false</array><attributes/><audit>false</audit><calculation/><choice/><choice_field/><choice_table/><column_label>Message</column_label><comments/><create_roles/><default_value/><defaultsort/><delete_roles/><dependent/><dependent_on_field/><display>true</display><dynamic_creation>false</dynamic_creation><dynamic_creation_script/><dynamic_default_value/><dynamic_ref_qual/><element>message</element><element_reference>false</element_reference><foreign_database/><formula/><function_definition/><function_field>false</function_field><internal_type display_value="HTML">html</internal_type><mandatory>false</mandatory><max_length>65536</max_length><name>x_716205_async_b_n_msg</name><next_element/><primary>false</primary><read_only>false</read_only><read_roles/><reference/><reference_cascade_rule/><reference_floats>false</reference_floats><reference_key/><reference_qual/><reference_qual_condition/><reference_type/><spell_check>false</spell_check><staged>false</staged><sys_class_name>sys_dictionary</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-14 10:48:51</sys_created_on><sys_id>508f68332ff1d110dc91c886f699b6f2</sys_id><sys_name>Message</sys_name><sys_package display_value="Async Background Notification" source="x_716205_async_b_n">708e24ff2fb1d110dc91c886f699b630</sys_package><sys_policy/><sys_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</sys_scope><sys_update_name>sys_dictionary_x_716205_async_b_n_msg_message</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-21 11:42:39</sys_updated_on><table_reference>false</table_reference><text_index>false</text_index><unique>false</unique><use_dependent_field>false</use_dependent_field><use_dynamic_default>false</use_dynamic_default><use_reference_qualifier>simple</use_reference_qualifier><virtual>false</virtual><virtual_type>script</virtual_type><widget/><write_roles/><xml_view>false</xml_view></sys_dictionary></record_update>]]></payload>
+<payload_hash>1152050567</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>05d71e8e2fc61110dc91c886f699b6b8</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1835fdb70770000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table>x_716205_async_b_n_msg</table>
+<target_name>Background Message.Message</target_name>
+<type>Dictionary</type>
+<update_domain>global</update_domain>
+<update_guid>e0fefc0e4b8211108cf1d4b802e1ea37</update_guid>
+<update_guid_history>e0fefc0e4b8211108cf1d4b802e1ea37:1152050567,d88fa833e7f1d110d1c979d3cbcb0414:-978575403</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>DELETE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_documentation_x_716205_async_b_n_msg_message_html_en</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update><sys_documentation action="DELETE" element="message_html" label="Message" language="en" table="x_716205_async_b_n_msg"><sys_documentation action="DELETE"><element>message_html</element><help/><hint/><label>Message</label><language>en</language><name>x_716205_async_b_n_msg</name><plural>Messages</plural><sys_class_name>sys_documentation</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-21 10:11:34</sys_created_on><sys_id>821ae08a2f421110dc91c886f699b686</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Message</sys_name><sys_package display_value="Async Background Notification" source="x_716205_async_b_n">708e24ff2fb1d110dc91c886f699b630</sys_package><sys_policy/><sys_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</sys_scope><sys_update_name>sys_documentation_x_716205_async_b_n_msg_message_html_en</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-21 10:11:34</sys_updated_on><url/><url_target/></sys_documentation></sys_documentation></record_update>]]></payload>
+<payload_hash>-1079773666</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>05d79e8e2fc61110dc91c886f699b67a</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1835f991eb20000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table>x_716205_async_b_n_msg</table>
+<target_name>Background Message.message_html</target_name>
+<type>Field Label</type>
+<update_domain>global</update_domain>
+<update_guid>235e248efb4211101f18e065209575d0</update_guid>
+<update_guid_history>235e248efb4211101f18e065209575d0:-1079773666,1a1ae08a3542111036e9432207aebe91:-448743674</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_script_f39178ce2f421110dc91c886f699b66a</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update sys_domain="global" table="sys_script"&gt;&lt;sys_script action="INSERT_OR_UPDATE"&gt;&lt;abort_action&gt;false&lt;/abort_action&gt;&lt;access&gt;package_private&lt;/access&gt;&lt;action_delete&gt;false&lt;/action_delete&gt;&lt;action_insert&gt;true&lt;/action_insert&gt;&lt;action_query&gt;false&lt;/action_query&gt;&lt;action_update&gt;true&lt;/action_update&gt;&lt;active&gt;true&lt;/active&gt;&lt;add_message&gt;false&lt;/add_message&gt;&lt;advanced&gt;true&lt;/advanced&gt;&lt;change_fields&gt;false&lt;/change_fields&gt;&lt;client_callable&gt;false&lt;/client_callable&gt;&lt;collection&gt;x_716205_async_b_n_msg&lt;/collection&gt;&lt;condition/&gt;&lt;description/&gt;&lt;execute_function&gt;false&lt;/execute_function&gt;&lt;filter_condition table="x_716205_async_b_n_msg"&gt;messageVALCHANGES^ORshort_descriptionVALCHANGES^EQ&lt;item endquery="false" field="message" goto="false" newquery="false" operator="VALCHANGES" or="false" value=""/&gt;&lt;item endquery="false" field="short_description" goto="false" newquery="false" operator="VALCHANGES" or="true" value=""/&gt;&lt;item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/&gt;&lt;/filter_condition&gt;&lt;is_rest&gt;false&lt;/is_rest&gt;&lt;message/&gt;&lt;name&gt;Fire Message&lt;/name&gt;&lt;order&gt;100&lt;/order&gt;&lt;priority&gt;100&lt;/priority&gt;&lt;rest_method/&gt;&lt;rest_method_text/&gt;&lt;rest_service/&gt;&lt;rest_service_text/&gt;&lt;rest_variables/&gt;&lt;role_conditions/&gt;&lt;script&gt;&lt;![CDATA[(function executeRule(current, previous /*null when async*/) {
+
+	gs.eventQueue('x_716205_async_b_n.asyncbgnotification.m', current, current.target_user);
+
+})(current, previous);]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2022-09-21 10:54:21&lt;/sys_created_on&gt;&lt;sys_domain&gt;global&lt;/sys_domain&gt;&lt;sys_domain_path&gt;/&lt;/sys_domain_path&gt;&lt;sys_id&gt;f39178ce2f421110dc91c886f699b66a&lt;/sys_id&gt;&lt;sys_mod_count&gt;6&lt;/sys_mod_count&gt;&lt;sys_name&gt;Fire Message&lt;/sys_name&gt;&lt;sys_overrides/&gt;&lt;sys_package display_value="Async Background Notification" source="x_716205_async_b_n"&gt;708e24ff2fb1d110dc91c886f699b630&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Async Background Notification"&gt;708e24ff2fb1d110dc91c886f699b630&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_f39178ce2f421110dc91c886f699b66a&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2022-09-21 18:02:31&lt;/sys_updated_on&gt;&lt;template/&gt;&lt;when&gt;after&lt;/when&gt;&lt;/sys_script&gt;&lt;sys_translated_text action="delete_multiple" query="documentkey=f39178ce2f421110dc91c886f699b66a"/&gt;&lt;/record_update&gt;</payload>
+<payload_hash>-1193255958</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>05d79e8e2fc61110dc91c886f699b67d</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>183613736da0000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table>x_716205_async_b_n_msg</table>
+<target_name>Fire Message</target_name>
+<type>Business Rule</type>
+<update_domain>global</update_domain>
+<update_guid>8de55e0e7fc611103caddb5c5674d59e</update_guid>
+<update_guid_history>8de55e0e7fc611103caddb5c5674d59e:-1193255958,55955e0e21c61110a66fc7ed83aee06f:681940329,7c94d28afec611100fd18fb84575d18a:-1193255958,7f6b388a09821110bf71697aac9de7de:166964330,ab7874c60682111062c9bf9bd6fa3f48:1268944062,71b774c2f9821110d854b1c3af8a1a7f:1885392519,c9e3f8c290821110118bab399324aa28:1925514233</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_app_module_ef8af1772ff5d110dc91c886f699b64c</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_app_module"><sys_app_module action="INSERT_OR_UPDATE"><active>true</active><application display_value="Background Notifications">559f64ff2fb1d110dc91c886f699b621</application><assessment/><device_type/><filter table="x_716205_async_b_n_msg">target_userDYNAMIC90d1921e5f510100a9ad2572f2b477fe^EQ<item endquery="false" field="target_user" goto="false" newquery="false" operator="DYNAMIC" or="false" value="90d1921e5f510100a9ad2572f2b477fe"/><item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/></filter><hint>List all of your received notifications</hint><homepage/><image/><link_type>LIST</link_type><map_page/><mobile_title>My Messages</mobile_title><mobile_view_name>Mobile</mobile_view_name><name>x_716205_async_b_n_msg</name><order>400</order><override_menu_roles>false</override_menu_roles><query/><report/><roles/><sys_class_name>sys_app_module</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-14 16:18:34</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>ef8af1772ff5d110dc91c886f699b64c</sys_id><sys_mod_count>0</sys_mod_count><sys_name>My Notifications</sys_name><sys_overrides/><sys_package display_value="Async Background Notification" source="x_716205_async_b_n">708e24ff2fb1d110dc91c886f699b630</sys_package><sys_policy/><sys_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</sys_scope><sys_update_name>sys_app_module_ef8af1772ff5d110dc91c886f699b64c</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-14 16:18:34</sys_updated_on><timeline_page/><title>My Notifications</title><uncancelable>false</uncancelable><view_name/><window_name/></sys_app_module></record_update>]]></payload>
+<payload_hash>124459583</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>09d71e8e2fc61110dc91c886f699b6b7</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1833ccb871b0000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table>x_716205_async_b_n_msg</table>
+<target_name>My Notifications</target_name>
+<type>Module</type>
+<update_domain>global</update_domain>
+<update_guid>0afa317701f5d110a04f101c2aa5309a</update_guid>
+<update_guid_history>0afa317701f5d110a04f101c2aa5309a:124459583</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_dictionary_x_716205_async_b_n_msg_source_application</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update&gt;&lt;sys_dictionary action="INSERT_OR_UPDATE" element="source_application" table="x_716205_async_b_n_msg"&gt;&lt;active&gt;true&lt;/active&gt;&lt;array&gt;false&lt;/array&gt;&lt;attributes/&gt;&lt;audit&gt;false&lt;/audit&gt;&lt;calculation&gt;&lt;![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]&gt;&lt;/calculation&gt;&lt;choice/&gt;&lt;choice_field/&gt;&lt;choice_table/&gt;&lt;column_label&gt;Source Application&lt;/column_label&gt;&lt;comments/&gt;&lt;create_roles/&gt;&lt;default_value/&gt;&lt;defaultsort/&gt;&lt;delete_roles/&gt;&lt;dependent/&gt;&lt;dependent_on_field/&gt;&lt;display&gt;false&lt;/display&gt;&lt;dynamic_creation&gt;false&lt;/dynamic_creation&gt;&lt;dynamic_creation_script/&gt;&lt;dynamic_default_value/&gt;&lt;dynamic_ref_qual/&gt;&lt;element&gt;source_application&lt;/element&gt;&lt;element_reference&gt;false&lt;/element_reference&gt;&lt;foreign_database/&gt;&lt;formula/&gt;&lt;function_definition/&gt;&lt;function_field&gt;false&lt;/function_field&gt;&lt;internal_type display_value="Reference"&gt;reference&lt;/internal_type&gt;&lt;mandatory&gt;false&lt;/mandatory&gt;&lt;max_length&gt;32&lt;/max_length&gt;&lt;name&gt;x_716205_async_b_n_msg&lt;/name&gt;&lt;next_element/&gt;&lt;primary&gt;false&lt;/primary&gt;&lt;read_only&gt;false&lt;/read_only&gt;&lt;read_roles/&gt;&lt;reference display_value="" name="sys_app"&gt;sys_app&lt;/reference&gt;&lt;reference_cascade_rule/&gt;&lt;reference_floats&gt;false&lt;/reference_floats&gt;&lt;reference_key/&gt;&lt;reference_qual/&gt;&lt;reference_qual_condition/&gt;&lt;reference_type/&gt;&lt;spell_check&gt;false&lt;/spell_check&gt;&lt;staged&gt;false&lt;/staged&gt;&lt;sys_class_name&gt;sys_dictionary&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2022-09-14 16:38:38&lt;/sys_created_on&gt;&lt;sys_id&gt;744ff57b2ff5d110dc91c886f699b6c5&lt;/sys_id&gt;&lt;sys_name&gt;Source Application&lt;/sys_name&gt;&lt;sys_package display_value="Async Background Notification" source="x_716205_async_b_n"&gt;708e24ff2fb1d110dc91c886f699b630&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Async Background Notification"&gt;708e24ff2fb1d110dc91c886f699b630&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_dictionary_x_716205_async_b_n_msg_source_application&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2022-09-14 16:38:38&lt;/sys_updated_on&gt;&lt;table_reference&gt;false&lt;/table_reference&gt;&lt;text_index&gt;false&lt;/text_index&gt;&lt;unique&gt;false&lt;/unique&gt;&lt;use_dependent_field&gt;false&lt;/use_dependent_field&gt;&lt;use_dynamic_default&gt;false&lt;/use_dynamic_default&gt;&lt;use_reference_qualifier&gt;simple&lt;/use_reference_qualifier&gt;&lt;virtual&gt;false&lt;/virtual&gt;&lt;virtual_type&gt;script&lt;/virtual_type&gt;&lt;widget/&gt;&lt;write_roles/&gt;&lt;xml_view&gt;false&lt;/xml_view&gt;&lt;/sys_dictionary&gt;&lt;/record_update&gt;</payload>
+<payload_hash>742860184</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>09d79e8e2fc61110dc91c886f699b679</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1833cddf0220000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table>x_716205_async_b_n_msg</table>
+<target_name>Background Message.Source Application</target_name>
+<type>Dictionary</type>
+<update_domain>global</update_domain>
+<update_guid>ac9ff1bbe6f5d110d9e05683e1fbf2a4</update_guid>
+<update_guid_history>ac9ff1bbe6f5d110d9e05683e1fbf2a4:742860184</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_scope_privilege_23f038732ff1d110dc91c886f699b648</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_scope_privilege"><sys_scope_privilege action="INSERT_OR_UPDATE"><operation>execute</operation><source_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</source_scope><status>allowed</status><sys_class_name>sys_scope_privilege</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-14 10:55:22</sys_created_on><sys_id>23f038732ff1d110dc91c886f699b648</sys_id><sys_mod_count>0</sys_mod_count><sys_name>ScopedGlideElement</sys_name><sys_package display_value="Async Background Notification" source="x_716205_async_b_n">708e24ff2fb1d110dc91c886f699b630</sys_package><sys_policy/><sys_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</sys_scope><sys_update_name>sys_scope_privilege_23f038732ff1d110dc91c886f699b648</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-14 10:55:22</sys_updated_on><target_name>ScopedGlideElement</target_name><target_scope display_value="Global">global</target_scope><target_type>scriptable</target_type></sys_scope_privilege></record_update>]]></payload>
+<payload_hash>1511405821</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>09d79e8e2fc61110dc91c886f699b67c</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1833ba39fe90000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table/>
+<target_name>ScopedGlideElement</target_name>
+<type>Cross scope privilege</type>
+<update_domain>global</update_domain>
+<update_guid>6ff038730bf1d110ef3b0113c32edc49</update_guid>
+<update_guid_history>6ff038730bf1d110ef3b0113c32edc49:1511405821</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_app_application_559f64ff2fb1d110dc91c886f699b621</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_app_application"><sys_app_application action="INSERT_OR_UPDATE"><active>true</active><category display_value="Custom Applications">e0355b31ef303000a61d5a3615c0fb78</category><description/><device_type>browser</device_type><hint/><name/><order/><roles/><sys_class_name>sys_app_application</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-14 10:49:13</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>559f64ff2fb1d110dc91c886f699b621</sys_id><sys_mod_count>1</sys_mod_count><sys_name>Background Notifications</sys_name><sys_overrides/><sys_package display_value="Async Background Notification" source="x_716205_async_b_n">708e24ff2fb1d110dc91c886f699b630</sys_package><sys_policy/><sys_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</sys_scope><sys_update_name>sys_app_application_559f64ff2fb1d110dc91c886f699b621</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-14 13:00:55</sys_updated_on><title>Background Notifications</title><view_name/></sys_app_application></record_update>]]></payload>
+<payload_hash>-745148393</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>0dd71e8e2fc61110dc91c886f699b6b6</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1833c1690d10000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table/>
+<target_name>Background Notifications</target_name>
+<type>Application Menu</type>
+<update_domain>global</update_domain>
+<update_guid>e6bd453fdc35d1102bc05ad9ba7b9496</update_guid>
+<update_guid_history>e6bd453fdc35d1102bc05ad9ba7b9496:-745148393,519fe833e9f1d110c38da2d244bee77d:-1238078659</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_dictionary_x_716205_async_b_n_msg_null</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update><sys_dictionary action="INSERT_OR_UPDATE" element="" table="x_716205_async_b_n_msg"><active>true</active><array>false</array><attributes/><audit>false</audit><calculation/><choice>0</choice><choice_field/><choice_table/><column_label/><comments/><create_roles/><default_value/><defaultsort/><delete_roles/><dependent/><dependent_on_field/><display>false</display><dynamic_creation>false</dynamic_creation><dynamic_creation_script/><dynamic_default_value/><dynamic_ref_qual/><element/><element_reference>false</element_reference><foreign_database/><formula/><function_definition/><function_field>false</function_field><internal_type display_value="Collection">collection</internal_type><mandatory>false</mandatory><max_length>40</max_length><name>x_716205_async_b_n_msg</name><next_element/><primary>false</primary><read_only>false</read_only><read_roles/><reference/><reference_cascade_rule/><reference_floats>false</reference_floats><reference_key/><reference_qual/><reference_qual_condition/><reference_type/><spell_check>false</spell_check><staged>false</staged><sys_class_name>sys_dictionary</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-14 10:48:50</sys_created_on><sys_id>0c8f68332ff1d110dc91c886f699b6ce</sys_id><sys_name>x_716205_async_b_n_msg</sys_name><sys_package display_value="Async Background Notification" source="x_716205_async_b_n">708e24ff2fb1d110dc91c886f699b630</sys_package><sys_policy/><sys_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</sys_scope><sys_update_name>sys_dictionary_x_716205_async_b_n_msg_null</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-14 10:48:50</sys_updated_on><table_reference>false</table_reference><text_index>false</text_index><unique>false</unique><use_dependent_field>false</use_dependent_field><use_dynamic_default>false</use_dynamic_default><use_reference_qualifier>simple</use_reference_qualifier><virtual>false</virtual><virtual_type>script</virtual_type><widget/><write_roles/><xml_view>false</xml_view></sys_dictionary></record_update>]]></payload>
+<payload_hash>434586902</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>0dd79e8e2fc61110dc91c886f699b678</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1833b9da7be0000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table>x_716205_async_b_n_msg</table>
+<target_name>Background Message</target_name>
+<type>Dictionary</type>
+<update_domain>global</update_domain>
+<update_guid>448f683338f1d11048025b00e75a3ce3</update_guid>
+<update_guid_history>448f683338f1d11048025b00e75a3ce3:434586902</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_documentation_x_716205_async_b_n_msg_target_user_en</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update><sys_documentation element="target_user" label="Target User" language="en" table="x_716205_async_b_n_msg"><sys_documentation action="INSERT_OR_UPDATE"><element>target_user</element><help/><hint/><label>Target User</label><language>en</language><name>x_716205_async_b_n_msg</name><plural>Target Users</plural><sys_class_name>sys_documentation</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-14 10:48:51</sys_created_on><sys_id>c08f68332ff1d110dc91c886f699b6eb</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Target User</sys_name><sys_package display_value="Async Background Notification" source="x_716205_async_b_n">708e24ff2fb1d110dc91c886f699b630</sys_package><sys_policy/><sys_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</sys_scope><sys_update_name>sys_documentation_x_716205_async_b_n_msg_target_user_en</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-14 10:48:51</sys_updated_on><url/><url_target/></sys_documentation></sys_documentation></record_update>]]></payload>
+<payload_hash>2140961614</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>0dd79e8e2fc61110dc91c886f699b67b</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1833b9dacdd0000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table>x_716205_async_b_n_msg</table>
+<target_name>Background Message.Target User</target_name>
+<type>Field Label</type>
+<update_domain>global</update_domain>
+<update_guid>1c8fa8335af1d110b54c118ab7eb881c</update_guid>
+<update_guid_history>1c8fa8335af1d110b54c118ab7eb881c:2140961614</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_ui_section_42200ebb2ff5d110dc91c886f699b6d6</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update><sys_ui_section caption="Source" section_id="42200ebb2ff5d110dc91c886f699b6d6" sys_domain="global" table="x_716205_async_b_n_msg" version="3" view=""><sys_ui_element action="INSERT_OR_UPDATE"><element>source_application</element><position>0</position><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-14 16:41:25</sys_created_on><sys_id>f8304ebb2ff5d110dc91c886f699b6f0</sys_id><sys_mod_count>0</sys_mod_count><sys_ui_formatter/><sys_ui_section caption="Source" display_value="Source" name="x_716205_async_b_n_msg" sys_domain="global" view="Default view">42200ebb2ff5d110dc91c886f699b6d6</sys_ui_section><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-14 16:41:25</sys_updated_on><sys_user/><type/></sys_ui_element><sys_ui_element action="INSERT_OR_UPDATE"><element>.split</element><position>1</position><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-14 16:41:25</sys_created_on><sys_id>7c304ebb2ff5d110dc91c886f699b6f0</sys_id><sys_mod_count>0</sys_mod_count><sys_ui_formatter/><sys_ui_section caption="Source" display_value="Source" name="x_716205_async_b_n_msg" sys_domain="global" view="Default view">42200ebb2ff5d110dc91c886f699b6d6</sys_ui_section><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-14 16:41:25</sys_updated_on><sys_user/><type>.split</type></sys_ui_element><sys_ui_element action="INSERT_OR_UPDATE"><element>source_scope</element><position>2</position><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-14 16:41:25</sys_created_on><sys_id>fc304ebb2ff5d110dc91c886f699b6f0</sys_id><sys_mod_count>0</sys_mod_count><sys_ui_formatter/><sys_ui_section caption="Source" display_value="Source" name="x_716205_async_b_n_msg" sys_domain="global" view="Default view">42200ebb2ff5d110dc91c886f699b6d6</sys_ui_section><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-14 16:41:25</sys_updated_on><sys_user/><type/></sys_ui_element><sys_ui_section action="INSERT_OR_UPDATE"><caption>Source</caption><header>false</header><name>x_716205_async_b_n_msg</name><roles/><sys_class_name>sys_ui_section</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-14 16:41:15</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>42200ebb2ff5d110dc91c886f699b6d6</sys_id><sys_mod_count>0</sys_mod_count><sys_name>x_716205_async_b_n_msg</sys_name><sys_overrides/><sys_package display_value="Async Background Notification" source="x_716205_async_b_n">708e24ff2fb1d110dc91c886f699b630</sys_package><sys_policy/><sys_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</sys_scope><sys_update_name>sys_ui_section_42200ebb2ff5d110dc91c886f699b6d6</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-14 16:41:15</sys_updated_on><sys_user/><title>false</title><view display_value="Default view" name="NULL">Default view</view><view_name/></sys_ui_section></sys_ui_section></record_update>]]></payload>
+<payload_hash>2089000593</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>15d79e8e2fc61110dc91c886f699b680</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1833ce0756c0000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table>x_716205_async_b_n_msg</table>
+<target_name>Background Message</target_name>
+<type>Form Layout</type>
+<update_domain>global</update_domain>
+<update_guid>f0304ebbeff5d11079b1143c4bb0fbf2</update_guid>
+<update_guid_history>f0304ebbeff5d11079b1143c4bb0fbf2:2089000593</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_ui_policy_action_b24aca022fc61110dc91c886f699b6f7</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_policy_action"><sys_ui_policy_action action="INSERT_OR_UPDATE"><cleared>false</cleared><disabled>true</disabled><field>notification_type</field><mandatory>ignore</mandatory><sys_class_name>sys_ui_policy_action</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-21 17:11:51</sys_created_on><sys_id>b24aca022fc61110dc91c886f699b6f7</sys_id><sys_mod_count>0</sys_mod_count><sys_name>notification_type</sys_name><sys_package display_value="Async Background Notification" source="x_716205_async_b_n">708e24ff2fb1d110dc91c886f699b630</sys_package><sys_policy/><sys_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</sys_scope><sys_update_name>sys_ui_policy_action_b24aca022fc61110dc91c886f699b6f7</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-21 17:11:51</sys_updated_on><table>x_716205_async_b_n_msg</table><ui_policy display_value="Disable writes under all circumstances">37f98e422fc61110dc91c886f699b662</ui_policy><visible>ignore</visible></sys_ui_policy_action></record_update>]]></payload>
+<payload_hash>1619049581</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>19d79e8e2fc61110dc91c886f699b67f</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1836108d39a0000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table>x_716205_async_b_n_msg</table>
+<target_name>notification_type</target_name>
+<type>UI Policy Action</type>
+<update_domain>global</update_domain>
+<update_guid>3e4aca02a5c6111062b8721f408416f8</update_guid>
+<update_guid_history>3e4aca02a5c6111062b8721f408416f8:1619049581</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_ui_policy_action_835a82822fc61110dc91c886f699b632</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_policy_action"><sys_ui_policy_action action="INSERT_OR_UPDATE"><cleared>false</cleared><disabled>true</disabled><field>priority</field><mandatory>ignore</mandatory><sys_class_name>sys_ui_policy_action</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-21 17:12:09</sys_created_on><sys_id>835a82822fc61110dc91c886f699b632</sys_id><sys_mod_count>0</sys_mod_count><sys_name>priority</sys_name><sys_package display_value="Async Background Notification" source="x_716205_async_b_n">708e24ff2fb1d110dc91c886f699b630</sys_package><sys_policy/><sys_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</sys_scope><sys_update_name>sys_ui_policy_action_835a82822fc61110dc91c886f699b632</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-21 17:12:09</sys_updated_on><table>x_716205_async_b_n_msg</table><ui_policy display_value="Disable writes under all circumstances">37f98e422fc61110dc91c886f699b662</ui_policy><visible>ignore</visible></sys_ui_policy_action></record_update>]]></payload>
+<payload_hash>-945706539</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>1dd79e8e2fc61110dc91c886f699b67e</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1836109184c0000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table>x_716205_async_b_n_msg</table>
+<target_name>priority</target_name>
+<type>UI Policy Action</type>
+<update_domain>global</update_domain>
+<update_guid>0f5a8282c1c61110ab0da5fa5fa78133</update_guid>
+<update_guid_history>0f5a8282c1c61110ab0da5fa5fa78133:-945706539</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_db_object_f37f68332ff1d110dc91c886f699b6cb</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_db_object"><sys_db_object action="INSERT_OR_UPDATE"><access>public</access><actions_access>true</actions_access><alter_access>true</alter_access><caller_access/><client_scripts_access>true</client_scripts_access><configuration_access>false</configuration_access><create_access>true</create_access><create_access_controls>false</create_access_controls><delete_access>false</delete_access><is_extendable>false</is_extendable><label>Background Message</label><live_feed_enabled>false</live_feed_enabled><name>x_716205_async_b_n_msg</name><number_ref display_value="BMSG">448f68332ff1d110dc91c886f699b6e5</number_ref><provider_class/><read_access>true</read_access><scriptable_table>false</scriptable_table><super_class/><sys_class_name>sys_db_object</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-14 10:48:50</sys_created_on><sys_id>f37f68332ff1d110dc91c886f699b6cb</sys_id><sys_mod_count>2</sys_mod_count><sys_name>Background Message</sys_name><sys_package display_value="Async Background Notification" source="x_716205_async_b_n">708e24ff2fb1d110dc91c886f699b630</sys_package><sys_policy/><sys_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</sys_scope><sys_update_name>sys_db_object_f37f68332ff1d110dc91c886f699b6cb</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-21 10:30:14</sys_updated_on><update_access>true</update_access><user_role/><ws_access>true</ws_access></sys_db_object></record_update>]]></payload>
+<payload_hash>785465086</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>41d71e8e2fc61110dc91c886f699b6b8</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1835f9921500000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table>x_716205_async_b_n_msg</table>
+<target_name>Background Message</target_name>
+<type>Table</type>
+<update_domain>global</update_domain>
+<update_guid>2b5e248e0a421110d3104f58217946de</update_guid>
+<update_guid_history>2b5e248e0a421110d3104f58217946de:785465086,088f6833e7f1d110cfefafd4c800c3e4:1412766821</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_documentation_x_716205_async_b_n_msg_message_en</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update><sys_documentation element="message" label="Message" language="en" table="x_716205_async_b_n_msg"><sys_documentation action="INSERT_OR_UPDATE"><element>message</element><help/><hint/><label>Message</label><language>en</language><name>x_716205_async_b_n_msg</name><plural>Messages</plural><sys_class_name>sys_documentation</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-14 10:48:51</sys_created_on><sys_id>d08f68332ff1d110dc91c886f699b6f4</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Message</sys_name><sys_package display_value="Async Background Notification" source="x_716205_async_b_n">708e24ff2fb1d110dc91c886f699b630</sys_package><sys_policy/><sys_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</sys_scope><sys_update_name>sys_documentation_x_716205_async_b_n_msg_message_en</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-14 10:48:51</sys_updated_on><url/><url_target/></sys_documentation></sys_documentation></record_update>]]></payload>
+<payload_hash>390892324</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>41d79e8e2fc61110dc91c886f699b67a</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1833b9dacc50000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table>x_716205_async_b_n_msg</table>
+<target_name>Background Message.Message</target_name>
+<type>Field Label</type>
+<update_domain>global</update_domain>
+<update_guid>548fa833d3f1d110b44786af3eb9df1b</update_guid>
+<update_guid_history>548fa833d3f1d110b44786af3eb9df1b:390892324</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_scope_privilege_b6abc1062fc21110dc91c886f699b6e1</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_scope_privilege"><sys_scope_privilege action="INSERT_OR_UPDATE"><operation>execute</operation><source_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</source_scope><status>allowed</status><sys_class_name>sys_scope_privilege</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-21 12:38:15</sys_created_on><sys_id>b6abc1062fc21110dc91c886f699b6e1</sys_id><sys_mod_count>0</sys_mod_count><sys_name>GlideRecord.update</sys_name><sys_package display_value="Async Background Notification" source="x_716205_async_b_n">708e24ff2fb1d110dc91c886f699b630</sys_package><sys_policy/><sys_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</sys_scope><sys_update_name>sys_scope_privilege_b6abc1062fc21110dc91c886f699b6e1</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-21 12:38:15</sys_updated_on><target_name>GlideRecord.update</target_name><target_scope display_value="Global">global</target_scope><target_type>scriptable</target_type></sys_scope_privilege></record_update>]]></payload>
+<payload_hash>-1620454071</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>41d79e8e2fc61110dc91c886f699b67d</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>183600e53320000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table/>
+<target_name>GlideRecord.update</target_name>
+<type>Cross scope privilege</type>
+<update_domain>global</update_domain>
+<update_guid>b2abc1062dc21110c16f9d8e98f212e3</update_guid>
+<update_guid_history>b2abc1062dc21110c16f9d8e98f212e3:-1620454071</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_app_module_dd9fe8332ff1d110dc91c886f699b67d</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_app_module"><sys_app_module action="INSERT_OR_UPDATE"><active>true</active><application display_value="Async Background Notification">559f64ff2fb1d110dc91c886f699b621</application><assessment/><device_type/><filter/><hint/><homepage/><image/><link_type>SEPARATOR</link_type><map_page/><mobile_title>Background Message</mobile_title><mobile_view_name>Mobile</mobile_view_name><name/><order>1</order><override_menu_roles>false</override_menu_roles><query/><report/><roles/><sys_class_name>sys_app_module</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-14 10:49:13</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>dd9fe8332ff1d110dc91c886f699b67d</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Background Message</sys_name><sys_overrides/><sys_package display_value="Async Background Notification" source="x_716205_async_b_n">708e24ff2fb1d110dc91c886f699b630</sys_package><sys_policy/><sys_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</sys_scope><sys_update_name>sys_app_module_dd9fe8332ff1d110dc91c886f699b67d</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-14 10:49:13</sys_updated_on><timeline_page/><title>Background Message</title><uncancelable>false</uncancelable><view_name/><window_name/></sys_app_module></record_update>]]></payload>
+<payload_hash>1907848098</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>45d71e8e2fc61110dc91c886f699b6b7</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1833b9dfcfe0000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table/>
+<target_name>Background Message</target_name>
+<type>Module</type>
+<update_domain>global</update_domain>
+<update_guid>519fe833a0f1d1103f936bdf52385980</update_guid>
+<update_guid_history>519fe833a0f1d1103f936bdf52385980:1907848098</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_dictionary_x_716205_async_b_n_msg_short_description</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update><sys_dictionary action="INSERT_OR_UPDATE" element="short_description" table="x_716205_async_b_n_msg"><active>true</active><array>false</array><attributes>edge_encryption_enabled=true</attributes><audit>false</audit><calculation/><choice/><choice_field/><choice_table/><column_label>Short Description</column_label><comments/><create_roles/><default_value/><defaultsort/><delete_roles/><dependent/><dependent_on_field/><display>false</display><dynamic_creation>false</dynamic_creation><dynamic_creation_script/><dynamic_default_value/><dynamic_ref_qual/><element>short_description</element><element_reference>false</element_reference><foreign_database/><formula/><function_definition/><function_field>false</function_field><internal_type display_value="String">string</internal_type><mandatory>false</mandatory><max_length>255</max_length><name>x_716205_async_b_n_msg</name><next_element/><primary>false</primary><read_only>false</read_only><read_roles/><reference/><reference_cascade_rule/><reference_floats>false</reference_floats><reference_key/><reference_qual/><reference_qual_condition/><reference_type/><spell_check>false</spell_check><staged>false</staged><sys_class_name>sys_dictionary</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-14 10:48:51</sys_created_on><sys_id>488f68332ff1d110dc91c886f699b6ed</sys_id><sys_name>Short Description</sys_name><sys_package display_value="Async Background Notification" source="x_716205_async_b_n">708e24ff2fb1d110dc91c886f699b630</sys_package><sys_policy/><sys_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</sys_scope><sys_update_name>sys_dictionary_x_716205_async_b_n_msg_short_description</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-21 11:42:21</sys_updated_on><table_reference>false</table_reference><text_index>false</text_index><unique>false</unique><use_dependent_field>false</use_dependent_field><use_dynamic_default>false</use_dynamic_default><use_reference_qualifier>simple</use_reference_qualifier><virtual>false</virtual><virtual_type>script</virtual_type><widget/><write_roles/><xml_view>false</xml_view></sys_dictionary></record_update>]]></payload>
+<payload_hash>-1541456270</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>45d79e8e2fc61110dc91c886f699b679</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1835fdb2e4b0000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table>x_716205_async_b_n_msg</table>
+<target_name>Background Message.Short Description</target_name>
+<type>Dictionary</type>
+<update_domain>global</update_domain>
+<update_guid>d4eeb80e81821110aeb2c2af7707c55e</update_guid>
+<update_guid_history>d4eeb80e81821110aeb2c2af7707c55e:-1541456270,ac8fa8332ef1d110834f83fa1a417e2a:-289569274,548fa83344f1d110094b31223a214818:-780700251</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_scope_privilege_23e338c22f821110dc91c886f699b62a</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_scope_privilege"><sys_scope_privilege action="INSERT_OR_UPDATE"><operation>execute</operation><source_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</source_scope><status>allowed</status><sys_class_name>sys_scope_privilege</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-21 10:54:32</sys_created_on><sys_id>23e338c22f821110dc91c886f699b62a</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Glide API: event management</sys_name><sys_package display_value="Async Background Notification" source="x_716205_async_b_n">708e24ff2fb1d110dc91c886f699b630</sys_package><sys_policy/><sys_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</sys_scope><sys_update_name>sys_scope_privilege_23e338c22f821110dc91c886f699b62a</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-21 10:54:32</sys_updated_on><target_name>Glide API: event management</target_name><target_scope display_value="Global">global</target_scope><target_type>scriptable</target_type></sys_scope_privilege></record_update>]]></payload>
+<payload_hash>-392106143</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>45d79e8e2fc61110dc91c886f699b67c</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1835faf61920000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table/>
+<target_name>Glide API: event management</target_name>
+<type>Cross scope privilege</type>
+<update_domain>global</update_domain>
+<update_guid>2fe338c29082111043e953c20265092b</update_guid>
+<update_guid_history>2fe338c29082111043e953c20265092b:-392106143</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_app_708e24ff2fb1d110dc91c886f699b630</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_app"><sys_app action="INSERT_OR_UPDATE"><active>true</active><can_edit_in_studio>true</can_edit_in_studio><enforce_license>none</enforce_license><guided_setup_guid/><hide_on_ui>false</hide_on_ui><installed_as_dependency>false</installed_as_dependency><js_level>helsinki_es5</js_level><licensable>true</licensable><license/><license_category>none</license_category><license_definition/><license_model>none</license_model><logo/><menu/><name>Async Background Notification</name><private>false</private><restrict_table_access>false</restrict_table_access><runtime_access_tracking>permissive</runtime_access_tracking><scope>x_716205_async_b_n</scope><scoped_administration>false</scoped_administration><short_description/><source>x_716205_async_b_n</source><store_correlation_id/><store_url/><sys_class_name>sys_app</sys_class_name><sys_code/><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-14 10:44:32</sys_created_on><sys_id>708e24ff2fb1d110dc91c886f699b630</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-14 10:44:32</sys_updated_on><template/><trackable>true</trackable><uninstall_blocked>false</uninstall_blocked><user_role/><vendor/><vendor_prefix/><version>1.0.0</version></sys_app><sys_translated_text action="delete_multiple" query="documentkey=708e24ff2fb1d110dc91c886f699b630"/></record_update>]]></payload>
+<payload_hash>213656211</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>49d71e8e2fc61110dc91c886f699b6b6</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1833b99b3fc0000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table/>
+<target_name>Async Background Notification</target_name>
+<type>Custom Application</type>
+<update_domain>global</update_domain>
+<update_guid>bc8e24ff21b1d110661753847c370933</update_guid>
+<update_guid_history>bc8e24ff21b1d110661753847c370933:213656211</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_dictionary_x_716205_async_b_n_msg_notification_type</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update&gt;&lt;sys_dictionary action="INSERT_OR_UPDATE" element="notification_type" table="x_716205_async_b_n_msg"&gt;&lt;active&gt;true&lt;/active&gt;&lt;array&gt;false&lt;/array&gt;&lt;attributes/&gt;&lt;audit&gt;false&lt;/audit&gt;&lt;calculation&gt;&lt;![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]&gt;&lt;/calculation&gt;&lt;choice&gt;3&lt;/choice&gt;&lt;choice_field/&gt;&lt;choice_table/&gt;&lt;column_label&gt;Notification Type&lt;/column_label&gt;&lt;comments/&gt;&lt;create_roles/&gt;&lt;default_value&gt;other&lt;/default_value&gt;&lt;defaultsort/&gt;&lt;delete_roles/&gt;&lt;dependent/&gt;&lt;dependent_on_field/&gt;&lt;display&gt;false&lt;/display&gt;&lt;dynamic_creation&gt;false&lt;/dynamic_creation&gt;&lt;dynamic_creation_script/&gt;&lt;dynamic_default_value/&gt;&lt;dynamic_ref_qual/&gt;&lt;element&gt;notification_type&lt;/element&gt;&lt;element_reference&gt;false&lt;/element_reference&gt;&lt;foreign_database/&gt;&lt;formula/&gt;&lt;function_definition/&gt;&lt;function_field&gt;false&lt;/function_field&gt;&lt;internal_type display_value="Choice"&gt;choice&lt;/internal_type&gt;&lt;mandatory&gt;false&lt;/mandatory&gt;&lt;max_length&gt;64&lt;/max_length&gt;&lt;name&gt;x_716205_async_b_n_msg&lt;/name&gt;&lt;next_element/&gt;&lt;primary&gt;false&lt;/primary&gt;&lt;read_only&gt;false&lt;/read_only&gt;&lt;read_roles/&gt;&lt;reference/&gt;&lt;reference_cascade_rule/&gt;&lt;reference_floats&gt;false&lt;/reference_floats&gt;&lt;reference_key/&gt;&lt;reference_qual/&gt;&lt;reference_qual_condition/&gt;&lt;reference_type/&gt;&lt;spell_check&gt;false&lt;/spell_check&gt;&lt;staged&gt;false&lt;/staged&gt;&lt;sys_class_name&gt;sys_dictionary&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2022-09-14 16:21:14&lt;/sys_created_on&gt;&lt;sys_id&gt;125bfd772ff5d110dc91c886f699b6c7&lt;/sys_id&gt;&lt;sys_name&gt;Notification Type&lt;/sys_name&gt;&lt;sys_package display_value="Async Background Notification" source="x_716205_async_b_n"&gt;708e24ff2fb1d110dc91c886f699b630&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Async Background Notification"&gt;708e24ff2fb1d110dc91c886f699b630&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_dictionary_x_716205_async_b_n_msg_notification_type&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2022-09-14 16:23:28&lt;/sys_updated_on&gt;&lt;table_reference&gt;false&lt;/table_reference&gt;&lt;text_index&gt;false&lt;/text_index&gt;&lt;unique&gt;false&lt;/unique&gt;&lt;use_dependent_field&gt;false&lt;/use_dependent_field&gt;&lt;use_dynamic_default&gt;false&lt;/use_dynamic_default&gt;&lt;use_reference_qualifier&gt;simple&lt;/use_reference_qualifier&gt;&lt;virtual&gt;false&lt;/virtual&gt;&lt;virtual_type&gt;script&lt;/virtual_type&gt;&lt;widget/&gt;&lt;write_roles/&gt;&lt;xml_view&gt;false&lt;/xml_view&gt;&lt;/sys_dictionary&gt;&lt;/record_update&gt;</payload>
+<payload_hash>1539438378</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>49d79e8e2fc61110dc91c886f699b678</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1833cd004c90000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table>x_716205_async_b_n_msg</table>
+<target_name>Background Message.Notification Type</target_name>
+<type>Dictionary</type>
+<update_domain>global</update_domain>
+<update_guid>351c35b721f5d110ca297239ec331a4c</update_guid>
+<update_guid_history>351c35b721f5d110ca297239ec331a4c:1539438378,ad9bf1b76ff5d110d119672bc448175b:765969705</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_documentation_x_716205_async_b_n_msg_source_scope_en</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update><sys_documentation element="source_scope" label="Source Scope" language="en" table="x_716205_async_b_n_msg"><sys_documentation action="INSERT_OR_UPDATE"><element>source_scope</element><help/><hint/><label>Source Scope</label><language>en</language><name>x_716205_async_b_n_msg</name><plural>Source Scopes</plural><sys_class_name>sys_documentation</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-14 16:36:55</sys_created_on><sys_id>662f7d7b2ff5d110dc91c886f699b642</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Source Scope</sys_name><sys_package display_value="Async Background Notification" source="x_716205_async_b_n">708e24ff2fb1d110dc91c886f699b630</sys_package><sys_policy/><sys_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</sys_scope><sys_update_name>sys_documentation_x_716205_async_b_n_msg_source_scope_en</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-14 16:36:55</sys_updated_on><url/><url_target/></sys_documentation></sys_documentation></record_update>]]></payload>
+<payload_hash>-606270980</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>49d79e8e2fc61110dc91c886f699b67b</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1833cdc54a30000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table>x_716205_async_b_n_msg</table>
+<target_name>Background Message.Source Scope</target_name>
+<type>Field Label</type>
+<update_domain>global</update_domain>
+<update_guid>ba2f7d7b4af5d1108e8b7c41b26f714a</update_guid>
+<update_guid_history>ba2f7d7b4af5d1108e8b7c41b26f714a:-606270980</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_documentation_x_716205_async_b_n_msg_number_en</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update><sys_documentation element="number" label="Number" language="en" table="x_716205_async_b_n_msg"><sys_documentation action="INSERT_OR_UPDATE"><element>number</element><help/><hint/><label>Number</label><language>en</language><name>x_716205_async_b_n_msg</name><plural>Numbers</plural><sys_class_name>sys_documentation</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-14 10:48:52</sys_created_on><sys_id>d88f68332ff1d110dc91c886f699b6f8</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Number</sys_name><sys_package display_value="Async Background Notification" source="x_716205_async_b_n">708e24ff2fb1d110dc91c886f699b630</sys_package><sys_policy/><sys_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</sys_scope><sys_update_name>sys_documentation_x_716205_async_b_n_msg_number_en</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-14 10:48:52</sys_updated_on><url/><url_target/></sys_documentation></sys_documentation></record_update>]]></payload>
+<payload_hash>-671839758</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>4dd79e8e2fc61110dc91c886f699b67a</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1833b9dad160000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table>x_716205_async_b_n_msg</table>
+<target_name>Background Message.Number</target_name>
+<type>Field Label</type>
+<update_domain>global</update_domain>
+<update_guid>188fa8336cf1d110f513767adf95271f</update_guid>
+<update_guid_history>188fa8336cf1d110f513767adf95271f:-671839758</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_security_acl_aaa0f4732ff1d110dc91c886f699b6db</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_security_acl"&gt;&lt;sys_security_acl action="INSERT_OR_UPDATE"&gt;&lt;active&gt;true&lt;/active&gt;&lt;admin_overrides&gt;true&lt;/admin_overrides&gt;&lt;advanced&gt;true&lt;/advanced&gt;&lt;condition/&gt;&lt;description&gt;Allow read for all fields in x_716205_async_b_n_msg, if the ACL script returns true.&lt;/description&gt;&lt;name&gt;x_716205_async_b_n_msg.*&lt;/name&gt;&lt;operation display_value="read"&gt;read&lt;/operation&gt;&lt;script&gt;&lt;![CDATA[answer = gs.getUserID() === String(current.target_user.sys_id);]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_security_acl&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2022-09-14 10:53:57&lt;/sys_created_on&gt;&lt;sys_id&gt;aaa0f4732ff1d110dc91c886f699b6db&lt;/sys_id&gt;&lt;sys_mod_count&gt;3&lt;/sys_mod_count&gt;&lt;sys_name&gt;x_716205_async_b_n_msg.*&lt;/sys_name&gt;&lt;sys_package display_value="Async Background Notification" source="x_716205_async_b_n"&gt;708e24ff2fb1d110dc91c886f699b630&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Async Background Notification"&gt;708e24ff2fb1d110dc91c886f699b630&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_security_acl_aaa0f4732ff1d110dc91c886f699b6db&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2022-09-14 12:59:38&lt;/sys_updated_on&gt;&lt;type display_value="record"&gt;record&lt;/type&gt;&lt;/sys_security_acl&gt;&lt;/record_update&gt;</payload>
+<payload_hash>-1776645581</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>4dd79e8e2fc61110dc91c886f699b67d</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1833c1564080000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table>x_716205_async_b_n_msg.*</table>
+<target_name>x_716205_async_b_n_msg.*</target_name>
+<type>Access Control</type>
+<update_domain>global</update_domain>
+<update_guid>336d4d3fac35d110c16e18fa49cab5ee</update_guid>
+<update_guid_history>336d4d3fac35d110c16e18fa49cab5ee:-1776645581,e5f8b47b46f1d1101df698e7ffbe7267:1487255567,05c0fc73f6f1d1100e902bb0faa4b118:-1690231413,faa0f4730ef1d1104215f5a2960815dd:-892835736</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_ui_policy_action_d97a86822fc61110dc91c886f699b637</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_policy_action"><sys_ui_policy_action action="INSERT_OR_UPDATE"><cleared>false</cleared><disabled>true</disabled><field>source_application</field><mandatory>ignore</mandatory><sys_class_name>sys_ui_policy_action</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-21 17:12:35</sys_created_on><sys_id>d97a86822fc61110dc91c886f699b637</sys_id><sys_mod_count>0</sys_mod_count><sys_name>source_application</sys_name><sys_package display_value="Async Background Notification" source="x_716205_async_b_n">708e24ff2fb1d110dc91c886f699b630</sys_package><sys_policy/><sys_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</sys_scope><sys_update_name>sys_ui_policy_action_d97a86822fc61110dc91c886f699b637</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-21 17:12:35</sys_updated_on><table>x_716205_async_b_n_msg</table><ui_policy display_value="Disable writes under all circumstances">37f98e422fc61110dc91c886f699b662</ui_policy><visible>ignore</visible></sys_ui_policy_action></record_update>]]></payload>
+<payload_hash>-390662939</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>51d79e8e2fc61110dc91c886f699b680</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>18361097ca80000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table>x_716205_async_b_n_msg</table>
+<target_name>source_application</target_name>
+<type>UI Policy Action</type>
+<update_domain>global</update_domain>
+<update_guid>557a868286c611100057f64812e8d239</update_guid>
+<update_guid_history>557a868286c611100057f64812e8d239:-390662939</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_ui_policy_action_a04a8e422fc61110dc91c886f699b6bf</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_policy_action"><sys_ui_policy_action action="INSERT_OR_UPDATE"><cleared>false</cleared><disabled>true</disabled><field>message_journal</field><mandatory>ignore</mandatory><sys_class_name>sys_ui_policy_action</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-21 17:11:43</sys_created_on><sys_id>a04a8e422fc61110dc91c886f699b6bf</sys_id><sys_mod_count>0</sys_mod_count><sys_name>message_journal</sys_name><sys_package display_value="Async Background Notification" source="x_716205_async_b_n">708e24ff2fb1d110dc91c886f699b630</sys_package><sys_policy/><sys_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</sys_scope><sys_update_name>sys_ui_policy_action_a04a8e422fc61110dc91c886f699b6bf</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-21 17:11:43</sys_updated_on><table>x_716205_async_b_n_msg</table><ui_policy display_value="Disable writes under all circumstances">37f98e422fc61110dc91c886f699b662</ui_policy><visible>ignore</visible></sys_ui_policy_action></record_update>]]></payload>
+<payload_hash>2031527501</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>55d79e8e2fc61110dc91c886f699b67f</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1836108b2750000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table>x_716205_async_b_n_msg</table>
+<target_name>message_journal</target_name>
+<type>UI Policy Action</type>
+<update_domain>global</update_domain>
+<update_guid>3c4a8e42bcc611102dd27d09af2b38c0</update_guid>
+<update_guid_history>3c4a8e42bcc611102dd27d09af2b38c0:2031527501</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_ui_policy_action_708a86822fc61110dc91c886f699b63b</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_policy_action"><sys_ui_policy_action action="INSERT_OR_UPDATE"><cleared>false</cleared><disabled>true</disabled><field>target_user</field><mandatory>ignore</mandatory><sys_class_name>sys_ui_policy_action</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-21 17:12:49</sys_created_on><sys_id>708a86822fc61110dc91c886f699b63b</sys_id><sys_mod_count>0</sys_mod_count><sys_name>target_user</sys_name><sys_package display_value="Async Background Notification" source="x_716205_async_b_n">708e24ff2fb1d110dc91c886f699b630</sys_package><sys_policy/><sys_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</sys_scope><sys_update_name>sys_ui_policy_action_708a86822fc61110dc91c886f699b63b</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-21 17:12:49</sys_updated_on><table>x_716205_async_b_n_msg</table><ui_policy display_value="Disable writes under all circumstances">37f98e422fc61110dc91c886f699b662</ui_policy><visible>ignore</visible></sys_ui_policy_action></record_update>]]></payload>
+<payload_hash>1750359437</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>59d79e8e2fc61110dc91c886f699b67e</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1836109b5250000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table>x_716205_async_b_n_msg</table>
+<target_name>target_user</target_name>
+<type>UI Policy Action</type>
+<update_domain>global</update_domain>
+<update_guid>f88a868252c6111072386f7f2116713c</update_guid>
+<update_guid_history>f88a868252c6111072386f7f2116713c:1750359437</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sysevent_register_8328f8c22f821110dc91c886f699b6b7</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sysevent_register"><sysevent_register action="INSERT_OR_UPDATE"><caller_access/><description/><event_name>x_716205_async_b_n.asyncbgnotification.m</event_name><fired_by>Async Background Notification Script Include</fired_by><queue/><suffix>asyncbgnotification.msg</suffix><sys_class_name>sysevent_register</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-21 11:13:58</sys_created_on><sys_id>8328f8c22f821110dc91c886f699b6b7</sys_id><sys_mod_count>0</sys_mod_count><sys_name>x_716205_async_b_n.asyncbgnotification.m</sys_name><sys_package display_value="Async Background Notification" source="x_716205_async_b_n">708e24ff2fb1d110dc91c886f699b630</sys_package><sys_policy/><sys_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</sys_scope><sys_update_name>sysevent_register_8328f8c22f821110dc91c886f699b6b7</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-21 11:13:58</sys_updated_on><table>x_716205_async_b_n_msg</table></sysevent_register></record_update>]]></payload>
+<payload_hash>2108659476</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>81d71e8e2fc61110dc91c886f699b6b6</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1835fc12ad60000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table>x_716205_async_b_n_msg</table>
+<target_name>x_716205_async_b_n.asyncbgnotification.m</target_name>
+<type>Event Registration</type>
+<update_domain>global</update_domain>
+<update_guid>94683cc6858211109b96f4d9522ee44f</update_guid>
+<update_guid_history>94683cc6858211109b96f4d9522ee44f:2108659476</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_app_module_d99fe8332ff1d110dc91c886f699b682</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_app_module"><sys_app_module action="INSERT_OR_UPDATE"><active>true</active><application display_value="Background Notifications">559f64ff2fb1d110dc91c886f699b621</application><assessment/><device_type/><filter/><hint/><homepage/><image/><link_type>LIST</link_type><map_page/><mobile_title>All</mobile_title><mobile_view_name>Mobile</mobile_view_name><name>x_716205_async_b_n_msg</name><order>3</order><override_menu_roles>false</override_menu_roles><query/><report/><roles>admin</roles><sys_class_name>sys_app_module</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-14 10:49:13</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>d99fe8332ff1d110dc91c886f699b682</sys_id><sys_mod_count>1</sys_mod_count><sys_name>All</sys_name><sys_overrides/><sys_package display_value="Async Background Notification" source="x_716205_async_b_n">708e24ff2fb1d110dc91c886f699b630</sys_package><sys_policy/><sys_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</sys_scope><sys_update_name>sys_app_module_d99fe8332ff1d110dc91c886f699b682</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-14 13:01:15</sys_updated_on><timeline_page/><title>All</title><uncancelable>false</uncancelable><view_name/><window_name/></sys_app_module></record_update>]]></payload>
+<payload_hash>1777183492</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>81d71e8e2fc61110dc91c886f699b6b7</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1833c16df2b0000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table>x_716205_async_b_n_msg</table>
+<target_name>All</target_name>
+<type>Module</type>
+<update_domain>global</update_domain>
+<update_guid>efcd497f9735d11039bab48464430ac4</update_guid>
+<update_guid_history>efcd497f9735d11039bab48464430ac4:1777183492,d99fe83386f1d11007f6c53ba0e22c83:-1640225525</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_dictionary_x_716205_async_b_n_msg_priority</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update&gt;&lt;sys_dictionary action="INSERT_OR_UPDATE" element="priority" table="x_716205_async_b_n_msg"&gt;&lt;active&gt;true&lt;/active&gt;&lt;array&gt;false&lt;/array&gt;&lt;attributes/&gt;&lt;audit&gt;false&lt;/audit&gt;&lt;calculation&gt;&lt;![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]&gt;&lt;/calculation&gt;&lt;choice&gt;3&lt;/choice&gt;&lt;choice_field/&gt;&lt;choice_table/&gt;&lt;column_label&gt;Priority&lt;/column_label&gt;&lt;comments/&gt;&lt;create_roles/&gt;&lt;default_value&gt;4&lt;/default_value&gt;&lt;defaultsort/&gt;&lt;delete_roles/&gt;&lt;dependent/&gt;&lt;dependent_on_field/&gt;&lt;display&gt;false&lt;/display&gt;&lt;dynamic_creation&gt;false&lt;/dynamic_creation&gt;&lt;dynamic_creation_script/&gt;&lt;dynamic_default_value/&gt;&lt;dynamic_ref_qual/&gt;&lt;element&gt;priority&lt;/element&gt;&lt;element_reference&gt;false&lt;/element_reference&gt;&lt;foreign_database/&gt;&lt;formula/&gt;&lt;function_definition/&gt;&lt;function_field&gt;false&lt;/function_field&gt;&lt;internal_type display_value="Choice"&gt;choice&lt;/internal_type&gt;&lt;mandatory&gt;false&lt;/mandatory&gt;&lt;max_length&gt;40&lt;/max_length&gt;&lt;name&gt;x_716205_async_b_n_msg&lt;/name&gt;&lt;next_element/&gt;&lt;primary&gt;false&lt;/primary&gt;&lt;read_only&gt;false&lt;/read_only&gt;&lt;read_roles/&gt;&lt;reference/&gt;&lt;reference_cascade_rule/&gt;&lt;reference_floats&gt;false&lt;/reference_floats&gt;&lt;reference_key/&gt;&lt;reference_qual/&gt;&lt;reference_qual_condition/&gt;&lt;reference_type/&gt;&lt;spell_check&gt;false&lt;/spell_check&gt;&lt;staged&gt;false&lt;/staged&gt;&lt;sys_class_name&gt;sys_dictionary&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2022-09-14 16:27:56&lt;/sys_created_on&gt;&lt;sys_id&gt;fbec79f72ff5d110dc91c886f699b608&lt;/sys_id&gt;&lt;sys_name&gt;Priority&lt;/sys_name&gt;&lt;sys_package display_value="Async Background Notification" source="x_716205_async_b_n"&gt;708e24ff2fb1d110dc91c886f699b630&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Async Background Notification"&gt;708e24ff2fb1d110dc91c886f699b630&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_dictionary_x_716205_async_b_n_msg_priority&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2022-09-14 16:30:41&lt;/sys_updated_on&gt;&lt;table_reference&gt;false&lt;/table_reference&gt;&lt;text_index&gt;false&lt;/text_index&gt;&lt;unique&gt;false&lt;/unique&gt;&lt;use_dependent_field&gt;false&lt;/use_dependent_field&gt;&lt;use_dynamic_default&gt;false&lt;/use_dynamic_default&gt;&lt;use_reference_qualifier&gt;simple&lt;/use_reference_qualifier&gt;&lt;virtual&gt;false&lt;/virtual&gt;&lt;virtual_type&gt;script&lt;/virtual_type&gt;&lt;widget/&gt;&lt;write_roles/&gt;&lt;xml_view&gt;false&lt;/xml_view&gt;&lt;/sys_dictionary&gt;&lt;/record_update&gt;</payload>
+<payload_hash>-1115695568</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>81d79e8e2fc61110dc91c886f699b679</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1833cd6a3550000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table>x_716205_async_b_n_msg</table>
+<target_name>Background Message.Priority</target_name>
+<type>Dictionary</type>
+<update_domain>global</update_domain>
+<update_guid>f3bd753bd2f5d11042979449ab871ffc</update_guid>
+<update_guid_history>f3bd753bd2f5d11042979449ab871ffc:-1115695568,2b1d3df78af5d110070e09f8224bfe57:-845813389</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_notification_workspace_content_55a8300a2f821110dc91c886f699b68d</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_notification_workspace_content"><sys_notification_workspace_content action="INSERT_OR_UPDATE"><active>true</active><is_default>false</is_default><name>Async Background Notification</name><notification display_value="Async Background Notification">e5f7b4c62f821110dc91c886f699b613</notification><route display_value="Agent Workspace">cb1af195872023002941b53046cb0b4e</route><sys_class_name>sys_notification_workspace_content</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-21 11:15:31</sys_created_on><sys_id>55a8300a2f821110dc91c886f699b68d</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Async Background Notification</sys_name><sys_package display_value="Async Background Notification" source="x_716205_async_b_n">708e24ff2fb1d110dc91c886f699b630</sys_package><sys_policy/><sys_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</sys_scope><sys_update_name>sys_notification_workspace_content_55a8300a2f821110dc91c886f699b68d</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-21 11:15:31</sys_updated_on></sys_notification_workspace_content></record_update>]]></payload>
+<payload_hash>-2143633050</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>81d79e8e2fc61110dc91c886f699b67c</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1835fc2968e0000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table/>
+<target_name>Async Background Notification</target_name>
+<type>Notification Workspace Content</type>
+<update_domain>global</update_domain>
+<update_guid>83b8700a0b8211102a0db49f7de971a6</update_guid>
+<update_guid_history>83b8700a0b8211102a0db49f7de971a6:-2143633050</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_documentation_x_716205_async_b_n_msg_source_application_en</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update><sys_documentation element="source_application" label="Source Application" language="en" table="x_716205_async_b_n_msg"><sys_documentation action="INSERT_OR_UPDATE"><element>source_application</element><help/><hint/><label>Source Application</label><language>en</language><name>x_716205_async_b_n_msg</name><plural>Source Applications</plural><sys_class_name>sys_documentation</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-14 16:38:40</sys_created_on><sys_id>589f797b2ff5d110dc91c886f699b6a5</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Source Application</sys_name><sys_package display_value="Async Background Notification" source="x_716205_async_b_n">708e24ff2fb1d110dc91c886f699b630</sys_package><sys_policy/><sys_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</sys_scope><sys_update_name>sys_documentation_x_716205_async_b_n_msg_source_application_en</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-14 16:38:40</sys_updated_on><url/><url_target/></sys_documentation></sys_documentation></record_update>]]></payload>
+<payload_hash>-1262645068</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>85d79e8e2fc61110dc91c886f699b67b</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1833cddf1f50000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table>x_716205_async_b_n_msg</table>
+<target_name>Background Message.Source Application</target_name>
+<type>Field Label</type>
+<update_domain>global</update_domain>
+<update_guid>349ff1bb06f5d110a68ef95962429aa6</update_guid>
+<update_guid_history>349ff1bb06f5d110a68ef95962429aa6:-1262645068</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_dictionary_x_716205_async_b_n_msg_message_journal</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update&gt;&lt;sys_dictionary action="INSERT_OR_UPDATE" element="message_journal" table="x_716205_async_b_n_msg"&gt;&lt;active&gt;true&lt;/active&gt;&lt;array&gt;false&lt;/array&gt;&lt;attributes/&gt;&lt;audit&gt;false&lt;/audit&gt;&lt;calculation&gt;&lt;![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]&gt;&lt;/calculation&gt;&lt;choice/&gt;&lt;choice_field/&gt;&lt;choice_table/&gt;&lt;column_label&gt;Message Journal&lt;/column_label&gt;&lt;comments/&gt;&lt;create_roles/&gt;&lt;default_value/&gt;&lt;defaultsort/&gt;&lt;delete_roles/&gt;&lt;dependent/&gt;&lt;dependent_on_field/&gt;&lt;display&gt;false&lt;/display&gt;&lt;dynamic_creation&gt;false&lt;/dynamic_creation&gt;&lt;dynamic_creation_script/&gt;&lt;dynamic_default_value/&gt;&lt;dynamic_ref_qual/&gt;&lt;element&gt;message_journal&lt;/element&gt;&lt;element_reference&gt;false&lt;/element_reference&gt;&lt;foreign_database/&gt;&lt;formula/&gt;&lt;function_definition/&gt;&lt;function_field&gt;false&lt;/function_field&gt;&lt;internal_type display_value="Journal"&gt;journal&lt;/internal_type&gt;&lt;mandatory&gt;false&lt;/mandatory&gt;&lt;max_length&gt;4000&lt;/max_length&gt;&lt;name&gt;x_716205_async_b_n_msg&lt;/name&gt;&lt;next_element/&gt;&lt;primary&gt;false&lt;/primary&gt;&lt;read_only&gt;false&lt;/read_only&gt;&lt;read_roles/&gt;&lt;reference/&gt;&lt;reference_cascade_rule/&gt;&lt;reference_floats&gt;false&lt;/reference_floats&gt;&lt;reference_key/&gt;&lt;reference_qual/&gt;&lt;reference_qual_condition/&gt;&lt;reference_type/&gt;&lt;spell_check&gt;false&lt;/spell_check&gt;&lt;staged&gt;false&lt;/staged&gt;&lt;sys_class_name&gt;sys_dictionary&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2022-09-21 12:04:10&lt;/sys_created_on&gt;&lt;sys_id&gt;51b38d022fc21110dc91c886f699b622&lt;/sys_id&gt;&lt;sys_name&gt;Message Journal&lt;/sys_name&gt;&lt;sys_package display_value="Async Background Notification" source="x_716205_async_b_n"&gt;708e24ff2fb1d110dc91c886f699b630&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Async Background Notification"&gt;708e24ff2fb1d110dc91c886f699b630&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_dictionary_x_716205_async_b_n_msg_message_journal&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2022-09-21 12:04:10&lt;/sys_updated_on&gt;&lt;table_reference&gt;false&lt;/table_reference&gt;&lt;text_index&gt;false&lt;/text_index&gt;&lt;unique&gt;false&lt;/unique&gt;&lt;use_dependent_field&gt;false&lt;/use_dependent_field&gt;&lt;use_dynamic_default&gt;false&lt;/use_dynamic_default&gt;&lt;use_reference_qualifier&gt;simple&lt;/use_reference_qualifier&gt;&lt;virtual&gt;false&lt;/virtual&gt;&lt;virtual_type&gt;script&lt;/virtual_type&gt;&lt;widget/&gt;&lt;write_roles/&gt;&lt;xml_view&gt;false&lt;/xml_view&gt;&lt;/sys_dictionary&gt;&lt;/record_update&gt;</payload>
+<payload_hash>940129951</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>89d71e8e2fc61110dc91c886f699b6b8</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1835fef24330000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table>x_716205_async_b_n_msg</table>
+<target_name>Background Message.Message Journal</target_name>
+<type>Dictionary</type>
+<update_domain>global</update_domain>
+<update_guid>b3d3c98262c211102f3423140940e596</update_guid>
+<update_guid_history>b3d3c98262c211102f3423140940e596:940129951</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_documentation_x_716205_async_b_n_msg_notification_type_en</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update><sys_documentation element="notification_type" label="Notification Type" language="en" table="x_716205_async_b_n_msg"><sys_documentation action="INSERT_OR_UPDATE"><element>notification_type</element><help/><hint/><label>Notification Type</label><language>en</language><name>x_716205_async_b_n_msg</name><plural>Notification Types</plural><sys_class_name>sys_documentation</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-14 16:21:15</sys_created_on><sys_id>d19bf1b72ff5d110dc91c886f699b650</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Notification Type</sys_name><sys_package display_value="Async Background Notification" source="x_716205_async_b_n">708e24ff2fb1d110dc91c886f699b630</sys_package><sys_policy/><sys_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</sys_scope><sys_update_name>sys_documentation_x_716205_async_b_n_msg_notification_type_en</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-14 16:21:15</sys_updated_on><url/><url_target/></sys_documentation></sys_documentation></record_update>]]></payload>
+<payload_hash>-43470782</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>89d79e8e2fc61110dc91c886f699b67a</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1833ccdff630000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table>x_716205_async_b_n_msg</table>
+<target_name>Background Message.Notification Type</target_name>
+<type>Field Label</type>
+<update_domain>global</update_domain>
+<update_guid>659bf1b7c5f5d1101ad7e5572e41285d</update_guid>
+<update_guid_history>659bf1b7c5f5d1101ad7e5572e41285d:-43470782</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_security_acl_7330f4732ff1d110dc91c886f699b6b8</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_security_acl"&gt;&lt;sys_security_acl action="INSERT_OR_UPDATE"&gt;&lt;active&gt;true&lt;/active&gt;&lt;admin_overrides&gt;true&lt;/admin_overrides&gt;&lt;advanced&gt;true&lt;/advanced&gt;&lt;condition/&gt;&lt;description&gt;Allow read for records in x_716205_async_b_n_msg, if the ACL script returns true.&lt;/description&gt;&lt;name&gt;x_716205_async_b_n_msg&lt;/name&gt;&lt;operation display_value="read"&gt;read&lt;/operation&gt;&lt;script&gt;&lt;![CDATA[answer = gs.getUserID() === String(current.target_user.sys_id);]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_security_acl&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2022-09-14 10:53:36&lt;/sys_created_on&gt;&lt;sys_id&gt;7330f4732ff1d110dc91c886f699b6b8&lt;/sys_id&gt;&lt;sys_mod_count&gt;3&lt;/sys_mod_count&gt;&lt;sys_name&gt;x_716205_async_b_n_msg&lt;/sys_name&gt;&lt;sys_package display_value="Async Background Notification" source="x_716205_async_b_n"&gt;708e24ff2fb1d110dc91c886f699b630&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Async Background Notification"&gt;708e24ff2fb1d110dc91c886f699b630&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_security_acl_7330f4732ff1d110dc91c886f699b6b8&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2022-09-14 12:59:42&lt;/sys_updated_on&gt;&lt;type display_value="record"&gt;record&lt;/type&gt;&lt;/sys_security_acl&gt;&lt;/record_update&gt;</payload>
+<payload_hash>-1676530939</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>89d79e8e2fc61110dc91c886f699b67d</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1833c1572ce0000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table>x_716205_async_b_n_msg</table>
+<target_name>x_716205_async_b_n_msg</target_name>
+<type>Access Control</type>
+<update_domain>global</update_domain>
+<update_guid>b87d8d3f8435d110914ee8ef7626c159</update_guid>
+<update_guid_history>b87d8d3f8435d110914ee8ef7626c159:-1676530939,aaf034b35df1d1109917f5d486eb9bc3:-993243679,b7d0b0b3a5f1d1103093d0268b7cf279:1272470877,b9903c73cbf1d11070c3d5235b580bf2:-1116983128</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_choice_x_716205_async_b_n_msg_priority</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update><sys_choice action="INSERT_OR_UPDATE" field="priority" table="x_716205_async_b_n_msg" version="3"><sys_choice_set action="INSERT_OR_UPDATE"><element>priority</element><name>x_716205_async_b_n_msg</name><sys_class_name>sys_choice_set</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-14 16:28:57</sys_created_on><sys_id>f55db5f72ff5d110dc91c886f699b6f0</sys_id><sys_mod_count>0</sys_mod_count><sys_name>priority</sys_name><sys_package display_value="Async Background Notification" source="x_716205_async_b_n">708e24ff2fb1d110dc91c886f699b630</sys_package><sys_policy/><sys_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</sys_scope><sys_update_name>sys_choice_x_716205_async_b_n_msg_priority</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-14 16:28:57</sys_updated_on></sys_choice_set><sys_choice action="INSERT_OR_UPDATE"><dependent_value/><element>priority</element><hint/><inactive>false</inactive><label>Critical</label><language>en</language><name>x_716205_async_b_n_msg</name><sequence>100</sequence><synonyms/><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-14 16:30:08</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>a37d7df72ff5d110dc91c886f699b6ef</sys_id><sys_mod_count>3</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-14 16:45:51</sys_updated_on><value>1</value></sys_choice><sys_choice action="INSERT_OR_UPDATE"><dependent_value/><element>priority</element><hint/><inactive>false</inactive><label>High</label><language>en</language><name>x_716205_async_b_n_msg</name><sequence>200</sequence><synonyms/><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-14 16:28:57</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>184db5f72ff5d110dc91c886f699b689</sys_id><sys_mod_count>3</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-14 16:29:46</sys_updated_on><value>2</value></sys_choice><sys_choice action="INSERT_OR_UPDATE"><dependent_value/><element>priority</element><hint/><inactive>false</inactive><label>Medium</label><language>en</language><name>x_716205_async_b_n_msg</name><sequence>300</sequence><synonyms/><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-14 16:29:19</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>965d313b2ff5d110dc91c886f699b663</sys_id><sys_mod_count>2</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-14 16:29:53</sys_updated_on><value>3</value></sys_choice><sys_choice action="INSERT_OR_UPDATE"><dependent_value/><element>priority</element><hint/><inactive>false</inactive><label>Low</label><language>en</language><name>x_716205_async_b_n_msg</name><sequence>400</sequence><synonyms/><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-14 16:29:34</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>807d713b2ff5d110dc91c886f699b675</sys_id><sys_mod_count>2</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-14 16:29:56</sys_updated_on><value>4</value></sys_choice></sys_choice></record_update>]]></payload>
+<payload_hash>-937377566</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>8dd71e8e2fc61110dc91c886f699b6b7</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1833ce483070000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table>x_716205_async_b_n_msg</table>
+<target_name>Background Message.Priority</target_name>
+<type>Choice list</type>
+<update_domain>global</update_domain>
+<update_guid>bd318efb56f5d110c67924e4b396a988</update_guid>
+<update_guid_history>bd318efb56f5d110c67924e4b396a988:-937377566,e7ad7df7a3f5d110551848702f787ef2:-1966127840,b5ad313b1df5d110899a81cf28e6585b:-1633081744,a79d3df721f5d110124e81fc3dfd3986:-1250091564,dc9d713b1df5d110e634977082ebd279:-1929154189,738dbdf7e6f5d1101c321aae94ceaf69:-65258100,828d713b7df5d110206148140beebac4:-9779052,158db13b56f5d1104107bcb8b00fa4b8:231374623,837df1f7cef5d11097324e8206e1c835:293354872,f97db5f7d5f5d11063436bf4fe0fde8e:-1646525422,fc7d713b4ff5d110755a026c3c29e1bf:1030089628,236d313b4ef5d1103d19b6da9bbf1666:-103100965,ee6d71f797f5d110a3fe8c572d981007:-1466370460,865db5f728f5d110c06ff80d04a199f2:553458048</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_dictionary_x_716205_async_b_n_msg_target_user</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update><sys_dictionary action="INSERT_OR_UPDATE" element="target_user" table="x_716205_async_b_n_msg"><active>true</active><array>false</array><attributes>encode_utf8=false</attributes><audit>false</audit><calculation/><choice>0</choice><choice_field/><choice_table/><column_label>Target User</column_label><comments/><create_roles/><default_value/><defaultsort/><delete_roles/><dependent/><dependent_on_field/><display>false</display><dynamic_creation>false</dynamic_creation><dynamic_creation_script/><dynamic_default_value/><dynamic_ref_qual/><element>target_user</element><element_reference>false</element_reference><foreign_database/><formula/><function_definition/><function_field>false</function_field><internal_type display_value="Reference">reference</internal_type><mandatory>true</mandatory><max_length>32</max_length><name>x_716205_async_b_n_msg</name><next_element/><primary>false</primary><read_only>false</read_only><read_roles/><reference display_value="" name="sys_user">sys_user</reference><reference_cascade_rule/><reference_floats>false</reference_floats><reference_key/><reference_qual/><reference_qual_condition/><reference_type/><spell_check>false</spell_check><staged>false</staged><sys_class_name>sys_dictionary</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-14 10:48:51</sys_created_on><sys_id>c48f68332ff1d110dc91c886f699b6e9</sys_id><sys_name>Target User</sys_name><sys_package display_value="Async Background Notification" source="x_716205_async_b_n">708e24ff2fb1d110dc91c886f699b630</sys_package><sys_policy/><sys_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</sys_scope><sys_update_name>sys_dictionary_x_716205_async_b_n_msg_target_user</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-14 10:48:52</sys_updated_on><table_reference>false</table_reference><text_index>false</text_index><unique>false</unique><use_dependent_field>false</use_dependent_field><use_dynamic_default>false</use_dynamic_default><use_reference_qualifier>simple</use_reference_qualifier><virtual>false</virtual><virtual_type>script</virtual_type><widget/><write_roles/><xml_view>false</xml_view></sys_dictionary></record_update>]]></payload>
+<payload_hash>506307791</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>8dd79e8e2fc61110dc91c886f699b679</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1833b9daddb0000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table>x_716205_async_b_n_msg</table>
+<target_name>Background Message.Target User</target_name>
+<type>Dictionary</type>
+<update_domain>global</update_domain>
+<update_guid>948fa833a0f1d110137c45036a2dc325</update_guid>
+<update_guid_history>948fa833a0f1d110137c45036a2dc325:506307791,588fa8332ff1d110e310f14cc495eb16:747524672</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_scope_privilege_923ee80e2f421110dc91c886f699b635</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_scope_privilege"><sys_scope_privilege action="INSERT_OR_UPDATE"><operation>execute</operation><source_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</source_scope><status>allowed</status><sys_class_name>sys_scope_privilege</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-21 10:29:36</sys_created_on><sys_id>923ee80e2f421110dc91c886f699b635</sys_id><sys_mod_count>0</sys_mod_count><sys_name>GlideRecord.setValue</sys_name><sys_package display_value="Async Background Notification" source="x_716205_async_b_n">708e24ff2fb1d110dc91c886f699b630</sys_package><sys_policy/><sys_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</sys_scope><sys_update_name>sys_scope_privilege_923ee80e2f421110dc91c886f699b635</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-21 10:29:36</sys_updated_on><target_name>GlideRecord.setValue</target_name><target_scope display_value="Global">global</target_scope><target_type>scriptable</target_type></sys_scope_privilege></record_update>]]></payload>
+<payload_hash>-259823363</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>8dd79e8e2fc61110dc91c886f699b67c</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1835f988d730000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table/>
+<target_name>GlideRecord.setValue</target_name>
+<type>Cross scope privilege</type>
+<update_domain>global</update_domain>
+<update_guid>523ea08e05421110f213ceb33e9a4464</update_guid>
+<update_guid_history>523ea08e05421110f213ceb33e9a4464:-259823363</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>DELETE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_ui_policy_action_976a4e422fc61110dc91c886f699b688</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_policy_action"><sys_ui_policy_action action="DELETE"><cleared>false</cleared><disabled>true</disabled><field>source_application</field><mandatory>ignore</mandatory><sys_class_name>sys_ui_policy_action</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-21 17:12:26</sys_created_on><sys_id>976a4e422fc61110dc91c886f699b688</sys_id><sys_mod_count>0</sys_mod_count><sys_name>source_application</sys_name><sys_package display_value="Async Background Notification" source="x_716205_async_b_n">708e24ff2fb1d110dc91c886f699b630</sys_package><sys_policy/><sys_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</sys_scope><sys_update_name>sys_ui_policy_action_976a4e422fc61110dc91c886f699b688</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-21 17:12:26</sys_updated_on><table>x_716205_async_b_n_msg</table><ui_policy display_value="Disable writes under all circumstances">37f98e422fc61110dc91c886f699b662</ui_policy><visible>ignore</visible></sys_ui_policy_action></record_update>]]></payload>
+<payload_hash>-1965639951</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>91d79e8e2fc61110dc91c886f699b67f</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>183610acc600000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table>x_716205_async_b_n_msg</table>
+<target_name>source_application</target_name>
+<type>UI Policy Action</type>
+<update_domain>global</update_domain>
+<update_guid>d2caca822dc61110b034500220675ac5</update_guid>
+<update_guid_history>d2caca822dc61110b034500220675ac5:-1965639951,136a4e42b1c611104aa20cb51955718a:-390662939</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_ui_policy_action_4a2a42822fc61110dc91c886f699b643</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_policy_action"><sys_ui_policy_action action="INSERT_OR_UPDATE"><cleared>false</cleared><disabled>true</disabled><field>short_description</field><mandatory>ignore</mandatory><sys_class_name>sys_ui_policy_action</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-21 17:11:31</sys_created_on><sys_id>4a2a42822fc61110dc91c886f699b643</sys_id><sys_mod_count>1</sys_mod_count><sys_name>short_description</sys_name><sys_package display_value="Async Background Notification" source="x_716205_async_b_n">708e24ff2fb1d110dc91c886f699b630</sys_package><sys_policy/><sys_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</sys_scope><sys_update_name>sys_ui_policy_action_4a2a42822fc61110dc91c886f699b643</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-21 17:12:17</sys_updated_on><table>x_716205_async_b_n_msg</table><ui_policy display_value="Disable writes under all circumstances">37f98e422fc61110dc91c886f699b662</ui_policy><visible>ignore</visible></sys_ui_policy_action></record_update>]]></payload>
+<payload_hash>391948621</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>95d79e8e2fc61110dc91c886f699b67e</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>183610937560000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table>x_716205_async_b_n_msg</table>
+<target_name>short_description</target_name>
+<type>UI Policy Action</type>
+<update_domain>global</update_domain>
+<update_guid>8d6ac28298c611104d70a956903f0f9e</update_guid>
+<update_guid_history>8d6ac28298c611104d70a956903f0f9e:391948621,b13a8e4246c611106ccbeebf787c7bbd:-2074941875</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_ui_section_a1e8747b2ff1d110dc91c886f699b646</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update><sys_ui_section caption="" section_id="a1e8747b2ff1d110dc91c886f699b646" sys_domain="global" table="x_716205_async_b_n_msg" version="3" view=""><sys_ui_element action="INSERT_OR_UPDATE"><element>number</element><position>0</position><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-21 12:10:44</sys_created_on><sys_id>3b55c1062fc21110dc91c886f699b625</sys_id><sys_mod_count>0</sys_mod_count><sys_ui_formatter/><sys_ui_section caption="NULL" display_value="" name="x_716205_async_b_n_msg" sys_domain="global" view="Default view">a1e8747b2ff1d110dc91c886f699b646</sys_ui_section><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-21 12:10:44</sys_updated_on><sys_user/><type/></sys_ui_element><sys_ui_element action="INSERT_OR_UPDATE"><element>notification_type</element><position>1</position><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-21 12:10:44</sys_created_on><sys_id>bb55c1062fc21110dc91c886f699b625</sys_id><sys_mod_count>0</sys_mod_count><sys_ui_formatter/><sys_ui_section caption="NULL" display_value="" name="x_716205_async_b_n_msg" sys_domain="global" view="Default view">a1e8747b2ff1d110dc91c886f699b646</sys_ui_section><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-21 12:10:44</sys_updated_on><sys_user/><type/></sys_ui_element><sys_ui_element action="INSERT_OR_UPDATE"><element>.split</element><position>2</position><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-21 12:10:44</sys_created_on><sys_id>3f55c1062fc21110dc91c886f699b625</sys_id><sys_mod_count>0</sys_mod_count><sys_ui_formatter/><sys_ui_section caption="NULL" display_value="" name="x_716205_async_b_n_msg" sys_domain="global" view="Default view">a1e8747b2ff1d110dc91c886f699b646</sys_ui_section><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-21 12:10:44</sys_updated_on><sys_user/><type>.split</type></sys_ui_element><sys_ui_element action="INSERT_OR_UPDATE"><element>target_user</element><position>3</position><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-21 12:10:44</sys_created_on><sys_id>bf55c1062fc21110dc91c886f699b625</sys_id><sys_mod_count>0</sys_mod_count><sys_ui_formatter/><sys_ui_section caption="NULL" display_value="" name="x_716205_async_b_n_msg" sys_domain="global" view="Default view">a1e8747b2ff1d110dc91c886f699b646</sys_ui_section><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-21 12:10:44</sys_updated_on><sys_user/><type/></sys_ui_element><sys_ui_element action="INSERT_OR_UPDATE"><element>priority</element><position>4</position><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-21 12:10:44</sys_created_on><sys_id>3355c1062fc21110dc91c886f699b626</sys_id><sys_mod_count>0</sys_mod_count><sys_ui_formatter/><sys_ui_section caption="NULL" display_value="" name="x_716205_async_b_n_msg" sys_domain="global" view="Default view">a1e8747b2ff1d110dc91c886f699b646</sys_ui_section><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-21 12:10:44</sys_updated_on><sys_user/><type/></sys_ui_element><sys_ui_element action="INSERT_OR_UPDATE"><element>.end_split</element><position>5</position><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-21 12:10:44</sys_created_on><sys_id>b355c1062fc21110dc91c886f699b626</sys_id><sys_mod_count>0</sys_mod_count><sys_ui_formatter/><sys_ui_section caption="NULL" display_value="" name="x_716205_async_b_n_msg" sys_domain="global" view="Default view">a1e8747b2ff1d110dc91c886f699b646</sys_ui_section><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-21 12:10:44</sys_updated_on><sys_user/><type>.end_split</type></sys_ui_element><sys_ui_element action="INSERT_OR_UPDATE"><element>short_description</element><position>6</position><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-21 12:10:44</sys_created_on><sys_id>3755c1062fc21110dc91c886f699b626</sys_id><sys_mod_count>0</sys_mod_count><sys_ui_formatter/><sys_ui_section caption="NULL" display_value="" name="x_716205_async_b_n_msg" sys_domain="global" view="Default view">a1e8747b2ff1d110dc91c886f699b646</sys_ui_section><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-21 12:10:44</sys_updated_on><sys_user/><type/></sys_ui_element><sys_ui_element action="INSERT_OR_UPDATE"><element>message</element><position>7</position><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-21 12:10:44</sys_created_on><sys_id>b755c1062fc21110dc91c886f699b626</sys_id><sys_mod_count>0</sys_mod_count><sys_ui_formatter/><sys_ui_section caption="NULL" display_value="" name="x_716205_async_b_n_msg" sys_domain="global" view="Default view">a1e8747b2ff1d110dc91c886f699b646</sys_ui_section><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-21 12:10:44</sys_updated_on><sys_user/><type/></sys_ui_element><sys_ui_element action="INSERT_OR_UPDATE"><element>message_journal</element><position>8</position><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-21 12:10:44</sys_created_on><sys_id>3b55c1062fc21110dc91c886f699b626</sys_id><sys_mod_count>0</sys_mod_count><sys_ui_formatter/><sys_ui_section caption="NULL" display_value="" name="x_716205_async_b_n_msg" sys_domain="global" view="Default view">a1e8747b2ff1d110dc91c886f699b646</sys_ui_section><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-21 12:10:44</sys_updated_on><sys_user/><type/></sys_ui_element><sys_ui_section action="INSERT_OR_UPDATE"><caption/><header>false</header><name>x_716205_async_b_n_msg</name><roles/><sys_class_name>sys_ui_section</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-14 11:29:55</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>a1e8747b2ff1d110dc91c886f699b646</sys_id><sys_mod_count>0</sys_mod_count><sys_name>x_716205_async_b_n_msg</sys_name><sys_overrides/><sys_package display_value="Async Background Notification" source="x_716205_async_b_n">708e24ff2fb1d110dc91c886f699b630</sys_package><sys_policy/><sys_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</sys_scope><sys_update_name>sys_ui_section_a1e8747b2ff1d110dc91c886f699b646</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-14 11:29:55</sys_updated_on><sys_user/><title>true</title><view display_value="Default view" name="NULL">Default view</view><view_name/></sys_ui_section></sys_ui_section></record_update>]]></payload>
+<payload_hash>-667618699</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>99d79e8e2fc61110dc91c886f699b680</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1835ff5258f0000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table>x_716205_async_b_n_msg</table>
+<target_name>Background Message</target_name>
+<type>Form Layout</type>
+<update_domain>global</update_domain>
+<update_guid>b355c1068fc2111062e6d6d8cad4db28</update_guid>
+<update_guid_history>b355c1068fc2111062e6d6d8cad4db28:-667618699,8d458106ffc21110547272629f24304e:-299067021,e7d34d42d5c2111033d805e478e31d2a:475388548,8a1aec4a534211109195e44d7fd6b3ae:-2005339427,94304ebb25f5d110f591da1730ca6fed:1557229675,889f797b7af5d110fea609b023d835a4:-884706398,a62f7d7b58f5d110d4ab33ef61f00041:-276363668,9b1d3df79af5d11071c4fb2a30ebf04f:2113880486,159bf1b756f5d1102c95bfee555a584f:1749792021,79e8747bb8f1d110bfdcfea870491750:1241030043,b5e8747b51f1d110a45c0bbccb28ba4a:2049356429</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_ui_policy_action_cf7a0e422fc61110dc91c886f699b695</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_policy_action"><sys_ui_policy_action action="INSERT_OR_UPDATE"><cleared>false</cleared><disabled>true</disabled><field>source_scope</field><mandatory>ignore</mandatory><sys_class_name>sys_ui_policy_action</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-21 17:12:42</sys_created_on><sys_id>cf7a0e422fc61110dc91c886f699b695</sys_id><sys_mod_count>0</sys_mod_count><sys_name>source_scope</sys_name><sys_package display_value="Async Background Notification" source="x_716205_async_b_n">708e24ff2fb1d110dc91c886f699b630</sys_package><sys_policy/><sys_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</sys_scope><sys_update_name>sys_ui_policy_action_cf7a0e422fc61110dc91c886f699b695</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-21 17:12:42</sys_updated_on><table>x_716205_async_b_n_msg</table><ui_policy display_value="Disable writes under all circumstances">37f98e422fc61110dc91c886f699b662</ui_policy><visible>ignore</visible></sys_ui_policy_action></record_update>]]></payload>
+<payload_hash>-846725907</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>9dd79e8e2fc61110dc91c886f699b67f</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>183610998980000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table>x_716205_async_b_n_msg</table>
+<target_name>source_scope</target_name>
+<type>UI Policy Action</type>
+<update_domain>global</update_domain>
+<update_guid>877ac682d2c61110eaf56e55ca50943b</update_guid>
+<update_guid_history>877ac682d2c61110eaf56e55ca50943b:-846725907</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_documentation_x_716205_async_b_n_msg_short_description_en</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update><sys_documentation element="short_description" label="Short Description" language="en" table="x_716205_async_b_n_msg"><sys_documentation action="INSERT_OR_UPDATE"><element>short_description</element><help/><hint/><label>Short Description</label><language>en</language><name>x_716205_async_b_n_msg</name><plural>Short Descriptions</plural><sys_class_name>sys_documentation</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-14 10:48:51</sys_created_on><sys_id>c88f68332ff1d110dc91c886f699b6ef</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Short Description</sys_name><sys_package display_value="Async Background Notification" source="x_716205_async_b_n">708e24ff2fb1d110dc91c886f699b630</sys_package><sys_policy/><sys_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</sys_scope><sys_update_name>sys_documentation_x_716205_async_b_n_msg_short_description_en</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-14 10:48:51</sys_updated_on><url/><url_target/></sys_documentation></sys_documentation></record_update>]]></payload>
+<payload_hash>1371851338</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>c1d79e8e2fc61110dc91c886f699b67b</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1833b9dacf70000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table>x_716205_async_b_n_msg</table>
+<target_name>Background Message.Short Description</target_name>
+<type>Field Label</type>
+<update_domain>global</update_domain>
+<update_guid>908fa83334f1d1105eec4b086c4c801e</update_guid>
+<update_guid_history>908fa83334f1d1105eec4b086c4c801e:1371851338</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_ui_policy_37f98e422fc61110dc91c886f699b662</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update sys_domain="global" table="sys_ui_policy"&gt;&lt;sys_ui_policy action="INSERT_OR_UPDATE"&gt;&lt;active&gt;true&lt;/active&gt;&lt;conditions/&gt;&lt;description/&gt;&lt;global&gt;true&lt;/global&gt;&lt;inherit&gt;false&lt;/inherit&gt;&lt;isolate_script&gt;true&lt;/isolate_script&gt;&lt;model_id/&gt;&lt;model_table/&gt;&lt;on_load&gt;true&lt;/on_load&gt;&lt;order&gt;100&lt;/order&gt;&lt;reverse_if_false&gt;true&lt;/reverse_if_false&gt;&lt;run_scripts&gt;false&lt;/run_scripts&gt;&lt;script_false&gt;&lt;![CDATA[function onCondition() {
+
+}]]&gt;&lt;/script_false&gt;&lt;script_true&gt;&lt;![CDATA[function onCondition() {
+
+}]]&gt;&lt;/script_true&gt;&lt;set_values/&gt;&lt;short_description&gt;Disable writes under all circumstances&lt;/short_description&gt;&lt;sys_class_name&gt;sys_ui_policy&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2022-09-21 17:11:10&lt;/sys_created_on&gt;&lt;sys_domain&gt;global&lt;/sys_domain&gt;&lt;sys_domain_path&gt;/&lt;/sys_domain_path&gt;&lt;sys_id&gt;37f98e422fc61110dc91c886f699b662&lt;/sys_id&gt;&lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;&lt;sys_name&gt;Disable writes under all circumstances&lt;/sys_name&gt;&lt;sys_overrides/&gt;&lt;sys_package display_value="Async Background Notification" source="x_716205_async_b_n"&gt;708e24ff2fb1d110dc91c886f699b630&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Async Background Notification"&gt;708e24ff2fb1d110dc91c886f699b630&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_ui_policy_37f98e422fc61110dc91c886f699b662&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2022-09-21 17:11:10&lt;/sys_updated_on&gt;&lt;table&gt;x_716205_async_b_n_msg&lt;/table&gt;&lt;ui_type&gt;0&lt;/ui_type&gt;&lt;view/&gt;&lt;/sys_ui_policy&gt;&lt;/record_update&gt;</payload>
+<payload_hash>656453668</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>c1d79e8e2fc61110dc91c886f699b67e</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>183610831370000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table>x_716205_async_b_n_msg</table>
+<target_name>Disable writes under all circumstances</target_name>
+<type>UI Policy</type>
+<update_domain>global</update_domain>
+<update_guid>ec2a0e42dfc611108d43a3734549cb22</update_guid>
+<update_guid_history>ec2a0e42dfc611108d43a3734549cb22:656453668</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>DELETE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_dictionary_x_716205_async_b_n_msg_message_html</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update&gt;&lt;sys_dictionary action="DELETE" element="message_html" table="x_716205_async_b_n_msg"&gt;&lt;active&gt;true&lt;/active&gt;&lt;array&gt;false&lt;/array&gt;&lt;attributes/&gt;&lt;audit&gt;false&lt;/audit&gt;&lt;calculation&gt;&lt;![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]&gt;&lt;/calculation&gt;&lt;choice/&gt;&lt;choice_field/&gt;&lt;choice_table/&gt;&lt;column_label&gt;Message&lt;/column_label&gt;&lt;comments/&gt;&lt;create_roles/&gt;&lt;default_value/&gt;&lt;defaultsort/&gt;&lt;delete_roles/&gt;&lt;dependent/&gt;&lt;dependent_on_field/&gt;&lt;display&gt;false&lt;/display&gt;&lt;dynamic_creation&gt;false&lt;/dynamic_creation&gt;&lt;dynamic_creation_script/&gt;&lt;dynamic_default_value/&gt;&lt;dynamic_ref_qual/&gt;&lt;element&gt;message_html&lt;/element&gt;&lt;element_reference&gt;false&lt;/element_reference&gt;&lt;foreign_database/&gt;&lt;formula/&gt;&lt;function_definition/&gt;&lt;function_field&gt;false&lt;/function_field&gt;&lt;internal_type display_value="HTML"&gt;html&lt;/internal_type&gt;&lt;mandatory&gt;false&lt;/mandatory&gt;&lt;max_length&gt;8000&lt;/max_length&gt;&lt;name&gt;x_716205_async_b_n_msg&lt;/name&gt;&lt;next_element/&gt;&lt;primary&gt;false&lt;/primary&gt;&lt;read_only&gt;false&lt;/read_only&gt;&lt;read_roles/&gt;&lt;reference/&gt;&lt;reference_cascade_rule/&gt;&lt;reference_floats&gt;false&lt;/reference_floats&gt;&lt;reference_key/&gt;&lt;reference_qual/&gt;&lt;reference_qual_condition/&gt;&lt;reference_type/&gt;&lt;spell_check&gt;false&lt;/spell_check&gt;&lt;staged&gt;false&lt;/staged&gt;&lt;sys_class_name&gt;sys_dictionary&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2022-09-21 10:11:30&lt;/sys_created_on&gt;&lt;sys_id&gt;f4d9a84a2f421110dc91c886f699b60e&lt;/sys_id&gt;&lt;sys_name&gt;Message&lt;/sys_name&gt;&lt;sys_package display_value="Async Background Notification" source="x_716205_async_b_n"&gt;708e24ff2fb1d110dc91c886f699b630&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Async Background Notification"&gt;708e24ff2fb1d110dc91c886f699b630&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_dictionary_x_716205_async_b_n_msg_message_html&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2022-09-21 10:11:30&lt;/sys_updated_on&gt;&lt;table_reference&gt;false&lt;/table_reference&gt;&lt;text_index&gt;false&lt;/text_index&gt;&lt;unique&gt;false&lt;/unique&gt;&lt;use_dependent_field&gt;false&lt;/use_dependent_field&gt;&lt;use_dynamic_default&gt;false&lt;/use_dynamic_default&gt;&lt;use_reference_qualifier&gt;simple&lt;/use_reference_qualifier&gt;&lt;virtual&gt;false&lt;/virtual&gt;&lt;virtual_type&gt;script&lt;/virtual_type&gt;&lt;widget/&gt;&lt;write_roles/&gt;&lt;xml_view&gt;false&lt;/xml_view&gt;&lt;/sys_dictionary&gt;&lt;/record_update&gt;</payload>
+<payload_hash>452671239</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>c5d71e8e2fc61110dc91c886f699b6b8</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1835f99207c0000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table>x_716205_async_b_n_msg</table>
+<target_name>Background Message.message_html</target_name>
+<type>Dictionary</type>
+<update_domain>global</update_domain>
+<update_guid>675e248ed84211101fee87c18fd006d9</update_guid>
+<update_guid_history>675e248ed84211101fee87c18fd006d9:452671239,121ae08abb42111066c2fe13c946ac90:-1966167725</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_documentation_x_716205_async_b_n_msg_message_journal_en</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update><sys_documentation element="message_journal" label="Message Journal" language="en" table="x_716205_async_b_n_msg"><sys_documentation action="INSERT_OR_UPDATE"><element>message_journal</element><help/><hint/><label>Message Journal</label><language>en</language><name>x_716205_async_b_n_msg</name><plural>Message Journals</plural><sys_class_name>sys_documentation</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-21 12:04:10</sys_created_on><sys_id>afd3c9822fc21110dc91c886f699b68c</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Message Journal</sys_name><sys_package display_value="Async Background Notification" source="x_716205_async_b_n">708e24ff2fb1d110dc91c886f699b630</sys_package><sys_policy/><sys_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</sys_scope><sys_update_name>sys_documentation_x_716205_async_b_n_msg_message_journal_en</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-21 12:04:10</sys_updated_on><url/><url_target/></sys_documentation></sys_documentation></record_update>]]></payload>
+<payload_hash>-1342625758</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>c5d79e8e2fc61110dc91c886f699b67a</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1835fef247e0000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table>x_716205_async_b_n_msg</table>
+<target_name>Background Message.Message Journal</target_name>
+<type>Field Label</type>
+<update_domain>global</update_domain>
+<update_guid>bbd3c98296c21110c93f0c4654fe8797</update_guid>
+<update_guid_history>bbd3c98296c21110c93f0c4654fe8797:-1342625758</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_script_include_ffc424c62f021110dc91c886f699b6e3</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_script_include"&gt;&lt;sys_script_include action="INSERT_OR_UPDATE"&gt;&lt;access&gt;public&lt;/access&gt;&lt;active&gt;true&lt;/active&gt;&lt;api_name&gt;x_716205_async_b_n.AsyncBMUtils&lt;/api_name&gt;&lt;caller_access/&gt;&lt;client_callable&gt;false&lt;/client_callable&gt;&lt;description/&gt;&lt;name&gt;AsyncBMUtils&lt;/name&gt;&lt;script&gt;&lt;![CDATA[var AsyncBMUtils = Class.create();
+AsyncBMUtils.prototype = {
+    initialize: function() {
+    },
+	sendMessage: function(user_sys_id, short_message, message_html, calling_application_sys_id, calling_scope, priority, notification_type) {
+		if (!(user_sys_id &amp;&amp; short_message)){
+			return false;
+		}
+		var msg = new GlideRecord("x_716205_async_b_n_msg");
+		msg.initialize();
+		msg.setValue("target_user", user_sys_id);
+		msg.setValue("short_description", short_message);
+		
+		if(!isNaN(parseInt(priority))){
+			msg.setValue("priority", String(priority));
+		}
+		if(message_html){
+			msg.setValue("message", message_html);
+			msg.message_journal = "[code] &lt;h4&gt;" + msg.getValue("short_description") + "&lt;/h4&gt;" + message_html + "[/code]";
+		}
+		if(calling_application_sys_id){ // length check for 32 bytes not recommended because sys_id may be shorter or longer for (very) old records
+			msg.setValue("source_application", String(calling_application_sys_id));
+		}
+		if(calling_scope){
+			msg.setValue("source_scope", calling_scope);
+		}
+		if(notification_type){
+			msg.setValue("notification_type", notification_type);
+		}
+		var msg_sys_id = msg.sys_id;
+		if(msg.insert()){
+			return msg_sys_id;
+		}
+		return false;
+	},
+	appendToMessage: function(message_sys_id, short_message, message_html, priority){
+		var msg = this._getMessage(message_sys_id);
+		if(!msg) return false;
+		if(short_message){
+			msg.setValue("short_description", short_message);
+		}
+		if(message_html){
+			msg.setValue("message", message_html);
+			msg.message_journal = "[code] &lt;h4&gt;" + msg.getValue("short_description") + "&lt;/h4&gt;" + message_html + "[/code]";
+		}
+		if(!isNaN(parseInt(priority))){
+			msg.setValue("priority", String(priority));
+		}
+		return msg.update();
+	},
+	_getMessage: function(message_id){
+		if(!message_id){
+			return false;
+		}
+		var msg = new GlideRecord("x_716205_async_b_n_msg");
+		msg.get(message_id);
+		if(msg.getRowCount() == 1){
+			return msg;
+		}
+	},
+    type: 'AsyncBMUtils'
+};]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script_include&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2022-09-21 09:52:15&lt;/sys_created_on&gt;&lt;sys_id&gt;ffc424c62f021110dc91c886f699b6e3&lt;/sys_id&gt;&lt;sys_mod_count&gt;21&lt;/sys_mod_count&gt;&lt;sys_name&gt;AsyncBMUtils&lt;/sys_name&gt;&lt;sys_package display_value="Async Background Notification" source="x_716205_async_b_n"&gt;708e24ff2fb1d110dc91c886f699b630&lt;/sys_package&gt;&lt;sys_policy&gt;read&lt;/sys_policy&gt;&lt;sys_scope display_value="Async Background Notification"&gt;708e24ff2fb1d110dc91c886f699b630&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_include_ffc424c62f021110dc91c886f699b6e3&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2022-09-21 18:04:11&lt;/sys_updated_on&gt;&lt;/sys_script_include&gt;&lt;/record_update&gt;</payload>
+<payload_hash>-212693572</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>c5d79e8e2fc61110dc91c886f699b67d</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1836138bbb40000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table/>
+<target_name>AsyncBMUtils</target_name>
+<type>Script Include</type>
+<update_domain>global</update_domain>
+<update_guid>11465e0e73c61110f0f88ac2b5da4f78</update_guid>
+<update_guid_history>11465e0e73c61110f0f88ac2b5da4f78:-212693572,5754d24ae5c6111004a3586bdb0f307f:2122909869,f5ef82c6d4c61110d78185430e6fa281:-1907939507,12cdce8275c61110a611f35462a9f922:-1916324979,d6b84a8e1f8611109f693142fe981839:467848708,e558460294c611105c6648474ab7f784:376957764,2bdbc1062dc21110a833269523a9c163:-1529670081,3d0b050606c211104b590e01c6c705fc:-875282792,dc1549c2aec211100723fdbfeecdb904:924371500,954481c268c21110067855539c1c434d:-666207337,90b30982b2c211103ee837bcf2fd7c59:484832654,50c0b8020482111031db3c0c55e7f13d:-671177140,17ff68ceb24211101369537a6068fabe:1602011479,21af68ce59421110c8bbdb175f35a060:-1453150431,0beee48e5c421110628f7ee3efa8ae9e:1925377564,cd7eac4e13421110078fb9f0aeaee14b:-1453150431,743eec4ec642111063b62e9671f274c7:609204539,97fd684eca421110c49b9124d1c335f4:-1664069606,aaeca0caa6421110284954f65e42e0cf:782038971,3aaca44af3421110f50902d79765ef03:577965358,b1d9e086a8421110ef5e1901c9f32593:378488707,13a56c0655421110949cd1f4bb909ff0:-128409739</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_choice_x_716205_async_b_n_msg_notification_type</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update><sys_choice action="INSERT_OR_UPDATE" field="notification_type" table="x_716205_async_b_n_msg" version="3"><sys_choice_set action="INSERT_OR_UPDATE"><element>notification_type</element><name>x_716205_async_b_n_msg</name><sys_class_name>sys_choice_set</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-14 16:21:34</sys_created_on><sys_id>75abf1b72ff5d110dc91c886f699b660</sys_id><sys_mod_count>0</sys_mod_count><sys_name>notification_type</sys_name><sys_package display_value="Async Background Notification" source="x_716205_async_b_n">708e24ff2fb1d110dc91c886f699b630</sys_package><sys_policy/><sys_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</sys_scope><sys_update_name>sys_choice_x_716205_async_b_n_msg_notification_type</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-14 16:21:34</sys_updated_on></sys_choice_set><sys_choice action="INSERT_OR_UPDATE"><dependent_value/><element>notification_type</element><hint/><inactive>false</inactive><label>Background Process Finished</label><language>en</language><name>x_716205_async_b_n_msg</name><sequence/><synonyms/><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-14 16:22:09</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>caab35b72ff5d110dc91c886f699b645</sys_id><sys_mod_count>1</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-14 16:22:23</sys_updated_on><value>background_process_finished</value></sys_choice><sys_choice action="INSERT_OR_UPDATE"><dependent_value/><element>notification_type</element><hint/><inactive>false</inactive><label>Other</label><language>en</language><name>x_716205_async_b_n_msg</name><sequence/><synonyms/><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-14 16:21:34</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>90abfd772ff5d110dc91c886f699b6cc</sys_id><sys_mod_count>1</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-14 16:21:38</sys_updated_on><value>other</value></sys_choice><sys_choice action="INSERT_OR_UPDATE"><dependent_value/><element>notification_type</element><hint/><inactive>false</inactive><label>Process Notification</label><language>en</language><name>x_716205_async_b_n_msg</name><sequence/><synonyms/><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-14 16:22:48</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>72cb3d372ff5d110dc91c886f699b614</sys_id><sys_mod_count>1</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-14 16:22:58</sys_updated_on><value>process_notification</value></sys_choice></sys_choice></record_update>]]></payload>
+<payload_hash>-1538990476</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>c9d71e8e2fc61110dc91c886f699b6b7</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1833ccf8c410000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table>x_716205_async_b_n_msg</table>
+<target_name>Background Message.Notification Type</target_name>
+<type>Choice list</type>
+<update_domain>global</update_domain>
+<update_guid>52fb79b764f5d1100d420413674f3483</update_guid>
+<update_guid_history>52fb79b764f5d1100d420413674f3483:-1538990476,bbebf5773ef5d110d3068d7f1b4b03e3:1831820648,f1dbf5b76bf5d1107b141041bbbbceb5:-1938424186,9acb71b725f5d110785c9b47333a7d42:578901676,baab79779df5d110c0f9c881948cf0cc:1895149041,c2ab35b74af5d1107a7c484933706fe4:884883822</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_dictionary_x_716205_async_b_n_msg_source_scope</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update&gt;&lt;sys_dictionary action="INSERT_OR_UPDATE" element="source_scope" table="x_716205_async_b_n_msg"&gt;&lt;active&gt;true&lt;/active&gt;&lt;array&gt;false&lt;/array&gt;&lt;attributes/&gt;&lt;audit&gt;false&lt;/audit&gt;&lt;calculation&gt;&lt;![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]&gt;&lt;/calculation&gt;&lt;choice/&gt;&lt;choice_field/&gt;&lt;choice_table/&gt;&lt;column_label&gt;Source Scope&lt;/column_label&gt;&lt;comments/&gt;&lt;create_roles/&gt;&lt;default_value/&gt;&lt;defaultsort/&gt;&lt;delete_roles/&gt;&lt;dependent/&gt;&lt;dependent_on_field/&gt;&lt;display&gt;false&lt;/display&gt;&lt;dynamic_creation&gt;false&lt;/dynamic_creation&gt;&lt;dynamic_creation_script/&gt;&lt;dynamic_default_value/&gt;&lt;dynamic_ref_qual/&gt;&lt;element&gt;source_scope&lt;/element&gt;&lt;element_reference&gt;false&lt;/element_reference&gt;&lt;foreign_database/&gt;&lt;formula/&gt;&lt;function_definition/&gt;&lt;function_field&gt;false&lt;/function_field&gt;&lt;internal_type display_value="String"&gt;string&lt;/internal_type&gt;&lt;mandatory&gt;false&lt;/mandatory&gt;&lt;max_length&gt;64&lt;/max_length&gt;&lt;name&gt;x_716205_async_b_n_msg&lt;/name&gt;&lt;next_element/&gt;&lt;primary&gt;false&lt;/primary&gt;&lt;read_only&gt;false&lt;/read_only&gt;&lt;read_roles/&gt;&lt;reference/&gt;&lt;reference_cascade_rule/&gt;&lt;reference_floats&gt;false&lt;/reference_floats&gt;&lt;reference_key/&gt;&lt;reference_qual/&gt;&lt;reference_qual_condition/&gt;&lt;reference_type/&gt;&lt;spell_check&gt;false&lt;/spell_check&gt;&lt;staged&gt;false&lt;/staged&gt;&lt;sys_class_name&gt;sys_dictionary&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2022-09-14 16:36:53&lt;/sys_created_on&gt;&lt;sys_id&gt;da0eb13b2ff5d110dc91c886f699b6bd&lt;/sys_id&gt;&lt;sys_name&gt;Source Scope&lt;/sys_name&gt;&lt;sys_package display_value="Async Background Notification" source="x_716205_async_b_n"&gt;708e24ff2fb1d110dc91c886f699b630&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Async Background Notification"&gt;708e24ff2fb1d110dc91c886f699b630&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_dictionary_x_716205_async_b_n_msg_source_scope&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2022-09-14 16:36:53&lt;/sys_updated_on&gt;&lt;table_reference&gt;false&lt;/table_reference&gt;&lt;text_index&gt;false&lt;/text_index&gt;&lt;unique&gt;false&lt;/unique&gt;&lt;use_dependent_field&gt;false&lt;/use_dependent_field&gt;&lt;use_dynamic_default&gt;false&lt;/use_dynamic_default&gt;&lt;use_reference_qualifier&gt;simple&lt;/use_reference_qualifier&gt;&lt;virtual&gt;false&lt;/virtual&gt;&lt;virtual_type&gt;script&lt;/virtual_type&gt;&lt;widget/&gt;&lt;write_roles/&gt;&lt;xml_view&gt;false&lt;/xml_view&gt;&lt;/sys_dictionary&gt;&lt;/record_update&gt;</payload>
+<payload_hash>-1230864273</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>c9d79e8e2fc61110dc91c886f699b679</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1833cdc53380000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table>x_716205_async_b_n_msg</table>
+<target_name>Background Message.Source Scope</target_name>
+<type>Dictionary</type>
+<update_domain>global</update_domain>
+<update_guid>362f7d7b0bf5d1106e287dc172789b49</update_guid>
+<update_guid_history>362f7d7b0bf5d1106e287dc172789b49:-1230864273</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_scope_privilege_263ea08e2f421110dc91c886f699b665</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_scope_privilege"><sys_scope_privilege action="INSERT_OR_UPDATE"><operation>execute</operation><source_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</source_scope><status>allowed</status><sys_class_name>sys_scope_privilege</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-21 10:29:37</sys_created_on><sys_id>263ea08e2f421110dc91c886f699b665</sys_id><sys_mod_count>0</sys_mod_count><sys_name>GlideRecord.insert</sys_name><sys_package display_value="Async Background Notification" source="x_716205_async_b_n">708e24ff2fb1d110dc91c886f699b630</sys_package><sys_policy/><sys_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</sys_scope><sys_update_name>sys_scope_privilege_263ea08e2f421110dc91c886f699b665</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-21 10:29:37</sys_updated_on><target_name>GlideRecord.insert</target_name><target_scope display_value="Global">global</target_scope><target_type>scriptable</target_type></sys_scope_privilege></record_update>]]></payload>
+<payload_hash>710983017</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>c9d79e8e2fc61110dc91c886f699b67c</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1835f988f310000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table/>
+<target_name>GlideRecord.insert</target_name>
+<type>Cross scope privilege</type>
+<update_domain>global</update_domain>
+<update_guid>6a3ea08ea14211102d741ae002820566</update_guid>
+<update_guid_history>6a3ea08ea14211102d741ae002820566:710983017</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_app_module_9d9fe8332ff1d110dc91c886f699b680</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_app_module"><sys_app_module action="INSERT_OR_UPDATE"><active>true</active><application display_value="Background Notifications">559f64ff2fb1d110dc91c886f699b621</application><assessment/><device_type/><filter/><hint/><homepage/><image/><link_type>NEW</link_type><map_page/><mobile_title>Create New</mobile_title><mobile_view_name>Mobile</mobile_view_name><name>x_716205_async_b_n_msg</name><order>2</order><override_menu_roles>false</override_menu_roles><query/><report/><roles>admin</roles><sys_class_name>sys_app_module</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-14 10:49:13</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>9d9fe8332ff1d110dc91c886f699b680</sys_id><sys_mod_count>1</sys_mod_count><sys_name>Create New</sys_name><sys_overrides/><sys_package display_value="Async Background Notification" source="x_716205_async_b_n">708e24ff2fb1d110dc91c886f699b630</sys_package><sys_policy/><sys_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</sys_scope><sys_update_name>sys_app_module_9d9fe8332ff1d110dc91c886f699b680</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-14 16:12:20</sys_updated_on><timeline_page/><title>Create New</title><uncancelable>false</uncancelable><view_name/><window_name/></sys_app_module></record_update>]]></payload>
+<payload_hash>-832510494</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>cdd71e8e2fc61110dc91c886f699b6b6</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1833cc5d2c30000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table>x_716205_async_b_n_msg</table>
+<target_name>Create New</target_name>
+<type>Module</type>
+<update_domain>global</update_domain>
+<update_guid>3e89f1376af5d110ea311be93d8bca1f</update_guid>
+<update_guid_history>3e89f1376af5d110ea311be93d8bca1f:-832510494,dd9fe8334df1d1101bf0e579b636ae81:1103504361</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_dictionary_x_716205_async_b_n_msg_number</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update><sys_dictionary action="INSERT_OR_UPDATE" element="number" table="x_716205_async_b_n_msg"><active>true</active><array>false</array><attributes>edge_encryption_enabled=true</attributes><audit>false</audit><calculation/><choice>0</choice><choice_field/><choice_table/><column_label>Number</column_label><comments/><create_roles/><default_value>javascript:global.getNextObjNumberPadded();</default_value><defaultsort/><delete_roles/><dependent/><dependent_on_field/><display>false</display><dynamic_creation>false</dynamic_creation><dynamic_creation_script/><dynamic_default_value/><dynamic_ref_qual/><element>number</element><element_reference>false</element_reference><foreign_database/><formula/><function_definition/><function_field>false</function_field><internal_type display_value="String">string</internal_type><mandatory>false</mandatory><max_length>40</max_length><name>x_716205_async_b_n_msg</name><next_element/><primary>false</primary><read_only>false</read_only><read_roles/><reference/><reference_cascade_rule/><reference_floats>false</reference_floats><reference_key/><reference_qual/><reference_qual_condition/><reference_type/><spell_check>false</spell_check><staged>false</staged><sys_class_name>sys_dictionary</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-14 10:48:52</sys_created_on><sys_id>588f68332ff1d110dc91c886f699b6f6</sys_id><sys_name>Number</sys_name><sys_package display_value="Async Background Notification" source="x_716205_async_b_n">708e24ff2fb1d110dc91c886f699b630</sys_package><sys_policy/><sys_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</sys_scope><sys_update_name>sys_dictionary_x_716205_async_b_n_msg_number</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-14 10:48:52</sys_updated_on><table_reference>false</table_reference><text_index>false</text_index><unique>false</unique><use_dependent_field>false</use_dependent_field><use_dynamic_default>false</use_dynamic_default><use_reference_qualifier>simple</use_reference_qualifier><virtual>false</virtual><virtual_type>script</virtual_type><widget/><write_roles/><xml_view>false</xml_view></sys_dictionary></record_update>]]></payload>
+<payload_hash>-872265505</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>cdd79e8e2fc61110dc91c886f699b678</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1833b9daca30000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table>x_716205_async_b_n_msg</table>
+<target_name>Background Message.Number</target_name>
+<type>Dictionary</type>
+<update_domain>global</update_domain>
+<update_guid>108fa83389f1d1107b4083703402671a</update_guid>
+<update_guid_history>108fa83389f1d1107b4083703402671a:-872265505</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_notification_e5f7b4c62f821110dc91c886f699b613</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update sys_domain="global" table="sys_notification"&gt;&lt;sys_notification action="INSERT_OR_UPDATE"&gt;&lt;action_delete&gt;false&lt;/action_delete&gt;&lt;action_insert&gt;true&lt;/action_insert&gt;&lt;action_update&gt;true&lt;/action_update&gt;&lt;active&gt;true&lt;/active&gt;&lt;advanced_event_condition&gt;false&lt;/advanced_event_condition&gt;&lt;condition/&gt;&lt;description/&gt;&lt;event display_value="x_716205_async_b_n.asyncbgnotification.m"&gt;8328f8c22f821110dc91c886f699b6b7&lt;/event&gt;&lt;event_parm_1&gt;false&lt;/event_parm_1&gt;&lt;event_parm_1_table&gt;sys_user&lt;/event_parm_1_table&gt;&lt;event_parm_2&gt;false&lt;/event_parm_2&gt;&lt;event_parm_2_table&gt;sys_user&lt;/event_parm_2_table&gt;&lt;include_originator&gt;true&lt;/include_originator&gt;&lt;name&gt;Async Background Notification&lt;/name&gt;&lt;order&gt;100&lt;/order&gt;&lt;recipient_fields&gt;target_user&lt;/recipient_fields&gt;&lt;recipient_users/&gt;&lt;script&gt;&lt;![CDATA[(function runRecipientScript(/*String*/ parm1, /*String*/ parm2) {
+      /*
+      //Create instance of AdvancedNotificationRecipients to add recipients
+      var nr = new sn_notification.AdvancedNotificationRecipients();
+      var sysIds = [];
+      var gr = new GlideRecord('sys_user');
+      gr.addQuery('first_name','IN',parm1);
+      gr.query();
+      while (gr.next()) {
+        sysIds.push(gr.getValue('sys_id'));
+      }
+      nr.addRecipientInfo('sys_user',sysIds);
+      return nr;*/
+      })(parm1,parm2);]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_notification&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2022-09-21 11:14:18&lt;/sys_created_on&gt;&lt;sys_domain&gt;global&lt;/sys_domain&gt;&lt;sys_domain_path&gt;/&lt;/sys_domain_path&gt;&lt;sys_id&gt;e5f7b4c62f821110dc91c886f699b613&lt;/sys_id&gt;&lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;&lt;sys_name&gt;Async Background Notification&lt;/sys_name&gt;&lt;sys_overrides/&gt;&lt;sys_package display_value="Async Background Notification" source="x_716205_async_b_n"&gt;708e24ff2fb1d110dc91c886f699b630&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Async Background Notification"&gt;708e24ff2fb1d110dc91c886f699b630&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_notification_e5f7b4c62f821110dc91c886f699b613&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2022-09-21 11:14:18&lt;/sys_updated_on&gt;&lt;table&gt;x_716205_async_b_n_msg&lt;/table&gt;&lt;triggered_by&gt;event&lt;/triggered_by&gt;&lt;/sys_notification&gt;&lt;/record_update&gt;</payload>
+<payload_hash>-1819659741</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>cdd79e8e2fc61110dc91c886f699b67b</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1835fc1795d0000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table>x_716205_async_b_n_msg</table>
+<target_name>Async Background Notification</target_name>
+<type>Notification</type>
+<update_domain>global</update_domain>
+<update_guid>49783006f182111048a2416fc33a24ea</update_guid>
+<update_guid_history>49783006f182111048a2416fc33a24ea:-1819659741</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sys_ui_section_5883b4822f821110dc91c886f699b646</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update><sys_ui_section caption="" section_id="5883b4822f821110dc91c886f699b646" sys_domain="global" table="sys_ui_navigator_history" version="3" view=""><sys_ui_element action="INSERT_OR_UPDATE"><element>ui_type</element><position>0</position><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-21 10:52:41</sys_created_on><sys_id>a483b4822f821110dc91c886f699b64d</sys_id><sys_mod_count>0</sys_mod_count><sys_ui_formatter/><sys_ui_section caption="NULL" display_value="" name="sys_ui_navigator_history" sys_domain="global" view="Default view">5883b4822f821110dc91c886f699b646</sys_ui_section><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-21 10:52:41</sys_updated_on><sys_user/><type/></sys_ui_element><sys_ui_element action="INSERT_OR_UPDATE"><element>url</element><position>1</position><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-21 10:52:41</sys_created_on><sys_id>2c83b4822f821110dc91c886f699b64d</sys_id><sys_mod_count>0</sys_mod_count><sys_ui_formatter/><sys_ui_section caption="NULL" display_value="" name="sys_ui_navigator_history" sys_domain="global" view="Default view">5883b4822f821110dc91c886f699b646</sys_ui_section><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-21 10:52:41</sys_updated_on><sys_user/><type/></sys_ui_element><sys_ui_element action="INSERT_OR_UPDATE"><element>title</element><position>2</position><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-21 10:52:41</sys_created_on><sys_id>ac83b4822f821110dc91c886f699b64d</sys_id><sys_mod_count>0</sys_mod_count><sys_ui_formatter/><sys_ui_section caption="NULL" display_value="" name="sys_ui_navigator_history" sys_domain="global" view="Default view">5883b4822f821110dc91c886f699b646</sys_ui_section><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-21 10:52:41</sys_updated_on><sys_user/><type/></sys_ui_element><sys_ui_element action="INSERT_OR_UPDATE"><element>description</element><position>3</position><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-21 10:52:41</sys_created_on><sys_id>2083b4822f821110dc91c886f699b64e</sys_id><sys_mod_count>0</sys_mod_count><sys_ui_formatter/><sys_ui_section caption="NULL" display_value="" name="sys_ui_navigator_history" sys_domain="global" view="Default view">5883b4822f821110dc91c886f699b646</sys_ui_section><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-21 10:52:41</sys_updated_on><sys_user/><type/></sys_ui_element><sys_ui_element action="INSERT_OR_UPDATE"><element>user</element><position>4</position><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-21 10:52:41</sys_created_on><sys_id>a083b4822f821110dc91c886f699b64e</sys_id><sys_mod_count>0</sys_mod_count><sys_ui_formatter/><sys_ui_section caption="NULL" display_value="" name="sys_ui_navigator_history" sys_domain="global" view="Default view">5883b4822f821110dc91c886f699b646</sys_ui_section><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-21 10:52:41</sys_updated_on><sys_user/><type/></sys_ui_element><sys_ui_section action="INSERT_OR_UPDATE"><caption/><header>false</header><name>sys_ui_navigator_history</name><roles/><sys_class_name>sys_ui_section</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-21 10:52:41</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>5883b4822f821110dc91c886f699b646</sys_id><sys_mod_count>0</sys_mod_count><sys_name>sys_ui_navigator_history</sys_name><sys_overrides/><sys_package display_value="Navigator API" source="com.glide.ui.magellan_navigator_api">6691ebb7753011108c8b143dd0c59fdf</sys_package><sys_policy/><sys_scope display_value="Global">global</sys_scope><sys_update_name>sys_ui_section_5883b4822f821110dc91c886f699b646</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-21 10:52:41</sys_updated_on><sys_user/><title>true</title><view display_value="Default view" name="NULL">Default view</view><view_name/></sys_ui_section></sys_ui_section></record_update>]]></payload>
+<payload_hash>438152284</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>d5d79e8e2fc61110dc91c886f699b680</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1835fadb0790000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table>sys_ui_navigator_history</table>
+<target_name>Navigator History</target_name>
+<type>Form Layout</type>
+<update_domain>global</update_domain>
+<update_guid>a483b4827a8211108637a6f60c04804f</update_guid>
+<update_guid_history>a483b4827a8211108637a6f60c04804f:438152284,6883b482aa8211107b70cd82df992549:1609574551</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_ui_policy_action_ccea8e822fc61110dc91c886f699b620</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_policy_action"><sys_ui_policy_action action="INSERT_OR_UPDATE"><cleared>false</cleared><disabled>true</disabled><field>message</field><mandatory>ignore</mandatory><sys_class_name>sys_ui_policy_action</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-21 17:14:24</sys_created_on><sys_id>ccea8e822fc61110dc91c886f699b620</sys_id><sys_mod_count>0</sys_mod_count><sys_name>message</sys_name><sys_package display_value="Async Background Notification" source="x_716205_async_b_n">708e24ff2fb1d110dc91c886f699b630</sys_package><sys_policy/><sys_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</sys_scope><sys_update_name>sys_ui_policy_action_ccea8e822fc61110dc91c886f699b620</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-21 17:14:24</sys_updated_on><table>x_716205_async_b_n_msg</table><ui_policy display_value="Disable writes under all circumstances">37f98e422fc61110dc91c886f699b662</ui_policy><visible>ignore</visible></sys_ui_policy_action></record_update>]]></payload>
+<payload_hash>-2074941875</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>d9d79e8e2fc61110dc91c886f699b67f</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>183610b293c0000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table>x_716205_async_b_n_msg</table>
+<target_name>message</target_name>
+<type>UI Policy Action</type>
+<update_domain>global</update_domain>
+<update_guid>48ea8e8257c6111013c40a15f1bd5e22</update_guid>
+<update_guid_history>48ea8e8257c6111013c40a15f1bd5e22:-2074941875</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</application>
+<category>customer</category>
+<comments/>
+<name>sys_ui_policy_action_915ac2822fc61110dc91c886f699b699</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_policy_action"><sys_ui_policy_action action="INSERT_OR_UPDATE"><cleared>false</cleared><disabled>true</disabled><field>number</field><mandatory>ignore</mandatory><sys_class_name>sys_ui_policy_action</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-21 17:12:02</sys_created_on><sys_id>915ac2822fc61110dc91c886f699b699</sys_id><sys_mod_count>0</sys_mod_count><sys_name>number</sys_name><sys_package display_value="Async Background Notification" source="x_716205_async_b_n">708e24ff2fb1d110dc91c886f699b630</sys_package><sys_policy/><sys_scope display_value="Async Background Notification">708e24ff2fb1d110dc91c886f699b630</sys_scope><sys_update_name>sys_ui_policy_action_915ac2822fc61110dc91c886f699b699</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-21 17:12:02</sys_updated_on><table>x_716205_async_b_n_msg</table><ui_policy display_value="Disable writes under all circumstances">37f98e422fc61110dc91c886f699b662</ui_policy><visible>ignore</visible></sys_ui_policy_action></record_update>]]></payload>
+<payload_hash>1029553375</payload_hash>
+<remote_update_set display_value="Async Background Notification">4dd71e8e2fc61110dc91c886f699b6b5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 18:11:00</sys_created_on>
+<sys_id>ddd79e8e2fc61110dc91c886f699b67e</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1836108fb5c0000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 18:11:00</sys_updated_on>
+<table>x_716205_async_b_n_msg</table>
+<target_name>number</target_name>
+<type>UI Policy Action</type>
+<update_domain>global</update_domain>
+<update_guid>1d5ac28216c611108d96e5784581249a</update_guid>
+<update_guid_history>1d5ac28216c611108d96e5784581249a:1029553375</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+</unload>
