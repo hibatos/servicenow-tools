@@ -1,0 +1,923 @@
+<?xml version="1.0" encoding="UTF-8"?><unload unload_date="2022-09-21 19:11:28">
+<sys_remote_update_set action="INSERT_OR_UPDATE">
+<application display_value="Global">global</application>
+<application_name>Global</application_name>
+<application_scope>global</application_scope>
+<application_version/>
+<collisions/>
+<commit_date/>
+<deleted/>
+<description># Simple Table Navigation
+
+This project aims to solve the problem of the one table name you need but do not remember completely.
+It makes them searchable within the filter navigator.
+
+## How does it work?
+
+To understand how this app works, you first need to understand how the menu structore works that the filter navigator uses.
+First there are the so called application **menus** (sys_app_application) that act as categories.
+These menus contain **modules** (sys_app_module), that are basically links to all sorts of conent, such as lists with certain filters, URLs and many more.
+
+We also need an application menu the modules are assigned to. This per default is the application menu with the sys_id 7b7a185e2f751110dc91c886f699b6cc.
+It is recommended not to change this default behaviour but possible nontheless by modifying the system property _simple_table_nav.target_menu_.
+
+Then we need to know which tables to include in the search index since indexing all is certainly possible,
+but will slow down your filter navigator a bit and make the search results overcrowded.
+This list of tables is stored in the system property _simple_table_nav.tables_ as a comma separated string.
+I selected three tables per default (core_company,sys_user,sys_user_group) for demo purposes.
+
+As soon as this list is updated the contents of the list are checked against the system table definitions or **Tables** (sys_db_object).
+This check is implemented in the before business rule _Check Simple Table Navigation Table List_ on the **system properties** (sys_properties) table.
+The update is aborted if invalid table names are detected and an error is echoed to the user.
+
+Then for each list entry a new module is created if there is no existing one in the modules already.
+Before that all modules that exist, but are not included in the list of tables specified in the system property are then deleted.
+This update step is implemented in the after business rule _Reload Simple Table Navigation_.
+
+### Sidenote
+It would have been easier to delete all and create all from scratch every tome the list is updated.
+But this would impact performance considerably so I decided against it.
+
+## Why is this application in the global scope?
+
+This application needs to be able to insert and delete into the sys_app_application and sys_app_module table, which both are protected from writes within scoped applications.
+Also since we do not need new tables, roles or anything that would make a scope recommended I spared some time and made it global.
+
+## Limitations
+
+### Only on Dev!
+
+This application modifies the menu structure, so the use is only recommended in development
+
+### Only admin 
+
+Only admin users (users having the **admin** role) are allowed to use this application
+
+### Long runtime on configuration
+
+If too many tables are added to the table list, the user session will freeze for up to 5 minutes for 4000 tables, caused by the reload business rule.
+
+### Custom and scoped tables
+
+Custom and scoped tables might prevent the application to reference them because of cross scope privileges.
+
+## Uninstall
+
+Uninstalling the application is as easy as removing it from the installed applications with one exception.
+If the system property _simple_table_nav.target_menu_ is modified and set to a menu outside the application then the modules are not removed.
+they can also be removed by first clearing the table list, waiting for the reload business rule to run and the removing the application.
+
+
+## Bugs
+
+If the table list property is updated it might not reload the modules, it might require updating it again.
+You can also run the following code as a background script
+```
+new SimpleTableNavigationUtils().reloadTables()
+```</description>
+<inserted/>
+<name>Simple Table Navigation</name>
+<origin_sys_id/>
+<parent display_value=""/>
+<release_date/>
+<remote_base_update_set display_value=""/>
+<remote_parent_id/>
+<remote_sys_id>2dd6f45e2f391110dc91c886f699b64a</remote_sys_id>
+<state>loaded</state>
+<summary/>
+<sys_class_name>sys_remote_update_set</sys_class_name>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 19:11:28</sys_created_on>
+<sys_id>72a562022f4a1110dc91c886f699b64e</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 19:11:28</sys_updated_on>
+<update_set display_value=""/>
+<update_source display_value=""/>
+<updated/>
+</sys_remote_update_set>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Simple Table Navigation">090a181e2f751110dc91c886f699b6bf</application>
+<category>customer</category>
+<comments/>
+<name>sys_properties_category_5a41a0162fb51110dc91c886f699b6e6</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_properties_category"&gt;&lt;sys_properties_category action="INSERT_OR_UPDATE"&gt;&lt;name&gt;SimpleTableNavigation&lt;/name&gt;&lt;sys_class_name&gt;sys_properties_category&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2022-09-09 17:56:21&lt;/sys_created_on&gt;&lt;sys_id&gt;5a41a0162fb51110dc91c886f699b6e6&lt;/sys_id&gt;&lt;sys_mod_count&gt;3&lt;/sys_mod_count&gt;&lt;sys_name&gt;SimpleTableNavigation&lt;/sys_name&gt;&lt;sys_package display_value="Simple Table Navigation" source="090a181e2f751110dc91c886f699b6bf"&gt;090a181e2f751110dc91c886f699b6bf&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Simple Table Navigation"&gt;090a181e2f751110dc91c886f699b6bf&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_properties_category_5a41a0162fb51110dc91c886f699b6e6&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2022-09-09 18:05:21&lt;/sys_updated_on&gt;&lt;title&gt;&lt;![CDATA[&lt;p&gt;Setup the Simple Table Navigation&lt;/p&gt;]]&gt;&lt;/title&gt;&lt;/sys_properties_category&gt;&lt;sys_translated_text action="delete_multiple" query="documentkey=5a41a0162fb51110dc91c886f699b6e6"/&gt;&lt;/record_update&gt;</payload>
+<payload_hash>-1369981548</payload_hash>
+<remote_update_set display_value="Simple Table Navigation">72a562022f4a1110dc91c886f699b64e</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 19:11:28</sys_created_on>
+<sys_id>32a5e2022f4a1110dc91c886f699b62a</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>183236d7e350000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 19:11:28</sys_updated_on>
+<table/>
+<target_name>SimpleTableNavigation</target_name>
+<type>System Property Category</type>
+<update_domain>global</update_domain>
+<update_guid>6173ec567eb51110dcf928552e60c9d6</update_guid>
+<update_guid_history>6173ec567eb51110dcf928552e60c9d6:-1369981548,7d63e096cbb51110d6372864e507a291:663629660,b5e2ec1635b5111076253b52ab576682:-1422334052,ed616c92cab511103a5364a6c89a065a:1792445713</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Simple Table Navigation">090a181e2f751110dc91c886f699b6bf</application>
+<category>customer</category>
+<comments/>
+<name>sys_properties_379a985e2f751110dc91c886f699b6e6</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties"><sys_properties action="INSERT_OR_UPDATE"><choices/><description>Menu item that the modules will get added to.&#13;
+Changing this is not recommended, as this could lead to a messy application menues.</description><ignore_cache>true</ignore_cache><is_private>false</is_private><name>simple_table_nav.target_menu</name><read_roles/><suffix/><sys_class_name>sys_properties</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-09 17:27:00</sys_created_on><sys_id>379a985e2f751110dc91c886f699b6e6</sys_id><sys_mod_count>1</sys_mod_count><sys_name>simple_table_nav.target_menu</sys_name><sys_package display_value="Simple Table Navigation" source="090a181e2f751110dc91c886f699b6bf">090a181e2f751110dc91c886f699b6bf</sys_package><sys_policy/><sys_scope display_value="Simple Table Navigation">090a181e2f751110dc91c886f699b6bf</sys_scope><sys_update_name>sys_properties_379a985e2f751110dc91c886f699b6e6</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-09 18:12:05</sys_updated_on><type>string</type><value>7b7a185e2f751110dc91c886f699b6cc</value><write_roles/></sys_properties><sys_translated_text action="delete_multiple" query="documentkey=379a985e2f751110dc91c886f699b6e6"/></record_update>]]></payload>
+<payload_hash>-1042307544</payload_hash>
+<remote_update_set display_value="Simple Table Navigation">72a562022f4a1110dc91c886f699b64e</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 19:11:28</sys_created_on>
+<sys_id>36a5e2022f4a1110dc91c886f699b629</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1832373aca40000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 19:11:28</sys_updated_on>
+<table/>
+<target_name>simple_table_nav.target_menu</target_name>
+<type>System Property</type>
+<update_domain>global</update_domain>
+<update_guid>1c05e4d660b511109488cf908263cfa0</update_guid>
+<update_guid_history>1c05e4d660b511109488cf908263cfa0:-1042307544,8cbad85e2175111048ead1f7c84a30ca:-643618702</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Simple Table Navigation">090a181e2f751110dc91c886f699b6bf</application>
+<category>customer</category>
+<comments/>
+<name>sys_app_module_5c64b41a2f391110dc91c886f699b6f2</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_app_module"><sys_app_module action="INSERT_OR_UPDATE"><active>true</active><application display_value="Simple Table Navigation">7b7a185e2f751110dc91c886f699b6cc</application><assessment/><device_type/><filter/><hint>jump to table</hint><homepage/><image/><link_type>LIST</link_type><map_page/><mobile_title>sys_user</mobile_title><mobile_view_name>Mobile</mobile_view_name><name>sys_user</name><order/><override_menu_roles>false</override_menu_roles><query/><report/><roles/><sys_class_name>sys_app_module</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-09 19:19:16</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>5c64b41a2f391110dc91c886f699b6f2</sys_id><sys_mod_count>0</sys_mod_count><sys_name>sys_user</sys_name><sys_overrides/><sys_package display_value="Simple Table Navigation" source="090a181e2f751110dc91c886f699b6bf">090a181e2f751110dc91c886f699b6bf</sys_package><sys_policy/><sys_scope display_value="Simple Table Navigation">090a181e2f751110dc91c886f699b6bf</sys_scope><sys_update_name>sys_app_module_5c64b41a2f391110dc91c886f699b6f2</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-09 19:19:16</sys_updated_on><timeline_page/><title>sys_user</title><uncancelable>false</uncancelable><view_name/><window_name/></sys_app_module></record_update>]]></payload>
+<payload_hash>-1760403808</payload_hash>
+<remote_update_set display_value="Simple Table Navigation">72a562022f4a1110dc91c886f699b64e</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 19:11:28</sys_created_on>
+<sys_id>3aa5e2022f4a1110dc91c886f699b628</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>18323b129300000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 19:11:28</sys_updated_on>
+<table>sys_user</table>
+<target_name>sys_user</target_name>
+<type>Module</type>
+<update_domain>global</update_domain>
+<update_guid>5064b41a69391110116de136f4c3fcf4</update_guid>
+<update_guid_history>5064b41a69391110116de136f4c3fcf4:-1760403808</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Simple Table Navigation">090a181e2f751110dc91c886f699b6bf</application>
+<category>customer</category>
+<comments/>
+<name>sys_script_6f8de0de2fb51110dc91c886f699b684</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update sys_domain="global" table="sys_script"&gt;&lt;sys_script action="INSERT_OR_UPDATE"&gt;&lt;abort_action&gt;false&lt;/abort_action&gt;&lt;access&gt;package_private&lt;/access&gt;&lt;action_delete&gt;false&lt;/action_delete&gt;&lt;action_insert&gt;false&lt;/action_insert&gt;&lt;action_query&gt;false&lt;/action_query&gt;&lt;action_update&gt;true&lt;/action_update&gt;&lt;active&gt;true&lt;/active&gt;&lt;add_message&gt;false&lt;/add_message&gt;&lt;advanced&gt;true&lt;/advanced&gt;&lt;change_fields&gt;false&lt;/change_fields&gt;&lt;client_callable&gt;false&lt;/client_callable&gt;&lt;collection&gt;sys_properties&lt;/collection&gt;&lt;condition/&gt;&lt;description/&gt;&lt;execute_function&gt;false&lt;/execute_function&gt;&lt;filter_condition table="sys_properties"&gt;name=simple_table_nav.tables^valueVALCHANGES^EQ&lt;item endquery="false" field="name" goto="false" newquery="false" operator="=" or="false" value="simple_table_nav.tables"/&gt;&lt;item endquery="false" field="value" goto="false" newquery="false" operator="VALCHANGES" or="false" value=""/&gt;&lt;item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/&gt;&lt;/filter_condition&gt;&lt;is_rest&gt;false&lt;/is_rest&gt;&lt;message/&gt;&lt;name&gt;Reload Simple Table Navigation&lt;/name&gt;&lt;order&gt;100&lt;/order&gt;&lt;priority&gt;100&lt;/priority&gt;&lt;rest_method/&gt;&lt;rest_method_text/&gt;&lt;rest_service/&gt;&lt;rest_service_text/&gt;&lt;rest_variables/&gt;&lt;role_conditions/&gt;&lt;script&gt;&lt;![CDATA[(function executeRule(current, previous /*null when async*/ ) {
+    var stnTools = new SimpleTableNavigationUtils();
+    stnTools.reloadTables(current.getValue("value").split(","));
+	if(gs.getProperty("simple_table_nav.send_message_as_task") == "true"){
+		var evnt = new GlideRecord("task");
+		evnt.initialize();
+		evnt.short_description = "simple table navigation table processing finished.";
+		evnt.work_notes = "The processing of the simple table navigation tables has finished.\nSee menu structure &lt;a href=\"sys_app_module_list.do?sysparm_query=application%3D"+gs.getProperty("simple_table_nav.target_menu") + "^&amp;sysparm_view=\"&gt;here&lt;/a&gt;.\nTo see the new Menu items (modules), you might need to reload your UI or logout and log back in again.";
+		evnt.get(evnt.insert());
+		gs.eventQueue('asyncmessage.info', evnt, gs.getUserID());
+	}
+})(current, previous);]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2022-09-09 18:49:28&lt;/sys_created_on&gt;&lt;sys_domain&gt;global&lt;/sys_domain&gt;&lt;sys_domain_path&gt;/&lt;/sys_domain_path&gt;&lt;sys_id&gt;6f8de0de2fb51110dc91c886f699b684&lt;/sys_id&gt;&lt;sys_mod_count&gt;13&lt;/sys_mod_count&gt;&lt;sys_name&gt;Reload Simple Table Navigation&lt;/sys_name&gt;&lt;sys_overrides/&gt;&lt;sys_package display_value="Simple Table Navigation" source="090a181e2f751110dc91c886f699b6bf"&gt;090a181e2f751110dc91c886f699b6bf&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Simple Table Navigation"&gt;090a181e2f751110dc91c886f699b6bf&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_6f8de0de2fb51110dc91c886f699b684&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2022-09-11 19:13:15&lt;/sys_updated_on&gt;&lt;template/&gt;&lt;when&gt;async_always&lt;/when&gt;&lt;/sys_script&gt;&lt;sys_translated_text action="delete_multiple" query="documentkey=6f8de0de2fb51110dc91c886f699b684"/&gt;&lt;/record_update&gt;</payload>
+<payload_hash>2130268277</payload_hash>
+<remote_update_set display_value="Simple Table Navigation">72a562022f4a1110dc91c886f699b64e</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 19:11:28</sys_created_on>
+<sys_id>3aa5e2022f4a1110dc91c886f699b62b</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1832df8608a0000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 19:11:28</sys_updated_on>
+<table>sys_properties</table>
+<target_name>Reload Simple Table Navigation</target_name>
+<type>Business Rule</type>
+<update_domain>global</update_domain>
+<update_guid>a7268ff6aa7111101a9738d474fe8095</update_guid>
+<update_guid_history>a7268ff6aa7111101a9738d474fe8095:2130268277,48650b3a64711110827fc2f4c63a7b54:1030342158,8ba407f6db7111103b6ee5a95cdc1f21:-1160416625,e404cbb6cf711110cb88b4b810b26eec:344014478,70734bb6717111108143742ec11b0998:-1681935368,f94307b674711110258cd7e5b1bcf15c:-1340573590,37e20f768271111076a27c350df66d47:-1439960044,51c143761871111079da5b52c0a54b4b:-129307258,80e5767a27311110d26214c5722fb77a:-355553182,a145b63a72311110e6c0ef9c762a9f7f:207292386,f8947eb604311110e1e592bfcadd70bb:1190840635,9be3faf601311110a1c126ecb575485e:-1365045567,b1bda412a6f51110b1720844c591fb0a:-1220243422,3f8de0dedeb511105cc80e3396e66e86:-272603436</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Simple Table Navigation">090a181e2f751110dc91c886f699b6bf</application>
+<category>customer</category>
+<comments/>
+<name>sysevent_register_7e87b2fa2f311110dc91c886f699b6f9</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sysevent_register"><sysevent_register action="INSERT_OR_UPDATE"><caller_access/><description>Allows Async Business Rules to communicate with the user</description><event_name>asyncmessage.info</event_name><fired_by>Async Business Rules </fired_by><queue/><suffix/><sys_class_name>sysevent_register</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-11 18:10:40</sys_created_on><sys_id>7e87b2fa2f311110dc91c886f699b6f9</sys_id><sys_mod_count>1</sys_mod_count><sys_name>asyncmessage.info</sys_name><sys_package display_value="Simple Table Navigation" source="090a181e2f751110dc91c886f699b6bf">090a181e2f751110dc91c886f699b6bf</sys_package><sys_policy/><sys_scope display_value="Simple Table Navigation">090a181e2f751110dc91c886f699b6bf</sys_scope><sys_update_name>sysevent_register_7e87b2fa2f311110dc91c886f699b6f9</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-11 18:15:43</sys_updated_on><table/></sysevent_register></record_update>]]></payload>
+<payload_hash>-1895780418</payload_hash>
+<remote_update_set display_value="Simple Table Navigation">72a562022f4a1110dc91c886f699b64e</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 19:11:28</sys_created_on>
+<sys_id>3ea562022f4a1110dc91c886f699b64e</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1832dc3b2ad0000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 19:11:28</sys_updated_on>
+<table/>
+<target_name>asyncmessage.info</target_name>
+<type>Event Registration</type>
+<update_domain>global</update_domain>
+<update_guid>b009befa4931111040245c915320f79f</update_guid>
+<update_guid_history>b009befa4931111040245c915320f79f:-1895780418,bad7f6fa53311110f9230daca7d5245b:-33014722</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Simple Table Navigation">090a181e2f751110dc91c886f699b6bf</application>
+<category>customer</category>
+<comments/>
+<name>sys_properties_e90e98de2f751110dc91c886f699b636</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties"><sys_properties action="INSERT_OR_UPDATE"><choices/><description>Tables that should be added to the modules list.</description><ignore_cache>true</ignore_cache><is_private>false</is_private><name>simple_table_nav.tables</name><read_roles/><suffix/><sys_class_name>sys_properties</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-09 17:42:24</sys_created_on><sys_id>e90e98de2f751110dc91c886f699b636</sys_id><sys_mod_count>38</sys_mod_count><sys_name>simple_table_nav.tables</sys_name><sys_package display_value="Simple Table Navigation" source="090a181e2f751110dc91c886f699b6bf">090a181e2f751110dc91c886f699b6bf</sys_package><sys_policy/><sys_scope display_value="Simple Table Navigation">090a181e2f751110dc91c886f699b6bf</sys_scope><sys_update_name>sys_properties_e90e98de2f751110dc91c886f699b636</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-21 18:51:09</sys_updated_on><type>string</type><value>cmn_notif_message,sys_sg_filter_condition,service_subscribe_location,sys_push_notif_act_script,sys_sg_item_stream_m2m_master_item,diagnostics_result,sys_schema_attribute_m2m,cmdb_qb_result_base,map_view_ci_type,sys_hub_flow_block,sysauto_pa,sys_ui_hp_cascading_filter,cmdb_ci_unix_cluster_node,cmdb_ci_san_zone_alias_member,sys_ux_page_action_binding,clone_log,clone_preserved_data,scan_check_suite_check,cmdb_ire_incomplete_payloads0006,sys_cs_virtual_agent_context,sn_cmdb_ws_attestation_task_state,sp_row,pa_snapshots,sn_app_eng_studio_taxonomy_details,sn_ex_sp_ext_link_user_criteria_no_mtom,svc_ci_assoc,cmdb_key_value,discovery_queue,discovery_classy_unix,cmdb_ci_installed_bundles,cmdb_ci_db_ora_instance,cmdb_ci_solaris_instance,cmdb_ci_appl_ibm_wmb_listener,cmdb_depreciation,statemgmt_ops_state,sys_email_attachment,sys_scoped_admin_acl_inheritance,ts_table,cmdb_convert_bulk_services_entry,cmdb_ci_appl_sap_bo,sn_sm_secret_group,sys_cs_auto_resolution_simulation_configuration,sys_cs_auto_resolution_matched_intents,sys_development_permission_set,sys_import_set_row_error,cmdb_lb_service_vlan,cxs_res_context_config_prop,transaction_call_chain,sys_cs_session_binding,sys_ui_home_section,sysevent0004,live_mention,cmdb_ci_win_cluster_node,provider_auth,sn_hr_sp_todos_widget_mapping,cmdb_ci_endpoint_tcp,pwd_verification,cmdb_ci_appl_tibco_adapter,cmdb_ci_pc_hardware,v_private_cache,ais_rule_action,ts_v4_23_df,cmdb_ci_endpoint_sybase,sys_sg_filter_condition_attribute_name,fx_rate,sys_cs_support_queue_cache,open_nlu_predict_log0006,cmdb_ci_endpoint_jms_flow,proposed_change_verification_log0007,syslog_app_scope0007,std_change_proposal,sys_on_call_group_template,sys_cache_flush,ecc_agent_cluster,ecc_agent_memory_metric,sys_phone_format,sys_highlighted_value_condition,sys_ux_style,sys_activity0012,ml_autotrain_solution,metric_definition,sn_bm_client_recommendation_activity,ts_c_21_1,cmdb_ci_web_domino,sla_repair_log_entry0003,sysauto_scan,sys_query_performance_test_result,sys_client_interaction0005,sc_ic_question,cmdb_ci_csu_dsu_network,change_request_imac,cmdb_ci_vcenter_datacenter,sys_flow_trigger,ecc_agent_ext_context_trap,sys_graphql_resolver_mapping,sn_devstudio_studio_preferences,ts_c_9_3,cmdb_ci_lb_f5_ltm,ml_agent_zero_aggregated_data,cmdb_ci_appl_sendmail,ts_c_14_1,cmdb_ci_endpoint_ssas_mssql,sc_item_option_mtom,sys_ux_list_category,wf_workflow_instance,wf_command,svc_baseline_exclusion,sys_notification_category,cmdb_health_scorecard_group_threshold,chg_policy_applied,svc_security_membership_ops,ssa_activity_pattern,cmn_department,cmdb_software_instance,cmdb_ci_directory_ha,cmdb_ci_endpoint_oracle_db,sys_scope_design_access,ts_c_10_4,cmdb_ci_file_system,ts_c_15_5,appsec_security_notification_type,cmdb_ci_endpoint_nfs,ts_phrase,sys_fkey,sys_service_endpoint_state,sys_service_authentication,sys_atf_test_template,sys_user_delegate,nlq_cmdb_implicit_relationship,sys_archive_link_chunk,sysevent0003,cmdb_ci_endpoint_ad_domain,pa_tags,cmdb_ci_azure_datacenter,sys_app_template_page_type,cmdb_multisource_query_result_ms_record,sys_uib_template,sys_ux_lib_component_prop,sys_homepage_destination_rule,m2m_map_page_map_marker,cmn_map_marker,cmn_map_data_item,pwd_active_question,ts_c_12_8,cmdb_ci_lb_datacenter,cmdb_ci_ip_address,ais_partition_health,sla_repair_log_message,sysevent_queue_stats,sys_sg_filter_category_m2m_filter_condition,sys_sg_related_list_map,diagnostic_rule,sys_cs_discovery_trace,sp_theme,cmdb_ci_win_server,sys_script_adapter_rule,sys_phone_territory,ua_user_ct_count,discovery_log0006,ip_service_affinity,sys_activity0010,business_calendar_span,scan_mute_rule_reason,scan_suite_execution,sys_sg_parameter_screen,sys_sg_variable,sys_rte_eb_set_operation,sys_cs_custom_control_execution_plan,life_cycle_control,cmdb_ci_appl_itam,ecc_agent_upgrade_history,sys_rw_amb_graphql_action,sys_ux_m2m_workspace_view_rule_ux_view_rule_config,sys_aw_module,ua_sp_usage,ml_capability_definition_workflow,sys_nlu_model,m2m_sys_nlu_utterance_entity,m2m_sys_nlu_intent_entity,sla_condition_class,alm_template_task,sys_sg_list_screen,sys_cs_click_metrics,cmdb_dynamic_ire_feature,sys_proxy_app,sys_cs_virtual_agent_variable,attachment_extractor,syslog0001,ts_c_5_8,sc_req_item,cxs_ui_action,cxs_table_config,sys_embedded_help_role,ts_c_22_9,sys_analytics_authentication,sys_notification_execution0007,sys_call_chain,sys_m2m,sys_nav_link,sys_processor,svc_security_persona,sys_certificate,sys_rollback_log0003,sys_export_set_log0004,proposed_change_verification_log0004,sm_flapper_strategy_data,sysevent0002,st_on_call_hour,sys_breakpoint,v_metadata_parent,interaction_wrap_up_configuration,oidc_token_verification,sys_ux_custom_content_root_elem,sys_operational_toggle,gcf_licensing_count,pwd_enrollment,cmdb_ci_storage_access_policy,ast_contract,cmn_notif_device,service_subscribe_company,sys_push_notif_app_install,v_shared_cache,fx_currency,cmdb_ci_scanner,application_diagnostic,sys_trend_jobs,cmdb_software_product_model,cmdb_ci_appl_ca_id_man,sys_cluster_state,kb_knowledge_keyword,sys_transformer_rule_node,license_action_artifact_query_config,sys_email_account_group,jdbc_retry_conditions,sys_mailbox,discovery_log0007,sys_activity0008,ml_model_artifact,sc_catalog_page_renderer,v_table_creator,help_user_interaction_log,ts_c_25_2,sn_gf_goal,asmt_metric_type,sc_ic_task_defn,sys_document_viewer_status,sys_cs_topic_language,cmdb_ci_storage_controller,ngbsm_ci_icons,cmdb_ci_appl_hp_service,ml_solution_parameters,cmdb_pid,sc_category_user_mtom,sys_nlu_sys_entity,cmdb_instance_run_history,scan_log0005,sys_package,cmdb_view,chg_policy,sys_scoped_cache,conflict,svc_traversal_rules,cmdb_ci_ids_network,pa_indicator_aggregate_excl,pa_dimensions,ts_c_5_9,cmdb_ci_email_server,automation_pipeline_filter_regex,automation_pipeline_transformer_javascript,sys_cs_auto_resolution_prediction_output,ts_c_10_6,sys_development_permission,cmdb_ci_nas_file_system,cmdb_ci_vpn_connection,pa_dashboards_permissions,ts_c_15_6,cmdb_ci_appl_ora_notif_svr,ts_c_18_6,cmdb_ci_oslv_engine,sn_sm_journal0004,contract_rel_ci,sys_amb_message0003,transaction_call_chain_register,nlq_table_guesser_query_log,sys_archive_log,sys_archive_run_chunk,sysevent0001,sysevent0005,sn_collab_request_dev_collab_task,live_favorite,sys_mapplication,sys_ux_page_property,agent_assist_recommendation,aw_record_type_selector,pwd_active_answer,pwd_map_request_to_verification,sys_search_signal_result_event,sysrule_assignment,expert_panel_catalog_order,cmn_timeline_page_style,sla_repair_log_message0001,isc_export_event,spm_taxonomy_layer_definition,cmdb_health_metric_pref,label_user_m2m,sp_rectangle_menu_item,sp_instance_ais,nlq_table_guesser_query_log0003,cmdb_ci_fc_disk,ecc_agent_config,license_ih_feature,cmdb_ci_endpoint_storefront_comp,sys_email_account,automation_pipeline_filter_key_value,discovery_device_history,sys_activity0014,cmdb_view_instance,sn_bm_client_breakdown,sn_ihub_data_mapping_definition,cmdb_running_process,ts_c_21_4,cmdb_fc_initiator,ts_c_25_4,cmdb_ip_service_ci,sys_client_interaction_details0000,sc_ic_aprvl_type_defn,sn_cmdb_ws_attestation_task_to_ci,sys_flow_secure_data,cmdb_ci_endpoint_mq_mem,task,file_discovery_agent_sync,ts_c_9_6,discovery_probe_capability_m2m,ua_prod_inst,ci_diagnostic_kb,cmdb_ci_san_zone_member,sys_sg_notifications_tab,sys_sg_content_section,sys_sg_navigation_section_destination_button,sys_notif_category_preference,cmdb_ci_endpoint_sim_inc,sysrule_escalate_history,svc_model_assoc_ci,sp_agent_chat_config,sys_user_grmember,cmdb_ci_nas_storage,text_search,wf_log0001,syslog_email0001,svc_recomputation_log,sttrm_transition_condition,sttrm_model,on_call_remove_member,pa_job_log_rows,sysauto_ms_report_builder,ts_c_6_0,cmdb_ci_dir_site_minder_server,sn_sm_secret,sn_sm_journal0006,alm_license,contract_rel_location,sys_rw_amb_action,sys_sg_redirect_dest_field,sys_sg_screen_shortcut,sys_sg_item_view,ticket_configuration,syslog0005,sys_archive_destroy_log,ecc_queue_stats_by_ecc_agent,sys_tokenize_adapter_rule,sys_ux_type,cmdb_data_management_task_to_ci,cmdb_categories,cert_follow_on_task,cmdb_ci_endpoint_exchange,ts_v4_16_9,cmdb_ci_netapp_cdot,sys_app_customization,cmdb_ci_endpoint_fromcluster_t,cmdb_ci_fc_export,sys_sg_item_sorting_attribute,sys_cs_field_script_validator,cmdb_ci_appl_ora_pm,sys_sync_preview_local,cmdb_ci_exchange_hub,sn_ex_sp_m2m_action_group,kb_submission,db_audio,cmdb_ci_appl_sap_system,ml_stopwords,ml_word_vector_corpus,sn_bm_client_configuration,sn_ihub_integration_instance,sys_rest_message_fn_headers,ts_c_25_6,cmdb_ci_lb_template,strategic_objective,metadata_clone,asmt_custom_metric,sc_ic_question_choice,sys_schema_change,sys_flow_report_doc_chunk_archive,v_sql_debug,sys_stacktrace_pattern,ts_c_4_8,cmdb_import_set_run,sla,ecc_event,cmdb_ci_personal_printer,ml_language_x_prediction_result,ts_c_14_4,cmdb_ci_bridge_domain,wf_condition,sa_notification0004,item_option_new_set,sys_sg_universal_link_applet_mapping,sys_cs_client_adapter,svc_extension_variable,sys_user_group_type,sys_decision_multi_result,sys_decision_multi_result_element,cmdb_ci_wbem_service,cmdb_ci_appl_ora_http,ts_c_10_8,cmdb_ci_route_table,cmdb_ci_win_cluster,ais_active_table_ingestion_tracker,ts_v4_23_0,ts_v4_23_1,contract_rel_user,sys_rw_action,cmdb_ci_endpoint_mq_flow,sys_ui_related_list_relationship_entry,sys_checkpoint,m2m_sys_suggestion_reader_sys_suggestion_reader_group,visualization_migration_storage,sys_task_number_adapter_rule,pa_cached_scores,pa_indicator_breakdown_excl,aisa_rp_config,dscy_swtch_partition,interaction_log,cmdb_data_management_policy_execution,ts_c_13_0,pwd_map_proc_to_verification,cmdb_ci_sa_launch_config,ast_warranty,v_transaction,cmdb_ci_lb_a10,cmdb_ci_vcenter_datastore_disk,cmdb_ci_iplanet_web_server,sys_api_stats_requestor,pa_m2m_targets_users,m2m_kb_task,collaborator,license_kv_query,cmdb_ci_db_mssql_server,v_table_editor,v_field_editor,sn_bm_client_activity,sn_ihub_transform_definition_whitelist,cmdb_ci_exchange_frontend,scan_check_suite,sys_rest_message,sys_user_has_license,sys_cs_nlu_language,cmdb_ci_storage_eff_template,syslog_transaction0004,sys_hub_sub_flow_instance,sys_ui_page,pa_job_config,mid_profile_config,automation_pipeline_transformer,cmdb_multisource_column_type_mapping,cmdb_ci_endpoint_iis,itil_agreement_support,jdbc_credentials,sys_aw_renderer_type,cmdb_ci_endpoint_tibco_bw_proc,ts_c_14_6,wf_workflow_schedule,sys_sg_sections_screen_m2m_section,sys_classic_notification_channels,v_interaction_context,cmdb_ci_appl_delivery_controler,catalog_category_request,svc_model_obj_path,v_rotation,sc_cat_item_group_mtom,cxs_rp_config,sn_bm_common_optout_feedback_options,stage_set_entry,sn_diagram_builder_diagram_action_argument,sys_wizard_answer,sys_atf_step_config,open_nlu_driver</value><write_roles/></sys_properties><sys_translated_text action="delete_multiple" query="documentkey=e90e98de2f751110dc91c886f699b636"/></record_update>]]></payload>
+<payload_hash>-914475349</payload_hash>
+<remote_update_set display_value="Simple Table Navigation">72a562022f4a1110dc91c886f699b64e</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 19:11:28</sys_created_on>
+<sys_id>3ea5e2022f4a1110dc91c886f699b62a</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1836163bf9d0000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 19:11:28</sys_updated_on>
+<table/>
+<target_name>simple_table_nav.tables</target_name>
+<type>System Property</type>
+<update_domain>global</update_domain>
+<update_guid>6901a6c6480a11101179f6779b57b140</update_guid>
+<update_guid_history>6901a6c6480a11101179f6779b57b140:-914475349,5b9787be75711110ada73f2ebf1b5218:-652555452,ff178b3e86711110f2ebb31f5ddbb405:-1574577045,1e3647ba89711110dfade7ac88059809:1949217435,6475037aca711110cb360e21e8191860:-34958487,83450f3a0671111004b1fb62cd2f4dfd:-1428774778,aa8303f6b8711110c26d1a19035e215a:997528060,d483cfb60f7111109693d3bbe903ea0d:-481282189,e853cbb6ad711110e0152bac1a3012be:-859152511,60334bb69b711110b8aef48446aa888b:-481282189,600347b627711110d6e97bc7d5b8a9ca:-859152511,94d1c376947111104b5d824832d34c12:-481282189,0cf5367acb311110a8593da05eea8fa4:997528060,d844723aeb3111106d511192f47046a3:2097153283,2314fef6db3111103299e3da9abec723:-859770260,4bf33ef6043111106b5f4df83814526f:-1501622235,5e5272b64a31111018ab5250c06aecb5:-720036434,a032fe766e311110522250d459c76726:1689527825,5d227e76ed31111030d68d4fa8f7b2d6:-810634302,44e17a762c311110520023e2a923936c:451057016,2190ef5a8db151109002f7c953a69f77:-1501622235,5dcf9f1affb15110b51e6299a3bf5db8:-859770260,5e8f9b1a54b151109e565daee6a6003c:383557041,7a39b09e78391110f6917f0dfbb7ea67:1953601355,5864b41a5239111045ed5567d2a8b5f7:-709322155,e611f816b8f51110f4e668cd5b3a69cf:618616134,f5203cd651f51110ebb0126513f1cebd:205843113,3dde6c5204f51110114f6b39fcd4679c:-1480146761,185ea05231f511101d1846f8076cc5a0:1395689098,f83e2052a6f51110f9fcd988f2a8ba27:464276888,f41decdeb0b511105ea12639cba08201:1830075480,932c20dec6b51110f08a059ce9405c77:-947562155,7dcb689e5bb51110b8316ac7073e1ad4:1827674064,d75b209e44b51110c0fefdbd8e3dac40:616378564,055bec5e2eb51110fb19377de05159b7:1827674064,0445201aedb51110304574a214a7e71d:-207740097,926e9452c6b51110a4d44a7c6276c700:1579576151,dd3e18deb5751110ee067ce8caab0f9c:-2038676842</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Simple Table Navigation">090a181e2f751110dc91c886f699b6bf</application>
+<category>customer</category>
+<comments/>
+<name>sys_notification_workspace_content_82283efa2f311110dc91c886f699b632</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_notification_workspace_content"><sys_notification_workspace_content action="INSERT_OR_UPDATE"><active>true</active><is_default>false</is_default><name>Async Business Rule Sent Message</name><notification display_value="Async Business Rule">497772fa2f311110dc91c886f699b622</notification><route display_value="Agent Workspace">cb1af195872023002941b53046cb0b4e</route><sys_class_name>sys_notification_workspace_content</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-11 18:12:45</sys_created_on><sys_id>82283efa2f311110dc91c886f699b632</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Async Business Rule Sent Message</sys_name><sys_package display_value="Simple Table Navigation" source="090a181e2f751110dc91c886f699b6bf">090a181e2f751110dc91c886f699b6bf</sys_package><sys_policy/><sys_scope display_value="Simple Table Navigation">090a181e2f751110dc91c886f699b6bf</sys_scope><sys_update_name>sys_notification_workspace_content_82283efa2f311110dc91c886f699b632</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-11 18:12:45</sys_updated_on></sys_notification_workspace_content></record_update>]]></payload>
+<payload_hash>-2139029353</payload_hash>
+<remote_update_set display_value="Simple Table Navigation">72a562022f4a1110dc91c886f699b64e</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 19:11:28</sys_created_on>
+<sys_id>72a5e2022f4a1110dc91c886f699b629</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1832dc0fc1b0000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 19:11:28</sys_updated_on>
+<table/>
+<target_name>Async Business Rule Sent Message</target_name>
+<type>Notification Workspace Content</type>
+<update_domain>global</update_domain>
+<update_guid>5d58fef640311110599dad387547ddab</update_guid>
+<update_guid_history>5d58fef640311110599dad387547ddab:-2139029353</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>DELETE</action>
+<application display_value="Simple Table Navigation">090a181e2f751110dc91c886f699b6bf</application>
+<category>customer</category>
+<comments/>
+<name>sys_ui_action_c794571e2f715110dc91c886f699b60d</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update sys_domain="global" table="sys_ui_action"&gt;&lt;sys_ui_action action="DELETE"&gt;&lt;action_name&gt;Reorder&lt;/action_name&gt;&lt;active&gt;true&lt;/active&gt;&lt;client&gt;false&lt;/client&gt;&lt;client_script_v2&gt;&lt;![CDATA[function onClick(g_form) {
+
+}]]&gt;&lt;/client_script_v2&gt;&lt;comments/&gt;&lt;condition&gt;gs.hasRole("admin")&lt;/condition&gt;&lt;form_action&gt;true&lt;/form_action&gt;&lt;form_button&gt;true&lt;/form_button&gt;&lt;form_button_v2&gt;false&lt;/form_button_v2&gt;&lt;form_context_menu&gt;true&lt;/form_context_menu&gt;&lt;form_link&gt;true&lt;/form_link&gt;&lt;form_menu_button_v2&gt;false&lt;/form_menu_button_v2&gt;&lt;form_style/&gt;&lt;format_for_configurable_workspace&gt;false&lt;/format_for_configurable_workspace&gt;&lt;hint/&gt;&lt;isolate_script&gt;false&lt;/isolate_script&gt;&lt;list_action&gt;true&lt;/list_action&gt;&lt;list_banner_button&gt;true&lt;/list_banner_button&gt;&lt;list_button&gt;true&lt;/list_button&gt;&lt;list_choice&gt;true&lt;/list_choice&gt;&lt;list_context_menu&gt;true&lt;/list_context_menu&gt;&lt;list_link&gt;true&lt;/list_link&gt;&lt;list_save_with_form_button&gt;false&lt;/list_save_with_form_button&gt;&lt;list_style&gt;unstyled&lt;/list_style&gt;&lt;messages/&gt;&lt;name&gt;Reorder&lt;/name&gt;&lt;onclick&gt;onClick();&lt;/onclick&gt;&lt;order&gt;400&lt;/order&gt;&lt;script&gt;&lt;![CDATA[var checkedItems = RP.getParameterValue('sysparm_checked_items') + '';
+var checkedItemArr = checkedItems.split(',');
+if(checkedItemArr.includes(current.sys_id)){
+	gs.addInfoMessage("i am the one");
+}]]&gt;&lt;/script&gt;&lt;show_insert&gt;true&lt;/show_insert&gt;&lt;show_multiple_update&gt;false&lt;/show_multiple_update&gt;&lt;show_query&gt;false&lt;/show_query&gt;&lt;show_update&gt;true&lt;/show_update&gt;&lt;sys_class_name&gt;sys_ui_action&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2022-09-10 07:05:36&lt;/sys_created_on&gt;&lt;sys_domain&gt;global&lt;/sys_domain&gt;&lt;sys_domain_path&gt;/&lt;/sys_domain_path&gt;&lt;sys_id&gt;c794571e2f715110dc91c886f699b60d&lt;/sys_id&gt;&lt;sys_mod_count&gt;24&lt;/sys_mod_count&gt;&lt;sys_name&gt;Reorder&lt;/sys_name&gt;&lt;sys_overrides/&gt;&lt;sys_package display_value="Simple Table Navigation" source="090a181e2f751110dc91c886f699b6bf"&gt;090a181e2f751110dc91c886f699b6bf&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Simple Table Navigation"&gt;090a181e2f751110dc91c886f699b6bf&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_ui_action_c794571e2f715110dc91c886f699b60d&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2022-09-10 07:45:49&lt;/sys_updated_on&gt;&lt;table&gt;global&lt;/table&gt;&lt;ui11_compatible&gt;true&lt;/ui11_compatible&gt;&lt;ui16_compatible&gt;true&lt;/ui16_compatible&gt;&lt;/sys_ui_action&gt;&lt;/record_update&gt;</payload>
+<payload_hash>2134541063</payload_hash>
+<remote_update_set display_value="Simple Table Navigation">72a562022f4a1110dc91c886f699b64e</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 19:11:28</sys_created_on>
+<sys_id>72a5e2022f4a1110dc91c886f699b62c</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>18361698b4f0000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 19:11:28</sys_updated_on>
+<table>global</table>
+<target_name>Reorder</target_name>
+<type>UI Action</type>
+<update_domain>global</update_domain>
+<update_guid>1672e68adf0a111056003043f2486fe9</update_guid>
+<update_guid_history>1672e68adf0a111056003043f2486fe9:2134541063,8c4f9f966ab15110243a39cf3b564891:-1590297581,a10f53d6d9b151106398da445d582ccc:-1793830180,833e539640b1511055bc4cc4688f84e1:761829972,b7ed9796a7b151100332cc5a77166a7f:-164260967,c6dd1396c0b1511080bd86e065ca5eca:253487778,098d9756ceb15110dbff6511e300c1b7:1134193435,96fc575665b1511052b76c2d993ba62a:1338323512,d6cc5356cfb15110c6c25b30f9f48a2f:97716116,619cd31685b151108494c6e32d8b8b99:199959459,0afb5316b1b151106ea43d8610698989:-1164417145,797b17d252b15110373264ff25a13870:2043552061,3d2b17d2ffb15110a922a64735dc1f78:1008159331,e90b53d2f1b15110743b61cfb496a0c1:-1792147943,bf8a9b92f1b15110e6fe0e70c5e981a7:616814441,4e3a1792ffb15110d123ecb038b080e0:-1971687912,d9e91f52a7b15110127096c6e43e37a0:1605237352,3d99535284b15110ba0bc5ae68b2013a:2103695958,13891752ccb151103e73d026527f9cc3:-233846739,58799b1200b15110b3bd54ad38f91563:109630033,8e69db122eb15110c7acc8e77c36b71c:-1670792812,5f29135270b15110f5c9ae25749a3209:-1636622417,92f81312fbb1511094b52fd16890a32d:1092838797,7bb71f5e61715110e4237a3f8bd51981:1483860896,9c279f5efe7151103f1bb9e157c3a696:1433875439,72069b5e9771511013ea5a71719f54cd:-175042864</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>DELETE</action>
+<application display_value="Simple Table Navigation">090a181e2f751110dc91c886f699b6bf</application>
+<category>customer</category>
+<comments/>
+<name>sysevent_register_7e87b2fa2f311110dc91c886f699b6f9</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sysevent_register"><sysevent_register action="DELETE"><caller_access/><description>Allows Async Business Rules to communicate with the user</description><event_name>asyncmessage.info</event_name><fired_by>Async Business Rules </fired_by><queue/><suffix/><sys_class_name>sysevent_register</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-11 18:10:40</sys_created_on><sys_id>7e87b2fa2f311110dc91c886f699b6f9</sys_id><sys_mod_count>1</sys_mod_count><sys_name>asyncmessage.info</sys_name><sys_package display_value="Simple Table Navigation" source="090a181e2f751110dc91c886f699b6bf">090a181e2f751110dc91c886f699b6bf</sys_package><sys_policy/><sys_scope display_value="Simple Table Navigation">090a181e2f751110dc91c886f699b6bf</sys_scope><sys_update_name>sysevent_register_7e87b2fa2f311110dc91c886f699b6f9</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-11 18:15:43</sys_updated_on><table/></sysevent_register></record_update>]]></payload>
+<payload_hash>-1583957686</payload_hash>
+<remote_update_set display_value="Simple Table Navigation">72a562022f4a1110dc91c886f699b64e</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 19:11:28</sys_created_on>
+<sys_id>76a562022f4a1110dc91c886f699b64e</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1836158eab10000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 19:11:28</sys_updated_on>
+<table/>
+<target_name>asyncmessage.info</target_name>
+<type>Event Registration</type>
+<update_domain>global</update_domain>
+<update_guid>9c5e5e060f0a1110a3bcb706c992c214</update_guid>
+<update_guid_history>9c5e5e060f0a1110a3bcb706c992c214:-1583957686,b009befa4931111040245c915320f79f:-1895780418,bad7f6fa53311110f9230daca7d5245b:-33014722</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Simple Table Navigation">090a181e2f751110dc91c886f699b6bf</application>
+<category>customer</category>
+<comments/>
+<name>sys_app_module_1b8060d22fb51110dc91c886f699b6d5</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_app_module"><sys_app_module action="INSERT_OR_UPDATE"><active>true</active><application display_value="Simple Table Navigation">7b7a185e2f751110dc91c886f699b6cc</application><assessment/><device_type/><filter/><hint>Setup Simple Table Navigation</hint><homepage/><image/><link_type>DIRECT</link_type><map_page/><mobile_title>Simple Table Navigation Properties</mobile_title><mobile_view_name>Mobile</mobile_view_name><name/><order>1</order><override_menu_roles>false</override_menu_roles><query>system_properties_ui.do?sysparm_category=SimpleTableNavigation</query><report/><roles>admin</roles><sys_class_name>sys_app_module</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-09 17:53:34</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>1b8060d22fb51110dc91c886f699b6d5</sys_id><sys_mod_count>11</sys_mod_count><sys_name>Setup Simple Table Navigation</sys_name><sys_overrides/><sys_package display_value="Simple Table Navigation" source="090a181e2f751110dc91c886f699b6bf">090a181e2f751110dc91c886f699b6bf</sys_package><sys_policy/><sys_scope display_value="Simple Table Navigation">090a181e2f751110dc91c886f699b6bf</sys_scope><sys_update_name>sys_app_module_1b8060d22fb51110dc91c886f699b6d5</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-09 19:45:00</sys_updated_on><timeline_page/><title>Setup Simple Table Navigation</title><uncancelable>false</uncancelable><view_name/><window_name/></sys_app_module></record_update>]]></payload>
+<payload_hash>-12276641</payload_hash>
+<remote_update_set display_value="Simple Table Navigation">72a562022f4a1110dc91c886f699b64e</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 19:11:28</sys_created_on>
+<sys_id>76a562022f4a1110dc91c886f699b64f</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>18323c8b95d0000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 19:11:28</sys_updated_on>
+<table/>
+<target_name>Setup Simple Table Navigation</target_name>
+<type>Module</type>
+<update_domain>global</update_domain>
+<update_guid>9d4a3c1296791110db77a68b8885b408</update_guid>
+<update_guid_history>9d4a3c1296791110db77a68b8885b408:-12276641,722abc12bc7911104aef19b6a70d6f01:-485632293,3bb9781287791110d4679ae2b833db89:1166628012,b5993412867911106cd059e1a3fb502a:-276057400,865424d685b5111030397cc97417041c:129817613,4df368967eb51110fe1decea6e129596:325274902,cdd368962db51110d39e6c036a2f91bc:1862546549,eb43a456b4b51110ff3149c542e985d9:977482745,4ab22c5696b51110b341af1f87e6bed6:1053761581,e6c12c1650b511103b7dd13dc63d93c0:921245045,17e02cd226b51110d6f39795b983dbc4:-879989203,30c06c92b8b51110e9fb5451881d3210:-1888978690</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Simple Table Navigation">090a181e2f751110dc91c886f699b6bf</application>
+<category>customer</category>
+<comments/>
+<name>sys_app_module_5c64b41a2f391110dc91c886f699b6f0</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_app_module"><sys_app_module action="INSERT_OR_UPDATE"><active>true</active><application display_value="Simple Table Navigation">7b7a185e2f751110dc91c886f699b6cc</application><assessment/><device_type/><filter/><hint>jump to table</hint><homepage/><image/><link_type>LIST</link_type><map_page/><mobile_title>core_company</mobile_title><mobile_view_name>Mobile</mobile_view_name><name>core_company</name><order/><override_menu_roles>false</override_menu_roles><query/><report/><roles/><sys_class_name>sys_app_module</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-09 19:19:16</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>5c64b41a2f391110dc91c886f699b6f0</sys_id><sys_mod_count>0</sys_mod_count><sys_name>core_company</sys_name><sys_overrides/><sys_package display_value="Simple Table Navigation" source="090a181e2f751110dc91c886f699b6bf">090a181e2f751110dc91c886f699b6bf</sys_package><sys_policy/><sys_scope display_value="Simple Table Navigation">090a181e2f751110dc91c886f699b6bf</sys_scope><sys_update_name>sys_app_module_5c64b41a2f391110dc91c886f699b6f0</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-09 19:19:16</sys_updated_on><timeline_page/><title>core_company</title><uncancelable>false</uncancelable><view_name/><window_name/></sys_app_module></record_update>]]></payload>
+<payload_hash>566477728</payload_hash>
+<remote_update_set display_value="Simple Table Navigation">72a562022f4a1110dc91c886f699b64e</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 19:11:28</sys_created_on>
+<sys_id>76a5e2022f4a1110dc91c886f699b628</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>18323b129130000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 19:11:28</sys_updated_on>
+<table>core_company</table>
+<target_name>core_company</target_name>
+<type>Module</type>
+<update_domain>global</update_domain>
+<update_guid>5064b41a433911104e31d5efcc6ce3f2</update_guid>
+<update_guid_history>5064b41a433911104e31d5efcc6ce3f2:566477728</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Simple Table Navigation">090a181e2f751110dc91c886f699b6bf</application>
+<category>customer</category>
+<comments/>
+<name>sys_script_1be8e8da2fb51110dc91c886f699b6a8</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update sys_domain="global" table="sys_script"&gt;&lt;sys_script action="INSERT_OR_UPDATE"&gt;&lt;abort_action&gt;false&lt;/abort_action&gt;&lt;access&gt;package_private&lt;/access&gt;&lt;action_delete&gt;false&lt;/action_delete&gt;&lt;action_insert&gt;false&lt;/action_insert&gt;&lt;action_query&gt;false&lt;/action_query&gt;&lt;action_update&gt;true&lt;/action_update&gt;&lt;active&gt;true&lt;/active&gt;&lt;add_message&gt;false&lt;/add_message&gt;&lt;advanced&gt;true&lt;/advanced&gt;&lt;change_fields&gt;false&lt;/change_fields&gt;&lt;client_callable&gt;false&lt;/client_callable&gt;&lt;collection&gt;sys_properties&lt;/collection&gt;&lt;condition/&gt;&lt;description/&gt;&lt;execute_function&gt;false&lt;/execute_function&gt;&lt;filter_condition table="sys_properties"&gt;name=simple_table_nav.tables^valueVALCHANGES^EQ&lt;item endquery="false" field="name" goto="false" newquery="false" operator="=" or="false" value="simple_table_nav.tables"/&gt;&lt;item endquery="false" field="value" goto="false" newquery="false" operator="VALCHANGES" or="false" value=""/&gt;&lt;item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/&gt;&lt;/filter_condition&gt;&lt;is_rest&gt;false&lt;/is_rest&gt;&lt;message/&gt;&lt;name&gt;Check Simple Table Navigation Table List&lt;/name&gt;&lt;order&gt;100&lt;/order&gt;&lt;priority&gt;100&lt;/priority&gt;&lt;rest_method/&gt;&lt;rest_method_text/&gt;&lt;rest_service/&gt;&lt;rest_service_text/&gt;&lt;rest_variables/&gt;&lt;role_conditions/&gt;&lt;script&gt;&lt;![CDATA[(function executeRule(current, previous /*null when async*/) {
+	var tableList = current.value.split(",");
+	for(var i = 0; i &lt; tableList.length; i++){
+		var check = new GlideRecord("sys_db_object");
+		check.addQuery("name",tableList[i]);
+		check.query();
+		if(check.getRowCount() !== 1){
+			current.setAbortAction(true);
+			gs.addErrorMessage("Table with name '" + tableList[i] + "' could not be found");
+			return false;
+		}
+	}
+})(current, previous);]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2022-09-09 18:31:37&lt;/sys_created_on&gt;&lt;sys_domain&gt;global&lt;/sys_domain&gt;&lt;sys_domain_path&gt;/&lt;/sys_domain_path&gt;&lt;sys_id&gt;1be8e8da2fb51110dc91c886f699b6a8&lt;/sys_id&gt;&lt;sys_mod_count&gt;5&lt;/sys_mod_count&gt;&lt;sys_name&gt;Check Simple Table Navigation Table List&lt;/sys_name&gt;&lt;sys_overrides/&gt;&lt;sys_package display_value="Simple Table Navigation" source="090a181e2f751110dc91c886f699b6bf"&gt;090a181e2f751110dc91c886f699b6bf&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Simple Table Navigation"&gt;090a181e2f751110dc91c886f699b6bf&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_1be8e8da2fb51110dc91c886f699b6a8&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2022-09-09 18:49:02&lt;/sys_updated_on&gt;&lt;template/&gt;&lt;when&gt;before&lt;/when&gt;&lt;/sys_script&gt;&lt;sys_translated_text action="delete_multiple" query="documentkey=1be8e8da2fb51110dc91c886f699b6a8"/&gt;&lt;/record_update&gt;</payload>
+<payload_hash>1301442884</payload_hash>
+<remote_update_set display_value="Simple Table Navigation">72a562022f4a1110dc91c886f699b64e</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 19:11:28</sys_created_on>
+<sys_id>76a5e2022f4a1110dc91c886f699b62b</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>18323957bee0000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 19:11:28</sys_updated_on>
+<table>sys_properties</table>
+<target_name>Check Simple Table Navigation Table List</target_name>
+<type>Business Rule</type>
+<update_domain>global</update_domain>
+<update_guid>1d7d2cde81b51110af49890d18bf5ad4</update_guid>
+<update_guid_history>1d7d2cde81b51110af49890d18bf5ad4:1301442884,cc5da012a8f5111026fafb8f4fa3345b:1931214372,62bb289ed3b51110df54a9b1aa390e90:1231624449,157bec5ecab5111072e10e11b3f4dda1:-2084068469,724bec1e52b511104d81ef5b7df76975:578260498,2e79ecda60b5111014e3680d5a8bfd23:-269898642</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Simple Table Navigation">090a181e2f751110dc91c886f699b6bf</application>
+<category>customer</category>
+<comments/>
+<name>sys_properties_category_m2m_fe3160162fb51110dc91c886f699b6ef</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties_category_m2m"><sys_properties_category_m2m action="INSERT_OR_UPDATE"><category display_value="SImple Table Navigation">5a41a0162fb51110dc91c886f699b6e6</category><order>100</order><property display_value="simple_table_nav.tables" name="simple_table_nav.tables">e90e98de2f751110dc91c886f699b636</property><sys_class_name>sys_properties_category_m2m</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-09 17:56:27</sys_created_on><sys_id>fe3160162fb51110dc91c886f699b6ef</sys_id><sys_mod_count>0</sys_mod_count><sys_name>simple_table_nav.tables.SImple Table Navigation</sys_name><sys_package display_value="Simple Table Navigation" source="090a181e2f751110dc91c886f699b6bf">090a181e2f751110dc91c886f699b6bf</sys_package><sys_policy/><sys_scope display_value="Simple Table Navigation">090a181e2f751110dc91c886f699b6bf</sys_scope><sys_update_name>sys_properties_category_m2m_fe3160162fb51110dc91c886f699b6ef</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-09 17:56:27</sys_updated_on></sys_properties_category_m2m></record_update>]]></payload>
+<payload_hash>-1042835658</payload_hash>
+<remote_update_set display_value="Simple Table Navigation">72a562022f4a1110dc91c886f699b64e</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 19:11:28</sys_created_on>
+<sys_id>7aa5e2022f4a1110dc91c886f699b62a</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>183236557a50000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 19:11:28</sys_updated_on>
+<table/>
+<target_name>simple_table_nav.tables.SImple Table Navigation</target_name>
+<type>Category Property</type>
+<update_domain>global</update_domain>
+<update_guid>c761acd2deb51110521aaa51e44a4224</update_guid>
+<update_guid_history>c761acd2deb51110521aaa51e44a4224:-1042835658</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Simple Table Navigation">090a181e2f751110dc91c886f699b6bf</application>
+<category>customer</category>
+<comments/>
+<name>sys_properties_category_5a41a0162fb51110dc91c886f699b6e6</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_properties_category"&gt;&lt;sys_properties_category action="INSERT_OR_UPDATE"&gt;&lt;name&gt;SimpleTableNavigation&lt;/name&gt;&lt;sys_class_name&gt;sys_properties_category&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2022-09-09 17:56:21&lt;/sys_created_on&gt;&lt;sys_id&gt;5a41a0162fb51110dc91c886f699b6e6&lt;/sys_id&gt;&lt;sys_mod_count&gt;5&lt;/sys_mod_count&gt;&lt;sys_name&gt;SimpleTableNavigation&lt;/sys_name&gt;&lt;sys_package display_value="Simple Table Navigation" source="090a181e2f751110dc91c886f699b6bf"&gt;090a181e2f751110dc91c886f699b6bf&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Simple Table Navigation"&gt;090a181e2f751110dc91c886f699b6bf&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_properties_category_5a41a0162fb51110dc91c886f699b6e6&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2022-09-09 19:40:25&lt;/sys_updated_on&gt;&lt;title&gt;&lt;![CDATA[&lt;p&gt;&lt;strong&gt;Setup the Simple Table Navigation.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;You can add tables that should be available by the filter navigator.&lt;br /&gt;&lt;span style="color: #e67e23;"&gt;Adding alot or all tables will take a long time to process and slow down the navbar load time considerably.&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;The target_menu property specifies the sys_id of the menu the modules for the tables should be placed in.&lt;br /&gt;&lt;span style="color: #e03e2d;"&gt;This Property should not be changed, as this could lead to big problems with other menues if the wrong menu sys_id is pasted in.&lt;/span&gt;&lt;/p&gt;]]&gt;&lt;/title&gt;&lt;/sys_properties_category&gt;&lt;sys_translated_text action="delete_multiple" query="documentkey=5a41a0162fb51110dc91c886f699b6e6"/&gt;&lt;/record_update&gt;</payload>
+<payload_hash>-1649829014</payload_hash>
+<remote_update_set display_value="Simple Table Navigation">72a562022f4a1110dc91c886f699b64e</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 19:11:28</sys_created_on>
+<sys_id>7ea5e2022f4a1110dc91c886f699b629</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>18323c488040000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 19:11:28</sys_updated_on>
+<table/>
+<target_name>SimpleTableNavigation</target_name>
+<type>System Property Category</type>
+<update_domain>global</update_domain>
+<update_guid>8a39f89e0f39111008d81bacf131966c</update_guid>
+<update_guid_history>8a39f89e0f39111008d81bacf131966c:-1649829014,a2f83cde573911102e55cc50dccf0a37:866606948,6173ec567eb51110dcf928552e60c9d6:-1369981548,7d63e096cbb51110d6372864e507a291:663629660,b5e2ec1635b5111076253b52ab576682:-1422334052,ed616c92cab511103a5364a6c89a065a:1792445713</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Simple Table Navigation">090a181e2f751110dc91c886f699b6bf</application>
+<category>customer</category>
+<comments/>
+<name>sys_app_application_7b7a185e2f751110dc91c886f699b6cc</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_app_application"><sys_app_application action="INSERT_OR_UPDATE"><active>true</active><category display_value="Custom Applications">e0355b31ef303000a61d5a3615c0fb78</category><description/><device_type>browser</device_type><hint/><name/><order>100</order><roles>admin</roles><sys_class_name>sys_app_application</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-09 17:26:30</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>7b7a185e2f751110dc91c886f699b6cc</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Simple Table Navigation</sys_name><sys_overrides/><sys_package display_value="Simple Table Navigation" source="090a181e2f751110dc91c886f699b6bf">090a181e2f751110dc91c886f699b6bf</sys_package><sys_policy/><sys_scope display_value="Simple Table Navigation">090a181e2f751110dc91c886f699b6bf</sys_scope><sys_update_name>sys_app_application_7b7a185e2f751110dc91c886f699b6cc</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-09 17:26:30</sys_updated_on><title>Simple Table Navigation</title><view_name/></sys_app_application></record_update>]]></payload>
+<payload_hash>-818059049</payload_hash>
+<remote_update_set display_value="Simple Table Navigation">72a562022f4a1110dc91c886f699b64e</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 19:11:28</sys_created_on>
+<sys_id>b2a562022f4a1110dc91c886f699b64f</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1832349eab90000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 19:11:28</sys_updated_on>
+<table/>
+<target_name>Simple Table Navigation</target_name>
+<type>Application Menu</type>
+<update_domain>global</update_domain>
+<update_guid>549a185efd751110f4063d0b4fe928d2</update_guid>
+<update_guid_history>549a185efd751110f4063d0b4fe928d2:-818059049</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Simple Table Navigation">090a181e2f751110dc91c886f699b6bf</application>
+<category>customer</category>
+<comments/>
+<name>sys_app_module_1b8060d22fb51110dc91c886f699b6d5</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_app_module"><sys_app_module action="INSERT_OR_UPDATE"><active>true</active><application display_value="Simple Table Navigation">7b7a185e2f751110dc91c886f699b6cc</application><assessment/><device_type/><filter/><hint>Setup the Simple Table Navigation</hint><homepage/><image/><link_type>DIRECT</link_type><map_page/><mobile_title>Simple Table Navigation Properties</mobile_title><mobile_view_name>Mobile</mobile_view_name><name/><order>1</order><override_menu_roles>false</override_menu_roles><query>system_properties_ui.do%3Fsysparm_title%3DSNTProperties%26sysparm_category%3DSimpleTableNavigation</query><report/><roles>admin</roles><sys_class_name>sys_app_module</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-09 17:53:34</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>1b8060d22fb51110dc91c886f699b6d5</sys_id><sys_mod_count>7</sys_mod_count><sys_name>Simple Table Navigation Properties</sys_name><sys_overrides/><sys_package display_value="Simple Table Navigation" source="090a181e2f751110dc91c886f699b6bf">090a181e2f751110dc91c886f699b6bf</sys_package><sys_policy/><sys_scope display_value="Simple Table Navigation">090a181e2f751110dc91c886f699b6bf</sys_scope><sys_update_name>sys_app_module_1b8060d22fb51110dc91c886f699b6d5</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-09 18:09:13</sys_updated_on><timeline_page/><title>Simple Table Navigation Properties</title><uncancelable>false</uncancelable><view_name/><window_name/></sys_app_module></record_update>]]></payload>
+<payload_hash>129817613</payload_hash>
+<remote_update_set display_value="Simple Table Navigation">72a562022f4a1110dc91c886f699b64e</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 19:11:28</sys_created_on>
+<sys_id>b2a5e2022f4a1110dc91c886f699b628</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>183237107840000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 19:11:28</sys_updated_on>
+<table/>
+<target_name>Simple Table Navigation Properties</target_name>
+<type>Module</type>
+<update_domain>global</update_domain>
+<update_guid>865424d685b5111030397cc97417041c</update_guid>
+<update_guid_history>865424d685b5111030397cc97417041c:129817613,4df368967eb51110fe1decea6e129596:325274902,cdd368962db51110d39e6c036a2f91bc:1862546549,eb43a456b4b51110ff3149c542e985d9:977482745,4ab22c5696b51110b341af1f87e6bed6:1053761581,e6c12c1650b511103b7dd13dc63d93c0:921245045,17e02cd226b51110d6f39795b983dbc4:-879989203,30c06c92b8b51110e9fb5451881d3210:-1888978690</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Simple Table Navigation">090a181e2f751110dc91c886f699b6bf</application>
+<category>customer</category>
+<comments/>
+<name>sys_properties_e90e98de2f751110dc91c886f699b636</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties"><sys_properties action="INSERT_OR_UPDATE"><choices/><description>Tables that should be added to the modules list.</description><ignore_cache>true</ignore_cache><is_private>false</is_private><name>simple_table_nav.tables</name><read_roles/><suffix/><sys_class_name>sys_properties</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-09 17:42:24</sys_created_on><sys_id>e90e98de2f751110dc91c886f699b636</sys_id><sys_mod_count>15</sys_mod_count><sys_name>simple_table_nav.tables</sys_name><sys_package display_value="Simple Table Navigation" source="090a181e2f751110dc91c886f699b6bf">090a181e2f751110dc91c886f699b6bf</sys_package><sys_policy/><sys_scope display_value="Simple Table Navigation">090a181e2f751110dc91c886f699b6bf</sys_scope><sys_update_name>sys_properties_e90e98de2f751110dc91c886f699b636</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-09 19:40:28</sys_updated_on><type>string</type><value>core_company,sys_user,sys_user_group</value><write_roles/></sys_properties><sys_translated_text action="delete_multiple" query="documentkey=e90e98de2f751110dc91c886f699b636"/></record_update>]]></payload>
+<payload_hash>1953601355</payload_hash>
+<remote_update_set display_value="Simple Table Navigation">72a562022f4a1110dc91c886f699b64e</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 19:11:28</sys_created_on>
+<sys_id>b2a5e2022f4a1110dc91c886f699b62b</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>18323c4932c0000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 19:11:28</sys_updated_on>
+<table/>
+<target_name>simple_table_nav.tables</target_name>
+<type>System Property</type>
+<update_domain>global</update_domain>
+<update_guid>7a39b09e78391110f6917f0dfbb7ea67</update_guid>
+<update_guid_history>7a39b09e78391110f6917f0dfbb7ea67:1953601355,5864b41a5239111045ed5567d2a8b5f7:-709322155,e611f816b8f51110f4e668cd5b3a69cf:618616134,f5203cd651f51110ebb0126513f1cebd:205843113,3dde6c5204f51110114f6b39fcd4679c:-1480146761,185ea05231f511101d1846f8076cc5a0:1395689098,f83e2052a6f51110f9fcd988f2a8ba27:464276888,f41decdeb0b511105ea12639cba08201:1830075480,932c20dec6b51110f08a059ce9405c77:-947562155,7dcb689e5bb51110b8316ac7073e1ad4:1827674064,d75b209e44b51110c0fefdbd8e3dac40:616378564,055bec5e2eb51110fb19377de05159b7:1827674064,0445201aedb51110304574a214a7e71d:-207740097,926e9452c6b51110a4d44a7c6276c700:1579576151,dd3e18deb5751110ee067ce8caab0f9c:-2038676842</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>DELETE</action>
+<application display_value="Simple Table Navigation">090a181e2f751110dc91c886f699b6bf</application>
+<category>customer</category>
+<comments/>
+<name>sys_properties_category_m2m_da614fb22f711110dc91c886f699b60d</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties_category_m2m"><sys_properties_category_m2m action="DELETE"><category display_value="SimpleTableNavigation">5a41a0162fb51110dc91c886f699b6e6</category><order>100</order><property display_value="">4451cb362f711110dc91c886f699b68d</property><sys_class_name>sys_properties_category_m2m</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-11 18:52:25</sys_created_on><sys_id>da614fb22f711110dc91c886f699b60d</sys_id><sys_mod_count>0</sys_mod_count><sys_name>simple_table_nav.send_message_as_task.SimpleTableNavigation</sys_name><sys_package display_value="Simple Table Navigation" source="090a181e2f751110dc91c886f699b6bf">090a181e2f751110dc91c886f699b6bf</sys_package><sys_policy/><sys_scope display_value="Simple Table Navigation">090a181e2f751110dc91c886f699b6bf</sys_scope><sys_update_name>sys_properties_category_m2m_da614fb22f711110dc91c886f699b60d</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-11 18:52:25</sys_updated_on></sys_properties_category_m2m></record_update>]]></payload>
+<payload_hash>-408075028</payload_hash>
+<remote_update_set display_value="Simple Table Navigation">72a562022f4a1110dc91c886f699b64e</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 19:11:28</sys_created_on>
+<sys_id>b6a5e2022f4a1110dc91c886f699b62a</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1836168daa60000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 19:11:28</sys_updated_on>
+<table/>
+<target_name>simple_table_nav.send_message_as_task.SimpleTableNavigation</target_name>
+<type>Category Property</type>
+<update_domain>global</update_domain>
+<update_guid>d342e68aa70a1110f3f0fef4351626be</update_guid>
+<update_guid_history>d342e68aa70a1110f3f0fef4351626be:-408075028,5e614fb2d9711110e5bd620be4af5f0f:1923195590</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>DELETE</action>
+<application display_value="Simple Table Navigation">090a181e2f751110dc91c886f699b6bf</application>
+<category>customer</category>
+<comments/>
+<name>sys_properties_4451cb362f711110dc91c886f699b68d</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties"><sys_properties action="DELETE"><choices/><description>Create task and fire notification to notify the user as soon as the table reload is completed.</description><ignore_cache>true</ignore_cache><is_private>false</is_private><name>simple_table_nav.send_message_as_task</name><read_roles/><suffix/><sys_class_name>sys_properties</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-11 18:52:12</sys_created_on><sys_id>4451cb362f711110dc91c886f699b68d</sys_id><sys_mod_count>2</sys_mod_count><sys_name>simple_table_nav.send_message_as_task</sys_name><sys_package display_value="Simple Table Navigation" source="090a181e2f751110dc91c886f699b6bf">090a181e2f751110dc91c886f699b6bf</sys_package><sys_policy/><sys_scope display_value="Simple Table Navigation">090a181e2f751110dc91c886f699b6bf</sys_scope><sys_update_name>sys_properties_4451cb362f711110dc91c886f699b68d</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-11 18:53:45</sys_updated_on><type>boolean</type><value>true</value><write_roles/></sys_properties><sys_translated_text action="delete_multiple" query="documentkey=4451cb362f711110dc91c886f699b68d"/></record_update>]]></payload>
+<payload_hash>1529174853</payload_hash>
+<remote_update_set display_value="Simple Table Navigation">72a562022f4a1110dc91c886f699b64e</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 19:11:28</sys_created_on>
+<sys_id>baa5e2022f4a1110dc91c886f699b629</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1836168dc400000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 19:11:28</sys_updated_on>
+<table/>
+<target_name>simple_table_nav.send_message_as_task</target_name>
+<type>System Property</type>
+<update_domain>global</update_domain>
+<update_guid>5b42e68ab30a11100d8b80bf9efc8cc1</update_guid>
+<update_guid_history>5b42e68ab30a11100d8b80bf9efc8cc1:1529174853,7db1437617711110fc52b84074766f45:-1693577775,dba10376bc7111102ebc01adb2012e8a:756417886,835143b2507111101ac663cb5078271f:-224683325</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Simple Table Navigation">090a181e2f751110dc91c886f699b6bf</application>
+<category>customer</category>
+<comments/>
+<name>sys_notification_497772fa2f311110dc91c886f699b622</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update sys_domain="global" table="sys_notification"&gt;&lt;sys_notification action="INSERT_OR_UPDATE"&gt;&lt;action_delete&gt;false&lt;/action_delete&gt;&lt;action_insert&gt;true&lt;/action_insert&gt;&lt;action_update&gt;true&lt;/action_update&gt;&lt;active&gt;true&lt;/active&gt;&lt;advanced_event_condition&gt;false&lt;/advanced_event_condition&gt;&lt;condition/&gt;&lt;description/&gt;&lt;event display_value="asyncmessage.info"&gt;7e87b2fa2f311110dc91c886f699b6f9&lt;/event&gt;&lt;event_parm_1&gt;true&lt;/event_parm_1&gt;&lt;event_parm_1_table&gt;sys_user&lt;/event_parm_1_table&gt;&lt;event_parm_2&gt;false&lt;/event_parm_2&gt;&lt;event_parm_2_table&gt;sys_user&lt;/event_parm_2_table&gt;&lt;include_originator&gt;true&lt;/include_originator&gt;&lt;name&gt;Async Business Rule&lt;/name&gt;&lt;order&gt;100&lt;/order&gt;&lt;recipient_fields/&gt;&lt;recipient_users/&gt;&lt;script&gt;&lt;![CDATA[(function runRecipientScript(/*String*/ parm1, /*String*/ parm2) {
+      /*
+      //Create instance of AdvancedNotificationRecipients to add recipients
+      var nr = new sn_notification.AdvancedNotificationRecipients();
+      var sysIds = [];
+      var gr = new GlideRecord('sys_user');
+      gr.addQuery('first_name','IN',parm1);
+      gr.query();
+      while (gr.next()) {
+        sysIds.push(gr.getValue('sys_id'));
+      }
+      nr.addRecipientInfo('sys_user',sysIds);
+      return nr;*/
+      })(parm1,parm2);]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_notification&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2022-09-11 18:11:36&lt;/sys_created_on&gt;&lt;sys_domain&gt;global&lt;/sys_domain&gt;&lt;sys_domain_path&gt;/&lt;/sys_domain_path&gt;&lt;sys_id&gt;497772fa2f311110dc91c886f699b622&lt;/sys_id&gt;&lt;sys_mod_count&gt;5&lt;/sys_mod_count&gt;&lt;sys_name&gt;Async Business Rule&lt;/sys_name&gt;&lt;sys_overrides/&gt;&lt;sys_package display_value="Simple Table Navigation" source="090a181e2f751110dc91c886f699b6bf"&gt;090a181e2f751110dc91c886f699b6bf&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Simple Table Navigation"&gt;090a181e2f751110dc91c886f699b6bf&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_notification_497772fa2f311110dc91c886f699b622&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2022-09-11 18:38:27&lt;/sys_updated_on&gt;&lt;table/&gt;&lt;triggered_by&gt;event&lt;/triggered_by&gt;&lt;/sys_notification&gt;&lt;/record_update&gt;</payload>
+<payload_hash>-785705727</payload_hash>
+<remote_update_set display_value="Simple Table Navigation">72a562022f4a1110dc91c886f699b64e</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 19:11:28</sys_created_on>
+<sys_id>bea5e2022f4a1110dc91c886f699b628</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1832dd8846a0000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 19:11:28</sys_updated_on>
+<table/>
+<target_name>Async Business Rule</target_name>
+<type>Notification</type>
+<update_domain>global</update_domain>
+<update_guid>7d3ef67204711110ecb515d54b570933</update_guid>
+<update_guid_history>7d3ef67204711110ecb515d54b570933:-785705727,ff2e7e3297711110faf987f750138757:979205779,9eeb76fe9e311110e1ac9f08615f737c:-1185106120,bd8bb2beaa311110e3e0ba9caaceb940:771503548,6d4b72be4931111065c4ea6cd947085d:238613373,68183a3af731111045d150eccdfaa791:1679841934</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Simple Table Navigation">090a181e2f751110dc91c886f699b6bf</application>
+<category>customer</category>
+<comments/>
+<name>sys_script_include_e72ad05e2f751110dc91c886f699b688</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_script_include"&gt;&lt;sys_script_include action="INSERT_OR_UPDATE"&gt;&lt;access&gt;package_private&lt;/access&gt;&lt;active&gt;true&lt;/active&gt;&lt;api_name&gt;global.SimpleTableNavigationUtils&lt;/api_name&gt;&lt;caller_access/&gt;&lt;client_callable&gt;false&lt;/client_callable&gt;&lt;description/&gt;&lt;name&gt;SimpleTableNavigationUtils&lt;/name&gt;&lt;script&gt;&lt;![CDATA[var SimpleTableNavigationUtils = Class.create();
+SimpleTableNavigationUtils.prototype = {
+    initialize: function() {
+    },
+	addTable: function(table_name, omit_check_exists) {
+		if(!omit_check_exists)
+			if (this.tableExists(table_name))
+				return false;
+		
+		var new_module = new GlideRecord("sys_app_module");
+		new_module.initialize();
+		new_module.title = table_name;
+		new_module.application = gs.getProperty("simple_table_nav.target_menu");
+		new_module.sys_name = table_name;
+		new_module.sys_scope = gs.getProperty("global");
+		new_module.name = table_name;
+		new_module.link_type = "LIST";
+		new_module.hint = "jump to table";
+		new_module.insert();
+	},
+	removeTable: function(table_name){
+		var target_module = new GlideRecord("sys_app_module");
+		target_module.addQuery("application", gs.getProperty("simple_table_nav.target_menu"));
+		target_module.addQuery("name", table_name);
+		target_module.addQuery("link_type", "LIST");
+		target_module.addQuery("hint","jump to table");
+		target_module.query();
+		if(target_module.getRowCount() === 1){
+			target_module.next();
+			target_module.deleteRecord();
+		}
+	},
+	tableExists: function(table_name){
+		var tableList = gs.getProperty("simple_table_nav.tables").split(",");
+		var target_module = new GlideRecord("sys_app_module");
+		target_module.addQuery("application", gs.getProperty("simple_table_nav.target_menu"));
+		target_module.addQuery("link_type", "LIST");
+		target_module.addQuery("hint","jump to table");
+		target_module.query();
+		return (target_module.getRowCount() === 1);
+	},
+	reloadTables: function(tableListOverride){
+		var tableList = tableListOverride || gs.getProperty("simple_table_nav.tables").split(",");
+		var target_module = new GlideRecord("sys_app_module");
+		target_module.addQuery("application", gs.getProperty("simple_table_nav.target_menu"));
+		target_module.addQuery("link_type", "LIST");
+		target_module.addQuery("hint","jump to table");
+		target_module.query();
+		while (target_module.next()){
+			if (!tableList.includes(target_module.getValue("name"))){
+				target_module.deleteRecord();
+			}
+		}
+		for(var i = 0; i &lt; tableList.length; i++){
+			this.addTable(tableList[i], true);
+		}
+	},
+    type: 'SimpleTableNavigationUtils'
+};]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script_include&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2022-09-09 17:25:04&lt;/sys_created_on&gt;&lt;sys_id&gt;e72ad05e2f751110dc91c886f699b688&lt;/sys_id&gt;&lt;sys_mod_count&gt;6&lt;/sys_mod_count&gt;&lt;sys_name&gt;SimpleTableNavigationUtils&lt;/sys_name&gt;&lt;sys_package display_value="Simple Table Navigation" source="090a181e2f751110dc91c886f699b6bf"&gt;090a181e2f751110dc91c886f699b6bf&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Simple Table Navigation"&gt;090a181e2f751110dc91c886f699b6bf&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_include_e72ad05e2f751110dc91c886f699b688&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2022-09-11 17:52:09&lt;/sys_updated_on&gt;&lt;/sys_script_include&gt;&lt;/record_update&gt;</payload>
+<payload_hash>-1683517656</payload_hash>
+<remote_update_set display_value="Simple Table Navigation">72a562022f4a1110dc91c886f699b64e</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 19:11:28</sys_created_on>
+<sys_id>bea5e2022f4a1110dc91c886f699b62b</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1832dae1e830000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 19:11:28</sys_updated_on>
+<table/>
+<target_name>SimpleTableNavigationUtils</target_name>
+<type>Script Include</type>
+<update_domain>global</update_domain>
+<update_guid>e793fe767a311110ca97335132fcfbd9</update_guid>
+<update_guid_history>e793fe767a311110ca97335132fcfbd9:-1683517656,d108e89a1fb51110170414448256610e:55890088,fa77e09a31b5111055539dd5a9704d3a:-896447548,2c0dd45e81751110b174ec009e3f6d12:1259799475,eaeb9c5ecb7511106eba923d4a270f0d:515063897,927ad05e907511102bb3ae2b80fdc08f:-350795594,d33a5c1ee475111007ad05385d474646:1244331281</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Simple Table Navigation">090a181e2f751110dc91c886f699b6bf</application>
+<category>customer</category>
+<comments/>
+<name>sys_properties_category_m2m_748164162fb51110dc91c886f699b6a9</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties_category_m2m"><sys_properties_category_m2m action="INSERT_OR_UPDATE"><category display_value="SImple Table Navigation">5a41a0162fb51110dc91c886f699b6e6</category><order>100</order><property display_value="simple_table_nav.target_menu" name="simple_table_nav.target_menu">379a985e2f751110dc91c886f699b6e6</property><sys_class_name>sys_properties_category_m2m</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-09 17:56:51</sys_created_on><sys_id>748164162fb51110dc91c886f699b6a9</sys_id><sys_mod_count>0</sys_mod_count><sys_name>simple_table_nav.target_menu.SImple Table Navigation</sys_name><sys_package display_value="Simple Table Navigation" source="090a181e2f751110dc91c886f699b6bf">090a181e2f751110dc91c886f699b6bf</sys_package><sys_policy/><sys_scope display_value="Simple Table Navigation">090a181e2f751110dc91c886f699b6bf</sys_scope><sys_update_name>sys_properties_category_m2m_748164162fb51110dc91c886f699b6a9</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-09 17:56:51</sys_updated_on></sys_properties_category_m2m></record_update>]]></payload>
+<payload_hash>1457849362</payload_hash>
+<remote_update_set display_value="Simple Table Navigation">72a562022f4a1110dc91c886f699b64e</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 19:11:28</sys_created_on>
+<sys_id>f2a5e2022f4a1110dc91c886f699b62a</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1832365b3d90000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 19:11:28</sys_updated_on>
+<table/>
+<target_name>simple_table_nav.target_menu.SImple Table Navigation</target_name>
+<type>Category Property</type>
+<update_domain>global</update_domain>
+<update_guid>bc816416b6b5111060fc73de11a2d8aa</update_guid>
+<update_guid_history>bc816416b6b5111060fc73de11a2d8aa:1457849362</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Simple Table Navigation">090a181e2f751110dc91c886f699b6bf</application>
+<category>customer</category>
+<comments/>
+<name>sys_properties_379a985e2f751110dc91c886f699b6e6</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties"><sys_properties action="INSERT_OR_UPDATE"><choices/><description>Menu item that the modules will get added to. (sys_id)</description><ignore_cache>true</ignore_cache><is_private>false</is_private><name>simple_table_nav.target_menu</name><read_roles/><suffix/><sys_class_name>sys_properties</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-09 17:27:00</sys_created_on><sys_id>379a985e2f751110dc91c886f699b6e6</sys_id><sys_mod_count>4</sys_mod_count><sys_name>simple_table_nav.target_menu</sys_name><sys_package display_value="Simple Table Navigation" source="090a181e2f751110dc91c886f699b6bf">090a181e2f751110dc91c886f699b6bf</sys_package><sys_policy/><sys_scope display_value="Simple Table Navigation">090a181e2f751110dc91c886f699b6bf</sys_scope><sys_update_name>sys_properties_379a985e2f751110dc91c886f699b6e6</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-09 19:46:57</sys_updated_on><type>string</type><value>7b7a185e2f751110dc91c886f699b6cc</value><write_roles/></sys_properties><sys_translated_text action="delete_multiple" query="documentkey=379a985e2f751110dc91c886f699b6e6"/></record_update>]]></payload>
+<payload_hash>-781876342</payload_hash>
+<remote_update_set display_value="Simple Table Navigation">72a562022f4a1110dc91c886f699b64e</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 19:11:28</sys_created_on>
+<sys_id>f6a5e2022f4a1110dc91c886f699b629</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>18323ca83a10000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 19:11:28</sys_updated_on>
+<table/>
+<target_name>simple_table_nav.target_menu</target_name>
+<type>System Property</type>
+<update_domain>global</update_domain>
+<update_guid>7dbaf852ed791110f7572dc4cae25398</update_guid>
+<update_guid_history>7dbaf852ed791110f7572dc4cae25398:-781876342,4aaab4528a79111073aac94c2d706cda:999933945,0f397cdecd391110df9c5aaaac953558:680289018,1c05e4d660b511109488cf908263cfa0:-1042307544,8cbad85e2175111048ead1f7c84a30ca:-643618702</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Simple Table Navigation">090a181e2f751110dc91c886f699b6bf</application>
+<category>customer</category>
+<comments/>
+<name>sys_app_module_5c64b41a2f391110dc91c886f699b6f4</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_app_module"><sys_app_module action="INSERT_OR_UPDATE"><active>true</active><application display_value="Simple Table Navigation">7b7a185e2f751110dc91c886f699b6cc</application><assessment/><device_type/><filter/><hint>jump to table</hint><homepage/><image/><link_type>LIST</link_type><map_page/><mobile_title>sys_user_group</mobile_title><mobile_view_name>Mobile</mobile_view_name><name>sys_user_group</name><order/><override_menu_roles>false</override_menu_roles><query/><report/><roles/><sys_class_name>sys_app_module</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-09 19:19:16</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>5c64b41a2f391110dc91c886f699b6f4</sys_id><sys_mod_count>0</sys_mod_count><sys_name>sys_user_group</sys_name><sys_overrides/><sys_package display_value="Simple Table Navigation" source="090a181e2f751110dc91c886f699b6bf">090a181e2f751110dc91c886f699b6bf</sys_package><sys_policy/><sys_scope display_value="Simple Table Navigation">090a181e2f751110dc91c886f699b6bf</sys_scope><sys_update_name>sys_app_module_5c64b41a2f391110dc91c886f699b6f4</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-09 19:19:16</sys_updated_on><timeline_page/><title>sys_user_group</title><uncancelable>false</uncancelable><view_name/><window_name/></sys_app_module></record_update>]]></payload>
+<payload_hash>-2125392288</payload_hash>
+<remote_update_set display_value="Simple Table Navigation">72a562022f4a1110dc91c886f699b64e</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 19:11:28</sys_created_on>
+<sys_id>faa5e2022f4a1110dc91c886f699b628</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>18323b129530000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 19:11:28</sys_updated_on>
+<table>sys_user_group</table>
+<target_name>sys_user_group</target_name>
+<type>Module</type>
+<update_domain>global</update_domain>
+<update_guid>5064b41ac9391110ecdc6a4e092ff4f6</update_guid>
+<update_guid_history>5064b41ac9391110ecdc6a4e092ff4f6:-2125392288</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Simple Table Navigation">090a181e2f751110dc91c886f699b6bf</application>
+<category>customer</category>
+<comments/>
+<name>sys_script_6f8de0de2fb51110dc91c886f699b684</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update sys_domain="global" table="sys_script"&gt;&lt;sys_script action="INSERT_OR_UPDATE"&gt;&lt;abort_action&gt;false&lt;/abort_action&gt;&lt;access&gt;package_private&lt;/access&gt;&lt;action_delete&gt;false&lt;/action_delete&gt;&lt;action_insert&gt;false&lt;/action_insert&gt;&lt;action_query&gt;false&lt;/action_query&gt;&lt;action_update&gt;true&lt;/action_update&gt;&lt;active&gt;true&lt;/active&gt;&lt;add_message&gt;false&lt;/add_message&gt;&lt;advanced&gt;true&lt;/advanced&gt;&lt;change_fields&gt;false&lt;/change_fields&gt;&lt;client_callable&gt;false&lt;/client_callable&gt;&lt;collection&gt;sys_properties&lt;/collection&gt;&lt;condition/&gt;&lt;description/&gt;&lt;execute_function&gt;false&lt;/execute_function&gt;&lt;filter_condition table="sys_properties"&gt;name=simple_table_nav.tables^valueVALCHANGES^EQ&lt;item endquery="false" field="name" goto="false" newquery="false" operator="=" or="false" value="simple_table_nav.tables"/&gt;&lt;item endquery="false" field="value" goto="false" newquery="false" operator="VALCHANGES" or="false" value=""/&gt;&lt;item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/&gt;&lt;/filter_condition&gt;&lt;is_rest&gt;false&lt;/is_rest&gt;&lt;message/&gt;&lt;name&gt;Reload Simple Table Navigation&lt;/name&gt;&lt;order&gt;100&lt;/order&gt;&lt;priority&gt;100&lt;/priority&gt;&lt;rest_method/&gt;&lt;rest_method_text/&gt;&lt;rest_service/&gt;&lt;rest_service_text/&gt;&lt;rest_variables/&gt;&lt;role_conditions/&gt;&lt;script&gt;&lt;![CDATA[(function executeRule(current, previous /*null when async*/ ) {
+    var stnTools = new SimpleTableNavigationUtils();
+
+    stnTools.reloadTables(current.getValue("value").split(","));
+	if(gs.getProperty("simple_table_nav.send_message_as_task") == "true"){
+		if(typeof x_716205_async_b_n == "object"){
+			var asyncBN = new x_716205_async_b_n.AsyncBMUtils();
+			asyncBN.sendMessage(
+				gs.getUserID(),
+				"simple table navigation table processing finished.",
+				"The processing of the simple table navigation tables has finished.&lt;br/&gt;See menu structure &lt;a href=\"sys_app_module_list.do?sysparm_query=application%3D" + gs.getProperty("simple_table_nav.target_menu") + "^&amp;sysparm_view=\"&gt;here&lt;/a&gt;.&lt;br/&gt;To see the new Menu items (modules), you might need to reload your UI or logout and log back in again.",
+				gs.getCurrentApplicationId(),
+				gs.getCurrentScopeName(),
+				2,
+				"other"
+			);
+			
+		}
+	}
+})(current, previous);]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2022-09-09 18:49:28&lt;/sys_created_on&gt;&lt;sys_domain&gt;global&lt;/sys_domain&gt;&lt;sys_domain_path&gt;/&lt;/sys_domain_path&gt;&lt;sys_id&gt;6f8de0de2fb51110dc91c886f699b684&lt;/sys_id&gt;&lt;sys_mod_count&gt;16&lt;/sys_mod_count&gt;&lt;sys_name&gt;Reload Simple Table Navigation&lt;/sys_name&gt;&lt;sys_overrides/&gt;&lt;sys_package display_value="Simple Table Navigation" source="090a181e2f751110dc91c886f699b6bf"&gt;090a181e2f751110dc91c886f699b6bf&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Simple Table Navigation"&gt;090a181e2f751110dc91c886f699b6bf&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_6f8de0de2fb51110dc91c886f699b684&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2022-09-21 18:50:02&lt;/sys_updated_on&gt;&lt;template/&gt;&lt;when&gt;async_always&lt;/when&gt;&lt;/sys_script&gt;&lt;sys_translated_text action="delete_multiple" query="documentkey=6f8de0de2fb51110dc91c886f699b684"/&gt;&lt;/record_update&gt;</payload>
+<payload_hash>-1611811572</payload_hash>
+<remote_update_set display_value="Simple Table Navigation">72a562022f4a1110dc91c886f699b64e</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 19:11:28</sys_created_on>
+<sys_id>faa5e2022f4a1110dc91c886f699b62b</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1836162b9170000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 19:11:28</sys_updated_on>
+<table>sys_properties</table>
+<target_name>Reload Simple Table Navigation</target_name>
+<type>Business Rule</type>
+<update_domain>global</update_domain>
+<update_guid>41c0a6061e0a111010f6875693497428</update_guid>
+<update_guid_history>41c0a6061e0a111010f6875693497428:-1611811572,b49743be6f711110538c30d9c2e2d224:315992771,f8170b3e2f7111107d13d47bf1b53df0:37575446,a7268ff6aa7111101a9738d474fe8095:2130268277,48650b3a64711110827fc2f4c63a7b54:1030342158,8ba407f6db7111103b6ee5a95cdc1f21:-1160416625,e404cbb6cf711110cb88b4b810b26eec:344014478,70734bb6717111108143742ec11b0998:-1681935368,f94307b674711110258cd7e5b1bcf15c:-1340573590,37e20f768271111076a27c350df66d47:-1439960044,51c143761871111079da5b52c0a54b4b:-129307258,80e5767a27311110d26214c5722fb77a:-355553182,a145b63a72311110e6c0ef9c762a9f7f:207292386,f8947eb604311110e1e592bfcadd70bb:1190840635,9be3faf601311110a1c126ecb575485e:-1365045567,b1bda412a6f51110b1720844c591fb0a:-1220243422,3f8de0dedeb511105cc80e3396e66e86:-272603436</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Simple Table Navigation">090a181e2f751110dc91c886f699b6bf</application>
+<category>customer</category>
+<comments/>
+<name>sys_app_090a181e2f751110dc91c886f699b6bf</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_app"><sys_app action="INSERT_OR_UPDATE"><active>true</active><can_edit_in_studio>true</can_edit_in_studio><enforce_license>none</enforce_license><guided_setup_guid/><hide_on_ui>false</hide_on_ui><installed_as_dependency>false</installed_as_dependency><js_level>helsinki_es5</js_level><licensable>true</licensable><license/><license_category>none</license_category><license_definition/><license_model>none</license_model><logo/><menu/><name>Simple Table Navigation</name><private>false</private><restrict_table_access>false</restrict_table_access><runtime_access_tracking>permissive</runtime_access_tracking><scope>global</scope><scoped_administration>false</scoped_administration><short_description/><source>090a181e2f751110dc91c886f699b6bf</source><store_correlation_id/><store_url/><sys_class_name>sys_app</sys_class_name><sys_code/><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-09 17:24:05</sys_created_on><sys_id>090a181e2f751110dc91c886f699b6bf</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-09 17:24:05</sys_updated_on><template/><trackable>true</trackable><uninstall_blocked>false</uninstall_blocked><user_role/><vendor/><vendor_prefix/><version>1.0.0</version></sys_app><sys_translated_text action="delete_multiple" query="documentkey=090a181e2f751110dc91c886f699b6bf"/></record_update>]]></payload>
+<payload_hash>267443061</payload_hash>
+<remote_update_set display_value="Simple Table Navigation">72a562022f4a1110dc91c886f699b64e</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 19:11:28</sys_created_on>
+<sys_id>fea562022f4a1110dc91c886f699b64e</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1832347b56f0000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 19:11:28</sys_updated_on>
+<table/>
+<target_name>Simple Table Navigation</target_name>
+<type>Custom Application</type>
+<update_domain>global</update_domain>
+<update_guid>0d0a181ede751110b06206ca4e92ddc2</update_guid>
+<update_guid_history>0d0a181ede751110b06206ca4e92ddc2:267443061</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Simple Table Navigation">090a181e2f751110dc91c886f699b6bf</application>
+<category>customer</category>
+<comments/>
+<name>sys_properties_e90e98de2f751110dc91c886f699b636</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties"><sys_properties action="INSERT_OR_UPDATE"><choices/><description>Tables that should be added to the modules list.</description><ignore_cache>true</ignore_cache><is_private>false</is_private><name>simple_table_nav.tables</name><read_roles/><suffix/><sys_class_name>sys_properties</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-09 17:42:24</sys_created_on><sys_id>e90e98de2f751110dc91c886f699b636</sys_id><sys_mod_count>35</sys_mod_count><sys_name>simple_table_nav.tables</sys_name><sys_package display_value="Simple Table Navigation" source="090a181e2f751110dc91c886f699b6bf">090a181e2f751110dc91c886f699b6bf</sys_package><sys_policy/><sys_scope display_value="Simple Table Navigation">090a181e2f751110dc91c886f699b6bf</sys_scope><sys_update_name>sys_properties_e90e98de2f751110dc91c886f699b636</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-11 19:13:26</sys_updated_on><type>string</type><value>sys_app_customization_version,cmdb_ci_san_export,cmn_notif_message,sys_sg_filter_condition,service_subscribe_location,sys_push_notif_act_script,sys_sg_item_stream_m2m_master_item,diagnostics_result,sys_schema_attribute_m2m,cmdb_qb_result_base,map_view_ci_type,sys_hub_flow_block,sysauto_pa,sys_ui_hp_cascading_filter,cmdb_ci_unix_cluster_node,cmdb_ci_san_zone_alias_member,sys_ux_page_action_binding,clone_log,clone_preserved_data,scan_check_suite_check,cmdb_ire_incomplete_payloads0006,sys_cs_virtual_agent_context,sn_cmdb_ws_attestation_task_state,sp_row,pa_snapshots,sn_app_eng_studio_taxonomy_details,sn_ex_sp_ext_link_user_criteria_no_mtom,svc_ci_assoc,cmdb_key_value,discovery_queue,discovery_classy_unix,cmdb_ci_installed_bundles,cmdb_ci_db_ora_instance,ts_c_14_3,cmdb_ci_solaris_instance,cmdb_ci_appl_ibm_wmb_listener,cmdb_depreciation,statemgmt_ops_state,sys_email_attachment,sys_scoped_admin_acl_inheritance,ts_table,cmdb_convert_bulk_services_entry,cmdb_ci_appl_sap_bo,sn_sm_secret_group,sys_cs_auto_resolution_simulation_configuration,sys_cs_auto_resolution_matched_intents,sys_development_permission_set,sys_import_set_row_error,cmdb_lb_service_vlan,cxs_res_context_config_prop,transaction_call_chain,sys_cs_session_binding,sys_ui_home_section,sysevent0004,live_mention,cmdb_ci_win_cluster_node,provider_auth,sn_hr_sp_todos_widget_mapping,cmdb_ci_endpoint_tcp,pwd_verification,cmdb_ci_appl_tibco_adapter,cmdb_ci_pc_hardware,v_private_cache,ais_rule_action,ts_v4_23_df,cmdb_ci_endpoint_sybase,sys_sg_filter_condition_attribute_name,fx_rate,sys_cs_support_queue_cache,open_nlu_predict_log0006,cmdb_ci_endpoint_jms_flow,proposed_change_verification_log0007,syslog_app_scope0007,std_change_proposal,sys_on_call_group_template,sys_cache_flush,ecc_agent_cluster,ecc_agent_memory_metric,sys_phone_format,sys_highlighted_value_condition,sys_ux_style,sys_activity0012,ml_autotrain_solution,metric_definition,sn_bm_client_recommendation_activity,ts_c_21_1,cmdb_ci_web_domino,sla_repair_log_entry0003,sysauto_scan,sys_query_performance_test_result,sys_client_interaction0005,sc_ic_question,cmdb_ci_csu_dsu_network,change_request_imac,cmdb_ci_vcenter_datacenter,sys_flow_trigger,ecc_agent_ext_context_trap,sys_graphql_resolver_mapping,sn_devstudio_studio_preferences,ts_c_9_3,cmdb_ci_lb_f5_ltm,ml_agent_zero_aggregated_data,cmdb_ci_appl_sendmail,ts_c_14_1,cmdb_ci_endpoint_ssas_mssql,sc_item_option_mtom,sys_ux_list_category,wf_workflow_instance,wf_command,svc_baseline_exclusion,sys_notification_category,cmdb_health_scorecard_group_threshold,chg_policy_applied,svc_security_membership_ops,ssa_activity_pattern,cmn_department,cmdb_software_instance,cmdb_ci_directory_ha,cmdb_ci_endpoint_oracle_db,sys_scope_design_access,ts_c_10_4,cmdb_ci_file_system,ts_c_15_5,appsec_security_notification_type,cmdb_ci_endpoint_nfs,ts_phrase,sys_fkey,sys_service_endpoint_state,sys_service_authentication,sys_atf_test_template,sys_user_delegate,nlq_cmdb_implicit_relationship,sys_archive_link_chunk,sysevent0003,cmdb_ci_endpoint_ad_domain,pa_tags,cmdb_ci_azure_datacenter,sys_app_template_page_type,cmdb_multisource_query_result_ms_record,sys_uib_template,sys_ux_lib_component_prop,sys_homepage_destination_rule,m2m_map_page_map_marker,cmn_map_marker,cmn_map_data_item,pwd_active_question,ts_c_12_8,cmdb_ci_lb_datacenter,cmdb_ci_ip_address,ais_partition_health,sla_repair_log_message,sysevent_queue_stats,sys_sg_filter_category_m2m_filter_condition,sys_sg_related_list_map,diagnostic_rule,sys_cs_discovery_trace,sp_theme,cmdb_ci_win_server,sys_script_adapter_rule,sys_phone_territory,ua_user_ct_count,discovery_log0006,ip_service_affinity,sys_activity0010,business_calendar_span,scan_mute_rule_reason,scan_suite_execution,sys_sg_parameter_screen,sys_sg_variable,sys_rte_eb_set_operation,sys_cs_custom_control_execution_plan,life_cycle_control,cmdb_ci_appl_itam,ecc_agent_upgrade_history,sys_rw_amb_graphql_action,sys_ux_m2m_workspace_view_rule_ux_view_rule_config,sys_aw_module,ua_sp_usage,ml_capability_definition_workflow,sys_nlu_model,m2m_sys_nlu_utterance_entity,m2m_sys_nlu_intent_entity,sla_condition_class,alm_template_task,sys_sg_list_screen,sys_cs_click_metrics,cmdb_dynamic_ire_feature,sys_proxy_app,sys_cs_virtual_agent_variable,attachment_extractor,syslog0001,ts_c_5_8,sc_req_item,cxs_ui_action,cxs_table_config,sys_embedded_help_role,ts_c_22_9,sys_analytics_authentication,sys_notification_execution0007,sys_call_chain,sys_m2m,sys_nav_link,sys_processor,svc_security_persona,sys_certificate,sys_rollback_log0003,sys_export_set_log0004,proposed_change_verification_log0004,sm_flapper_strategy_data,sysevent0002,st_on_call_hour,sys_breakpoint,v_metadata_parent,interaction_wrap_up_configuration,oidc_token_verification,sys_ux_custom_content_root_elem,sys_operational_toggle,gcf_licensing_count,pwd_enrollment,cmdb_ci_storage_access_policy,ast_contract,cmn_notif_device,service_subscribe_company,sys_push_notif_app_install,v_shared_cache,fx_currency,cmdb_ci_scanner,application_diagnostic,sys_trend_jobs,cmdb_software_product_model,cmdb_ci_appl_ca_id_man,sys_cluster_state,kb_knowledge_keyword,sys_transformer_rule_node,license_action_artifact_query_config,sys_email_account_group,jdbc_retry_conditions,sys_mailbox,discovery_log0007,sys_activity0008,ml_model_artifact,sc_catalog_page_renderer,v_table_creator,help_user_interaction_log,ts_c_25_2,sn_gf_goal,asmt_metric_type,sc_ic_task_defn,sys_document_viewer_status,sys_cs_topic_language,cmdb_ci_storage_controller,ngbsm_ci_icons,cmdb_ci_appl_hp_service,ml_solution_parameters,cmdb_pid,sc_category_user_mtom,sys_nlu_sys_entity,cmdb_instance_run_history,scan_log0005,sys_package,cmdb_view,chg_policy,sys_scoped_cache,conflict,svc_traversal_rules,cmdb_ci_ids_network,pa_indicator_aggregate_excl,pa_dimensions,ts_c_5_9,cmdb_ci_email_server,automation_pipeline_filter_regex,automation_pipeline_transformer_javascript,sys_cs_auto_resolution_prediction_output,ts_c_10_6,sys_development_permission,cmdb_ci_nas_file_system,cmdb_ci_vpn_connection,pa_dashboards_permissions,ts_c_15_6,cmdb_ci_appl_ora_notif_svr,ts_c_18_6,cmdb_ci_oslv_engine,sn_sm_journal0004,contract_rel_ci,sys_amb_message0003,transaction_call_chain_register,nlq_table_guesser_query_log,sys_archive_log,sys_archive_run_chunk,sysevent0001,sysevent0005,sn_collab_request_dev_collab_task,live_favorite,sys_mapplication,sys_ux_page_property,agent_assist_recommendation,aw_record_type_selector,pwd_active_answer,pwd_map_request_to_verification,sys_search_signal_result_event,sysrule_assignment,expert_panel_catalog_order,cmn_timeline_page_style,sla_repair_log_message0001,isc_export_event,spm_taxonomy_layer_definition,cmdb_health_metric_pref,label_user_m2m,sp_rectangle_menu_item,sp_instance_ais,nlq_table_guesser_query_log0003,cmdb_ci_fc_disk,ecc_agent_config,license_ih_feature,cmdb_ci_endpoint_storefront_comp,sys_email_account,automation_pipeline_filter_key_value,discovery_device_history,sys_activity0014,cmdb_view_instance,sn_bm_client_breakdown,sn_ihub_data_mapping_definition,cmdb_running_process,ts_c_21_4,cmdb_fc_initiator,ts_c_25_4,cmdb_ip_service_ci,sys_client_interaction_details0000,sc_ic_aprvl_type_defn,sn_cmdb_ws_attestation_task_to_ci,sys_flow_secure_data,cmdb_ci_endpoint_mq_mem,task,file_discovery_agent_sync,ts_c_9_6,discovery_probe_capability_m2m,ua_prod_inst,ci_diagnostic_kb,cmdb_ci_san_zone_member,sys_sg_notifications_tab,sys_sg_content_section,sys_sg_navigation_section_destination_button,sys_notif_category_preference,cmdb_ci_endpoint_sim_inc,sysrule_escalate_history,svc_model_assoc_ci,sp_agent_chat_config,sys_user_grmember,cmdb_ci_nas_storage,text_search,wf_log0001,syslog_email0001,svc_recomputation_log,sttrm_transition_condition,sttrm_model,on_call_remove_member,pa_job_log_rows,sysauto_ms_report_builder,ts_c_6_0,cmdb_ci_dir_site_minder_server,sn_sm_secret,sn_sm_journal0006,alm_license,contract_rel_location,sys_rw_amb_action,sys_sg_redirect_dest_field,sys_sg_screen_shortcut,sys_sg_item_view,ticket_configuration,syslog0005,sys_archive_destroy_log,ecc_queue_stats_by_ecc_agent,sys_tokenize_adapter_rule,sys_ux_type,cmdb_data_management_task_to_ci,cmdb_categories,cert_follow_on_task,cmdb_ci_endpoint_exchange,ts_v4_16_9,cmdb_ci_netapp_cdot,sys_app_customization,cmdb_ci_endpoint_fromcluster_t,cmdb_ci_fc_export,sys_sg_item_sorting_attribute,sys_cs_field_script_validator,cmdb_ci_appl_ora_pm,sys_sync_preview_local,cmdb_ci_exchange_hub,sn_ex_sp_m2m_action_group,kb_submission,db_audio,cmdb_ci_appl_sap_system,ml_stopwords,ml_word_vector_corpus,sn_bm_client_configuration,sn_ihub_integration_instance,sys_rest_message_fn_headers,ts_c_25_6,cmdb_ci_lb_template,strategic_objective,metadata_clone,asmt_custom_metric,sc_ic_question_choice,sys_schema_change,sys_flow_report_doc_chunk_archive,v_sql_debug,sys_stacktrace_pattern,ts_c_4_8,cmdb_import_set_run,sla,ecc_event,cmdb_ci_personal_printer,ml_language_x_prediction_result,ts_c_14_4,cmdb_ci_bridge_domain,wf_condition,sa_notification0004,item_option_new_set,sys_sg_universal_link_applet_mapping,sys_cs_client_adapter,svc_extension_variable,sys_user_group_type,sys_decision_multi_result,sys_decision_multi_result_element,cmdb_ci_wbem_service,cmdb_ci_appl_ora_http,ts_c_10_8,cmdb_ci_route_table,cmdb_ci_win_cluster,ais_active_table_ingestion_tracker,ts_v4_23_0,ts_v4_23_1,contract_rel_user,sys_rw_action,cmdb_ci_endpoint_mq_flow,sys_ui_related_list_relationship_entry,sys_checkpoint,m2m_sys_suggestion_reader_sys_suggestion_reader_group,visualization_migration_storage,sys_task_number_adapter_rule,pa_cached_scores,pa_indicator_breakdown_excl,aisa_rp_config,dscy_swtch_partition,interaction_log,cmdb_data_management_policy_execution,ts_c_13_0,pwd_map_proc_to_verification,cmdb_ci_sa_launch_config,ast_warranty,v_transaction,cmdb_ci_lb_a10,cmdb_ci_vcenter_datastore_disk,cmdb_ci_iplanet_web_server,sys_api_stats_requestor,pa_m2m_targets_users,m2m_kb_task,collaborator,license_kv_query,cmdb_ci_db_mssql_server,v_table_editor,v_field_editor,sn_bm_client_activity,sn_ihub_transform_definition_whitelist,cmdb_ci_exchange_frontend,scan_check_suite,sys_rest_message,sys_user_has_license,sys_cs_nlu_language,cmdb_ci_storage_eff_template,syslog_transaction0004,sys_hub_sub_flow_instance,sys_ui_page,pa_job_config,mid_profile_config,automation_pipeline_transformer,cmdb_multisource_column_type_mapping,cmdb_ci_endpoint_iis,itil_agreement_support,jdbc_credentials,sys_aw_renderer_type,cmdb_ci_endpoint_tibco_bw_proc,ts_c_14_6,wf_workflow_schedule,sys_sg_sections_screen_m2m_section,sys_classic_notification_channels,v_interaction_context,cmdb_ci_appl_delivery_controler,catalog_category_request,svc_model_obj_path,v_rotation,sc_cat_item_group_mtom,cxs_rp_config,sn_bm_common_optout_feedback_options,stage_set_entry,sn_diagram_builder_diagram_action_argument,sys_wizard_answer,sys_atf_step_config,open_nlu_driver</value><write_roles/></sys_properties><sys_translated_text action="delete_multiple" query="documentkey=e90e98de2f751110dc91c886f699b636"/></record_update>]]></payload>
+<payload_hash>1949217435</payload_hash>
+<remote_update_set display_value="Simple Table Navigation">72a562022f4a1110dc91c886f699b64e</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2022-09-21 19:11:28</sys_created_on>
+<sys_id>fea5e2022f4a1110dc91c886f699b62a</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1832df88d550000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2022-09-21 19:11:28</sys_updated_on>
+<table/>
+<target_name>simple_table_nav.tables</target_name>
+<type>System Property</type>
+<update_domain>global</update_domain>
+<update_guid>1e3647ba89711110dfade7ac88059809</update_guid>
+<update_guid_history>1e3647ba89711110dfade7ac88059809:1949217435,6475037aca711110cb360e21e8191860:-34958487,83450f3a0671111004b1fb62cd2f4dfd:-1428774778,aa8303f6b8711110c26d1a19035e215a:997528060,d483cfb60f7111109693d3bbe903ea0d:-481282189,e853cbb6ad711110e0152bac1a3012be:-859152511,60334bb69b711110b8aef48446aa888b:-481282189,600347b627711110d6e97bc7d5b8a9ca:-859152511,94d1c376947111104b5d824832d34c12:-481282189,0cf5367acb311110a8593da05eea8fa4:997528060,d844723aeb3111106d511192f47046a3:2097153283,2314fef6db3111103299e3da9abec723:-859770260,4bf33ef6043111106b5f4df83814526f:-1501622235,5e5272b64a31111018ab5250c06aecb5:-720036434,a032fe766e311110522250d459c76726:1689527825,5d227e76ed31111030d68d4fa8f7b2d6:-810634302,44e17a762c311110520023e2a923936c:451057016,2190ef5a8db151109002f7c953a69f77:-1501622235,5dcf9f1affb15110b51e6299a3bf5db8:-859770260,5e8f9b1a54b151109e565daee6a6003c:383557041,7a39b09e78391110f6917f0dfbb7ea67:1953601355,5864b41a5239111045ed5567d2a8b5f7:-709322155,e611f816b8f51110f4e668cd5b3a69cf:618616134,f5203cd651f51110ebb0126513f1cebd:205843113,3dde6c5204f51110114f6b39fcd4679c:-1480146761,185ea05231f511101d1846f8076cc5a0:1395689098,f83e2052a6f51110f9fcd988f2a8ba27:464276888,f41decdeb0b511105ea12639cba08201:1830075480,932c20dec6b51110f08a059ce9405c77:-947562155,7dcb689e5bb51110b8316ac7073e1ad4:1827674064,d75b209e44b51110c0fefdbd8e3dac40:616378564,055bec5e2eb51110fb19377de05159b7:1827674064,0445201aedb51110304574a214a7e71d:-207740097,926e9452c6b51110a4d44a7c6276c700:1579576151,dd3e18deb5751110ee067ce8caab0f9c:-2038676842</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+</unload>
