@@ -44,10 +44,6 @@ This application modifies the menu structure, so the use is only recommended in 
 
 Only admin users (users having the **admin** role) are allowed to use this application
 
-### Long runtime on configuration
-
-If too many tables are added to the table list, the user session will freeze for up to 5 minutes for 4000 tables, caused by the reload business rule.
-
 ### Custom and scoped tables
 
 Custom and scoped tables might prevent the application to reference them because of cross scope privileges.
@@ -61,8 +57,11 @@ they can also be removed by first clearing the table list, waiting for the reloa
 
 ## Bugs
 ### Only V1
+#### update of module list failing
 If the table list property is updated it might not reload the modules, it might require updating it again.
 You can also run the following code as a background script
 ```
 new SimpleTableNavigationUtils().reloadTables()
 ```
+### Long runtime on configuration
+If too many tables are added to the table list, the user session will freeze for up to 5 minutes for 4000 tables, caused by the reload business rule.
